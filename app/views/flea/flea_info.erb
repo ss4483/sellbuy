@@ -1,0 +1,59 @@
+
+<br>
+<div class="z-depth-2 row"  style="padding:5px; background-color:white;">
+  <a href="/flea_update_view/<%=@one_flea.id%>" style="width:100px; display:inline;">[수정]</a>
+  <a href="/flea_delete/<%=@one_flea.id%>" style="width:100px; display:inline;">[X]</a>
+  <h3 class="center">
+    <%= @one_flea.title %>
+    <img class="materialboxed "  src="<%= @one_flea.image_url %>" style="margin:auto;"height="500px;">
+  </h3>
+  <div class="col s3 center">
+        주관
+  </div>
+  <div class="col s9">
+    <%= @one_flea.supervision %>
+  </div>
+
+  <div class="col s3 center">
+        기간
+  </div>
+  <div class="col s9">
+  <%= @one_flea.term_start.strftime("%m/%d %H:%M") %> - <%= @one_flea.term_end.to_s(:time) %>
+  </div>
+
+  <div class="col s3 center">
+        셀러 모집 기간
+  </div>
+  <div class="col s9">
+    <%= @one_flea.sel_term_start.strftime("%m/%d") %> - <%= @one_flea.sel_term_end.strftime("%m/%d") %>
+  </div>
+
+  <div class="col s3 center">
+        마켓 주제
+  </div>
+  <div class="col s9">
+    <%= @one_flea.post%>
+  </div>
+
+  <div class="col s3 center">
+      품목
+  </div>
+  <div class="col s9">
+    <%= @one_flea.sel_item %>
+  </div>
+
+  <div class="col s3 center">
+    참가비 환불 지원항목
+  </div>
+  <div class="col s9">
+   <%= @one_flea.condition %>
+  </div>
+
+  <div class="col s3 center">
+    주소
+  </div>
+  <div class="col s9">
+    <%= @one_flea.address %>
+  </div>
+
+</div>

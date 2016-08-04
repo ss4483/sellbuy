@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Market</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body id="style-3" class="scroll">
+  <header>
+    <div class="navbar-fixed">
+      <nav class="nav">
+        <div class="nav-wrapper ">
+          <div class="nav-wrapper container black-text">
+            <div class="row" style="max-height:60px;">
+              <div class="col s2 m2 l2" style="max-height:60px;">
+                <a href="/">
+                  <img src="<%=image_path("logo.png")%>" alt="logo" height="55px"/>
+                </a>
+              </div>
+              <div class="col s3 m3 l4" style="max-height:60px;">
+                <form action="/searches" method="get" style="max-height:60px;">
+                  <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+                  <input name ="utf8" type="hidden", value="✓">
+                  <div class="col s9">
+                    <input name ="search"  type="text" value="<%= search(@search) %>">
+                  </div>
+                  <div class="col s3">
+                    <button class="enjoy-css left" style="max-height:60px;">
+                      <i class="material-icons right medium" style="font-size:1.5rem;max-height:60px;">search</i></button>
+                  </div>
+                </form>
+              </div>
+              <div class="col s7 m7 l3 offset-l3">
+                <span stlye="left">
+                  <% if user_signed_in? %>
+                    <%= current_user.email %>
+                    <a class="black-text" href="/users/sign_out">로그아웃</a>
+                  <% else %>
+                    <a class="black-text" href="/users/sign_in">로그인</a>
+                    <a class="black-text" href="/users/sign_up">회원가입</a>
+                  <% end %>
+                </span>
+                  <%= render partial: '/user_page/epilogue' if @seller_check %>
+                  <%= render partial: '/flea/right' if @check %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m2 l2">
+          <%= render partial: '/user_page/left'%>
+        </div>
+        <div class=" col s12 m10 l8">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <% if flash[:notice] %>
+  <%= flash[:notice] %>
+  <% end %>
+
+</body>
+</html>

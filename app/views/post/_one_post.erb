@@ -1,0 +1,112 @@
+<!-- 각각 post -->
+<% @posts.each do |p| %>
+  <% if p.index_check %>
+    <div style="position: relative;">
+      <img alt="Icon" src="/assets/pin2.png"style="width: 80px;position: absolute; left:-20px; top:-35px;"/>
+      <div class="z-depth-2"  style="padding:25px; background-color:white;">
+        <img src="<%= p.image_url %>" style="max-height:600px; max-width:100%; display:block; margin-left:auto;margin-right:auto;">
+        <% if  p.kind == 'epilogue' %>
+          <%= user_nickname_page(user_find(p.other_user).id) %>
+        <% end %>
+        <span class="right" style="font-family: post_content; font-size:15px;"><%= p.created_at.strftime("%m/%d %H:%M") %>
+          <!-- 수정, 삭제 버튼 -->
+          <% if user_signed_in? && (p.user == current_user || current_user.kind == "M") %>
+            <a class="modal-trigger enjoy-css" href="#update<%= p.id%>"><i class="small material-icons">mode_edit</i></a>
+            <a class="enjoy-css" href="/post_delete/<%=p.id%>"><i class="small material-icons">delete</i></a>
+          <!-- 수정 팝업창 -->
+            <div id="update<%= p.id%>" class="modal modal-fixed-footer" style="max-height:100%; height:800px; width:700px;">
+              <form action="/post_update/<%= p.id %>" method="POST" enctype="multipart/form-data">
+                <input name ="utf8" type="hidden", value="✓">
+                <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+                <div class="modal-content">
+                  <img id="image_goods_<%=p.id%>" src="<%=p.image_url%>" alt="your image" style="max-height:400px; display:block; margin-left:auto;margin-right:auto;"/>
+                  <% if  p.kind == 'epilogue' %>
+                    <span class="star-rating " >
+                      <% 1.upto(5) do |i| %>
+                        <% if i == p.rating.to_i %>
+                          <input type="radio" name="rating" id="star<%=i%>_<%=p.id%>" value="<%=i%>" checked><i></i><label for="star<%=i%>_<%=p.id%>"></label>
+                        <% else %>
+                          <input type="radio" name="rating" id="star<%=i%>_<%=p.id%>" value="<%=i%>"><i></i><label for="star<%=i%>_<%=p.id%>"></label>
+                        <% end %>
+                      <% end %>
+                    </span>
+                  <% end %>
+                  <div class="field">
+                    <label class="filebox" for="update_<%=p.id%>">
+                      <%= user_profile(p.user.id) %>
+                      <span style="font-size:20px; color:black;"><%= p.user.nickname %></span>
+                      <% if p.kind == "goods" %>
+                        <label for="goods_<%=p.id%>">사진 업로드</label>
+                        <input id="goods_<%=p.id%>" class="image_in" type="file" name="image_url">
+                      <% end %>
+                    </label>
+                    <textarea id="update_<%=p.id%>" class="materialize-textarea" name="content" required><%= p.content %></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                   <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">
+                     <i class="large material-icons" style="font-size:2rem">settings_backup_restore</i></a>
+                  <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">
+                    <i class="large material-icons" style="font-size:2rem">done</i></button>
+                </div>
+              </form>
+            </div>
+          <% end %>
+        </span>
+        <!-- post 내용 -->
+        <p style="font-family: post_content; font-size:22px; margin-bottom:0px;">
+          <%= user_profile(p.user.id) %><%=  user_nickname_page(p.user.id) %><br>
+          <% if  p.kind == 'epilogue' %>
+            <span class="star-rating" >
+              <% 1.upto(5) do |i| %>
+                <% if i == p.rating.to_i %>
+                  <i class="on"></i>
+                <% else %>
+                  <i></i>
+                <% end %>
+              <% end %>
+            </span>
+          <% end %>
+
+          <%= p.content %>
+        </p>
+        좋아요 갯수 : <span id="like_count_<%=p.id%>"><%= p.post_likes.all.count %></span>
+        <!-- 좋아요 -->
+        <% if user_signed_in? && p.post_likes.where(post_id: p.id, user_id: current_user.id).blank? %>
+          <button class="like_submit" value="<%= p.id %>">좋아요</button>
+        <% elsif user_signed_in? %>
+          <button class="like_submit" value="<%= p.id %>">좋아요 취소</button>
+        <% end %>
+        <!-- 댓글 쓰기 -->
+          <div class="re_view" value="<%=p.id%>">댓글 보기 (<%= p.post_replies.all.count %>)</div>
+          <div id="reply_<%= p.id%>" style="display:none;">
+            <% if user_signed_in?%>
+              <form action="/post_reply" method="POST">
+                <input name ="utf8" type="hidden", value="✓">
+                <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+                <input type="hidden" name="post_id" value="<%= p.id %>">
+                <span>댓글 : </span><input id="re_input_<%=p.id%>" type="text" name ="content" style="width:80%;" required>
+                <button class="re_submit enjoy-css" value="<%=p.id%>" style="height:20px;"><i class="material-icons right small">textsms</i></button>
+              </form>
+            <% end %>
+
+            <!-- one_댓글 -->
+            <% p.post_replies.reverse.each do |r| %>
+              <div id="one_reply_<%=r.id%>">
+                <span ><%= user_nickname_page(r.user.id) %> : <span id="re_content_<%=r.id%>"><%= r.content %></span> </span>
+               <!-- 댓글 수정,삭제 버튼 -->
+                <% if user_signed_in? && (r.user == current_user || current_user.kind == "M") %>
+                 <button class="reply_update enjoy-css" id="reply_update_<%=r.id%>" value="<%= r.id%>" style="height: 20px;">
+                   <i class="small material-icons">mode_edit</i>
+                 </button>
+                 <button class="reply_delete enjoy-css" id="reply_delete_<%=r.id%>" value="<%= r.id%>" style="height: 20px;">
+                   <i class="small material-icons">delete</i>
+                 </button>
+                 <br>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+    </div><br><br><br>
+  <% end %>
+<% end %>

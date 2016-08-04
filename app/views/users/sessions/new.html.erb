@@ -1,0 +1,24 @@
+<div class="row"><br>
+  <div class="z-depth-3 col s6 offset-s1" style="width: 900px; background-color:white;">
+    <h2>로그인</h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="input-field">
+        <i class="material-icons prefix">email</i>
+        <label for="user_email">이메일</label>
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+
+      <div class="input-field">
+        <i class="material-icons prefix">lock</i>
+        <label for="user_password">비밀번호</label>
+        <%= f.password_field :password, autocomplete: "off" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "로그인" %>
+      </div>
+    <% end %>
+    <%= render "users/shared/links" %>
+  </div>
+</div>

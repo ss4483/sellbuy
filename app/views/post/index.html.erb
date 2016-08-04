@@ -1,0 +1,9 @@
+<br>
+<!-- post 쓰기-->
+  <% if user_signed_in? && current_user.kind == "seller" %>
+    <%= render partial: "post/write_post" %>
+  <% end %>
+<!-- 각각 post -->
+<div class="row">
+  <%= render partial: "post/one_post" %>
+</div>

@@ -1,0 +1,50 @@
+
+  <div class = "row white"style="padding: 10px; margin: 10px;">
+  <p>마켓 등록</p>
+        <form action="/flea_enroll" method="POST" enctype="multipart/form-data">
+          <!-- 윗줄: enctype="multipart/form-data"  pdf, 이미지, 동영상파일 등 파일 업로드 경우 꼭 써주어야 함!(안 넣으면 동작 X) 글 쓰기나 그냥 텍스트만 있는 경우는 없어도 됨. -->
+          <!-- 아래2줄: 쓸데있이 강한 보안 켰을 때 아래 두줄을 넣어주면 form 날릴 때 꼭 같이 날려줘서 에러가 안 뜸 -->
+          <input name ="utf8" type="hidden", value="✓">
+          <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+          <p>
+            <input class="with-gap"name="kind" type="radio" id="kind1" value="short" checked />
+            <label for="test1">플리 마켓</label>
+
+            <input class="with-gap"name="kind" type="radio" id="kind2" value="long"/>
+            <label for="test2">정기 마켓</label>
+          </p>
+          <input type="text" name="title" placeholder="마켓 이름">
+          <input type="text" name="supervision" placeholder="마켓 주체 주관">
+          <p>마켓 개최 기간</p>
+          <div class="col s6">
+            <label for="term_start">마켓 시작 시간</label>
+            <input id="term_start" name="term_start"  class=flatpickr data-enabletime data-time_24hr required>
+          </div>
+          <div class="col s6">
+            <label for="term_end">마켓 마치는 시간</label>
+            <input id="term_end" name="term_end"  class=flatpickr data-enabletime data-time_24hr required>
+          </div>
+          <p>셀러 모집 기간</p>
+          <div class="col s6">
+            <label for="sel_term_start">시작</label>
+            <input id="sel_term_start" name="sel_term_start"  class=flatpickr data-enabletime data-time_24hr required>
+          </div>
+          <div class="col s6">
+            <label for="sel_term_end">마감</label>
+            <input id="sel_term_end" name="sel_term_end"  class=flatpickr data-enabletime data-time_24hr required>
+          </div>
+          <input tyep="text" name="sel-item" placeholder="품목">
+
+          <textarea name="post" style="width: 410px; height: 80px; vertical-align:bottom;" placeholder="마켓 주제"></textarea>
+          <input type="text" name="condition" placeholder="참가비 환불 지원항목">
+          <input type="text" name="address" placeholder="마켓 주소">
+          <input type="text" name="enter_link" placeholder="마켓 참여하기">
+
+            <img id="image_poster" class="profile_img" src="<%=image_path("whiteline.jpg")%>" alt="your image" style="max-height:100px; "/>
+          <!-- 플리마켓 포스터 -->
+          <label class="filebox">
+            <label for="poster">사진 업로드</label>
+            <input id="poster" class="image_in" type="file" name="pic" required>
+          </label>
+          <input type="submit" value="글쓰기" >
+        </form>

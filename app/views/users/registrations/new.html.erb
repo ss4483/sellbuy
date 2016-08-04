@@ -1,0 +1,153 @@
+<br>
+<div class="z-depth-3 row" style="height:100%; width: 900px; background-color:white;">
+  <h1 style="text-align:center">회원가입</h1>
+  <%= devise_error_messages! %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => { :multipart => true}) do |f| %>
+    <div class="col s6">
+      <h4 style="text-align:center">필수 항목</h4>
+    </div>
+    <div class="col s6">
+      <h4 style="text-align:center">선택 항목</h4>
+    </div>
+    <!--앞-->
+    <div class="col s6">
+    <!--셀러/바이어-->
+      <div class="row">
+        <div class="col s3">
+          <span style="font-size:25px">구 분</span>
+        </div>
+        <div class="col s4">
+          <input class="with-gap" name="user[kind]" type="radio" id="kind1" value="seller" required>
+          <label for="kind1">Seller</label>
+        </div>
+        <div class="col s4">
+           <input class="with-gap" name="user[kind]" type="radio" id="kind2" value="buyer">
+           <label for="kind2">Buyer</label>
+          </div>
+          <div class="col s1"> </div>
+      </div>
+    <!-- 이메일 -->
+      <div class="input-field">
+       <i class="material-icons prefix">email</i>
+         <label for="user_email">이메일</label>
+         <input autofocus="autofocus" type="email" value="" name="user[email]" id="user_email" required>
+      </div>
+    <!-- 비밀번호 -->
+      <div class="input-field">
+       <i class="material-icons prefix">lock</i>
+         <label for="user_password">비밀번호</label>
+         <input autocomplete="off" type="password" name="user[password]" id="user_password" required>
+      </div>
+    <!-- 비밀번호 확인 -->
+      <div class="input-field">
+       <i class="material-icons prefix">vpn_key</i>
+         <label for="user_password_confirmation">비밀번호 확인</label>
+         <input autocomplete="off" type="password" name="user[password_confirmation]" id="user_password_confirmation" required>
+      </div>
+    <!-- 닉네임 -->
+      <div class="input-field">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="nickname" name="user[nickname]"  type="text" class="validate" required>
+        <label for="nickname">닉네임</label>
+      </div>
+    <!-- 이름 -->
+      <div class="input-field">
+        <i class="material-icons prefix">assignment_ind</i>
+        <input id="name" type="text" name="user[name]"class="validate" required>
+        <label for="name">이름</label>
+      </div>
+    <!-- 전화번호 -->
+      <div class="input-field">
+        <i class="material-icons prefix">phone</i>
+        <input id="icon_telephone" name="user[phone_num]"  type="text" pattern="[0-9]*" class="validate" required>
+        <label for="icon_telephone">전화번호</label>
+      </div>
+    </div>
+
+  <!--뒤-->
+    <div class="col s6" style="border-left: 5px solid #6bcae8;">
+      <!-- 프로필 -->
+      <label class="filebox">
+        <img id="image_profile" class="image" src="<%=image_path("profile.jpg")%>" alt="your image" style="max-height:100px; "/>
+        <label for="profile">사진 업로드</label>
+        <input id="profile" class="image_in" type="file" name="user[profile]">
+      </label>
+
+    <!--성별-->
+      <div class="row">
+        <div class="col s3">
+          <span style="font-size:20px">성  별 </span>
+        </div>
+        <div class="col s4">
+          <input class="with-gap" name="user[gender]" type="radio" id="gender1" value="m" >
+          <label for="gender1">남</label>
+        </div>
+        <div class="col s4">
+          <input class="with-gap" name="user[gender]" type="radio" id="gender2" value="f">
+          <label for="gender2">여</label>
+          </div>
+          <div class="col s1"> </div>
+      </div>
+    <!--지역-->
+      <div class="row">
+        <div class="col s3">
+          <span style="font-size:20px">지  역</span>
+        </div>
+        <div class="col s4">
+          <input class="with-gap" name="user[location]" type="radio" id="location1" value="busan">
+          <label for="location1">부 산</label>
+        </div>
+        <div class="col s4">
+          <input class="with-gap" name="user[location]" type="radio" id="location2" value="deagu">
+          <label for="location2">대 구</label>
+        </div>
+          <div class="col s1"> </div>
+      </div>
+    <!--참가 경력 사항-->
+      <div class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="career" name="user[career]"  class="materialize-textarea" length="120"></textarea>
+            <label for="career">셀러의 참가경력</label>
+          </div>
+        </div>
+      </div>
+    <!--판매 제품-->
+      <div class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="category" name="user[category]" class="materialize-textarea" length="120"></textarea>
+            <label for="category">판매 제품</label>
+          </div>
+        </div>
+      </div>
+    <!-- SNS -->
+      <h4>SNS </h4>
+      <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+        <li class="">
+          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Facebook</div>
+          <div class="collapsible-body" style="display: none; padding-left:20%;"><input style="width:80%;"name="user[facebook_url]"></div>
+        </li>
+        <li class="">
+          <div class="collapsible-header"><i class="material-icons">place</i>instagram</div>
+          <div class="collapsible-body" style="display: none;"><input name="user[instar_url]"></div>
+        </li>
+        <li class="active">
+          <div class="collapsible-header"><i class="material-icons">whatshot</i>Twitter</div>
+          <div class="collapsible-body" style="display: block;"><input name="user[twitter_url]"></div>
+        </li>
+         <li class="active">
+          <div class="collapsible-header"><i class="material-icons">whatshot</i>Blog</div>
+          <div class="collapsible-body" style="display: block;"><input name="user[blog_url]"></div>
+        </li>
+      </ul>
+    </div>
+    <div class="col s4 offset-s8">
+      <%= f.submit "가입하기" %>
+      <%= render "users/shared/links" %>
+      <br>
+    </div>
+  <% end %>
+</div>

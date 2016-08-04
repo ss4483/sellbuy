@@ -1,0 +1,18 @@
+<% if user_signed_in? %>
+<div class="row">
+  <div class="col s6 m12 l12">
+    <p> <a href="/user_page/<%= current_user.id %>">My Page</a></p>
+    <p><%= link_to 'Edit Profile',edit_user_registration_path %></p>
+  </div>
+  <div class="col s6 m12 l12">
+    <p> <i class="tiny material-icons prefix">grade</i>즐겨찾는 셀러</p>
+    <ul class="favorites">
+      <% current_user.favorites.each do |f| %>
+        <li class="seller_<%=f.id%>"><%= user_nickname_page(f.id) %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<%else%>
+  <br>
+<%end%>

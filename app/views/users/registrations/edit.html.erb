@@ -1,0 +1,206 @@
+<br>
+<div class="z-depth-3 row" style="width:100%; height:100%; background-color:white;">
+  <h1 style="text-align:center">정보수정</h1>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :html => { :multipart => true}) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="col s6">
+    <h4 style="text-align:center">필수 항목</h4>
+  </div>
+  <div class="col s6">
+    <h4 style="text-align:center">선택 항목</h4>
+  </div>
+ <!--앞-->
+  <div class="col s6">
+    <div class="row">
+      <div class="col s3">
+        <span style="font-size:20px">구   분</span>
+      </div>
+    <!--셀러/바이어-->
+      <% if current_user.kind == "seller" %>
+        <div class="col s4">
+          <input class="with-gap" name="user[kind]" type="radio" id="kind1" value="seller" disabled="disabled" required checked/>
+          <label for="kind1">Seller</label>
+        </div>
+        <div class="col s4">
+          <input class="with-gap" name="user[kind]" type="radio" id="kind2"disabled="disabled"  value="buyer">
+          <label for="kind2">Buyer</label>
+        </div>
+      <%else%>
+        <div class="col s4">
+          <input class="with-gap" name="user[kind]" type="radio" id="kind1"disabled="disabled"  value="seller" required>
+          <label for="kind1">Seller</label>
+        </div>
+        <div class="col s4">
+          <input class="with-gap" name="user[kind]" type="radio" id="kind2" value="buyer"disabled="disabled"  checked/>
+          <label for="kind2">Buyer</label>
+        </div>
+      <% end %>
+      <div class="col s1">
+      </div>
+    </div>
+    <!-- 이메일 -->
+      <div class="input-field">
+       <i class="material-icons prefix">email</i>
+         <label for="user_email">이메일</label>
+         <input disabled="disabled" value="<%= current_user.email %>" type="email"  name="user[email]" id="user_email"  required>
+      </div>
+    <!-- 비밀번호 -->
+      <div class="input-field">
+       <i class="material-icons prefix">lock</i>
+         <label for="user_password">비밀번호</label>
+         <input autocomplete="off" type="password" name="user[password]" id="user_password" >
+      </div>
+    <!-- 비밀번호 확인 -->
+      <div class="input-field">
+       <i class="material-icons prefix">vpn_key</i>
+         <label for="user_password_confirmation">비밀번호 확인</label>
+         <input autocomplete="off" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+      </div>
+    <!-- 현재 비밀번호 -->
+      <div class="input-field">
+        <i class="material-icons prefix">vpn_key</i>
+          <label for="user_current_password">현재 비밀번호</label>
+          <input autocomplete="off" type="password" name="user[current_password]" id="user_current_password" required>
+      </div>
+    <!-- 닉네임 -->
+      <div class="input-field">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="nickname" type="text" class="validate" name="user[nickname]" value="<%= current_user.nickname %>" required>
+        <label for="nickname">닉네임</label>
+      </div>
+    <!-- 이름 -->
+      <div class="input-field">
+        <i class="material-icons prefix">assignment_ind</i>
+        <input id="name" type="text" name="user[name]" value="<%= current_user.name %>"class="validate" required>
+        <label for="name">이름</label>
+      </div>
+    <!-- 전화번호 -->
+      <div class="input-field">
+        <i class="material-icons prefix">phone</i>
+        <input id="icon_telephone" value="<%= current_user.phone_num %>" name="user[phone_num]"  type="text" pattern="[0-9]*" class="validate" required>
+        <label for="icon_telephone">전화번호</label>
+      </div>
+    </div>
+
+  <!--뒤-->
+    <div class="col s6" style="border-left: 5px solid #6bcae8;">
+      <!-- 프로필 -->
+      <label class="filebox">
+        <% if current_user.profile.blank?%>
+          <img id="image_profile" class="image" src="<%= image_path('profile.jpg') %>" alt="your image" style="max-height:100px; "/>
+        <% else %>
+          <img id="image_profile" class="image" src="<%= current_user.profile %>" alt="your image" style="max-height:100px; "/>
+        <% end %>
+        <label for="profile">사진 업로드</label>
+        <input id="profile" class="image_in" type="file" name="user[profile]">
+      </label>
+      <!--성별-->
+      <div class="row">
+        <div class="col s3">
+          <span style="font-size:20px">성   별</span>
+        </div>
+      <!--셀러/바이어-->
+        <% if current_user.gender == "m" %>
+          <div class="col s4">
+            <input class="with-gap" name="user[gender]" type="radio" id="gender1" value="m" checked/>
+            <label for="gender1">남</label>
+          </div>
+          <div class="col s4">
+            <input class="with-gap" name="user[gender]" type="radio" id="gender2" value="f">
+            <label for="gender2">여</label>
+          </div>
+        <% else %>
+          <div class="col s4">
+            <input class="with-gap" name="user[gender]" type="radio" id="gender1"value="m">
+            <label for="gender1">남</label>
+          </div>
+          <div class="col s4">
+            <input class="with-gap" name="user[gender]" type="radio" id="gender2"value="f" checked/>
+            <label for="gender2">여</label>
+          </div>
+        <% end %>
+        <div class="col s1">
+        </div>
+      </div>
+  <!--지역-->
+      <div class="row">
+        <div class="col s3">
+          <span style="font-size:20px">지  역</span>
+        </div>
+        <% if current_user.location == "busan" %>
+          <div class="col s4">
+            <input class="with-gap" name="user[location]" type="radio" id="location1" value="busan" checked/>
+            <label for="location1">부 산</label>
+          </div>
+          <div class="col s4">
+            <input class="with-gap" name="user[location]" type="radio" id="location2" value="deagu">
+            <label for="location2">대 구</label>
+          </div>
+        <%else%>
+          <div class="col s4">
+            <input class="with-gap" name="user[location]" type="radio" id="location1" value="busan">
+            <label for="location1">부 산</label>
+          </div>
+          <div class="col s4">
+            <input class="with-gap" name="user[location]" type="radio" id="location2" value="deagu" checked/>
+            <label for="location2">대 구</label>
+          </div>
+        <% end %>
+        <div class="col s2">
+        </div>
+      </div>
+     <!--참가 경력 사항-->
+      <div class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="career" name="user[career]" class="materialize-textarea" length="120"><%=current_user.career%></textarea>
+            <label for="career">셀러의 참가경력</label>
+          </div>
+        </div>
+      </div>
+     <!--판매 제품-->
+      <div class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="category" name="user[category]" class="materialize-textarea" length="120"><%=current_user.category%></textarea>
+            <label for="category">판매 제품</label>
+          </div>
+        </div>
+      </div>
+     <!-- SNS -->
+      <h4>SNS </h4>
+      <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+        <li class="">
+          <div class="collapsible-header"><i class="material-icons">filter_drama</i>Facebook</div>
+          <div class="collapsible-body" style="display: none; padding-left:20%;"><input style="width:80%;"name="user[facebook_url]" value="<%=current_user.facebook_url%>"></div>
+        </li>
+        <li class="">
+          <div class="collapsible-header"><i class="material-icons">place</i>instagram</div>
+          <div class="collapsible-body" style="display: none;"><input name="user[instar_url]" value="<%=current_user.instar_url%>"></div>
+        </li>
+        <li class="active">
+          <div class="collapsible-header"><i class="material-icons">whatshot</i>Twitter</div>
+          <div class="collapsible-body" style="display: block;"><input name="user[twitter_url]" value="<%=current_user.twitter_url%>"></div>
+        </li>
+        <li class="active">
+          <div class="collapsible-header"><i class="material-icons">whatshot</i>Blog</div>
+          <div class="collapsible-body" style="display: block;"><input name="user[blog_url]" value="<%=current_user.blog_url%>"></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col s4 offset-s8">
+      <div>
+        <%= f.submit "수정하기" %>
+        <%= link_to "취소", :back %>
+      </div>
+  <% end %>
+
+      <!-- <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p> -->
+
+
+    </div>
+  </div>
+</div>

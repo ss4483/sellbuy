@@ -1,0 +1,49 @@
+<% if @one_user.kind == "seller" %>
+    <div class="row z-depth-2" style="position: relative; background-color: white;">
+      <br>
+      <div class="col s3">
+       <%= user_profile(@one_user.id) %>
+        <br>
+        <% if user_signed_in? && @check_favorite %>
+          <a class="enjoy-css" href="/user_favorite/<%= @one_user.id %>" method="post"><i class="small material-icons">delete</i>즐겨찾기 제거</a>
+        <% elsif user_signed_in? %>
+          <a class="enjoy-css" href="/user_favorite/<%= @one_user.id %>" method="post"><i class="small material-icons">store</i>즐겨찾기</a>
+        <% end %>
+      </div>
+      <div class="col s9"><input type="hidden" value="<%=@one_user.id%>" class="seller_id">
+        이메일 : <span id="seller" ><%= @one_user.email %></span><br>
+        닉네임 : <span id="nickname"><%= @one_user.nickname%> </span><br>
+        이름 : <br>
+        연락처 : <br>
+        <%= facebook_url(@one_user.facebook_url) %>
+        <%= instar_url(@one_user.instar_url) %>
+        <%= twitter_url(@one_user.twitter_url) %>
+        <%= blog_url(@one_user.blog_url) %>
+      </div>
+    </div>
+    <%= render partial: "/user_page/goods" %>
+    <%= render partial: '/user_page/modal' %>
+
+
+<% elsif user_signed_in? && @one_user == current_user %>
+    <div class="row z-depth-2" style="position: relative; background-color: white;">
+      <br>
+      <div class="col s3">
+        <img class="_s0 _44ma img" src="https://scontent.xx.fbcdn.net/v/t1.0-1/c12.0.40.40/p40x40/10354686_10150004552801856_220367501106153455_n.jpg?oh=5c7e7ff32224d343a948ccb140e1499b&amp;oe=58320BF8" alt="" style="width:40px;height:40px">
+        <br>
+      </div>
+      <div class="col s9"><input type="hidden" value="<%=@one_user.id%>" class="seller_id">
+        이메일 : <span id="seller" ><%= @one_user.email %></span><br>
+        이름 : <br>
+        연락처 : <br>
+        <img alt="facebook" src="/assets/facebook.png"style="width: 30px;"/>
+        <img alt="instagram" src="/assets/instagram.png"style="width: 30px;"/>
+        <img alt="twitter" src="/assets/twitter.png"style="width: 30px;"/>
+        <img alt="blog" src="/assets/blog.png"style="width: 30px;"/>
+      </div>
+    </div>
+    <div class="row"><br>
+      <%= render partial: "user_page/goods2" %>
+    </div>
+
+<% end %>

@@ -1,0 +1,78 @@
+
+  <a href="#" data-activates="flea" class="button-collapse black-text right">
+    <i class="large material-icons">menu</i>
+  </a>
+<ul id="flea" class="side-nav fixed" style="margin-top:60px; background-color: rgba(255,255,255,0.5);">
+  <% if false %>
+    <a href="/flea_enroll_view"><input type="submit" value="등록하기" ></a>
+  <% end %>
+  <li><p class="center"><마켓 정보></p></li>
+  <% fleas.each do |m| %>
+    <% if m.kind == "short" %>
+      <li>
+        <div class="row"  style="margin-bottom:0;">
+          <a class="tooltipped left"  data-delay="50"  data-position="left" data-html="true"
+            data-tooltip='
+            <div class="row valign-wrapper" style="width:450px;">
+              <div class="col s4 valign center">
+                <img src="<%= m.image_url %>" width="180px">
+              </div>
+              <div class="col s7 offset-s1 valign center">
+                <p ><%= m.title %></p>
+                <p> 기간 : <%= m.term_start.strftime("%m/%d %H:%M") %> - <%= m.term_end.to_s(:time) %></p>
+                <p> 셀러 모집 기간 : <%= m.sel_term_start.strftime("%m/%d") %> - <%= m.sel_term_end.strftime("%m/%d") %></p>
+              </div>
+            </div>' href="/flea_info/<%=m.id%>" style="height: 80px; width:250px; display: inline-block;">
+
+            <div class="col s4" style="padding:0;">
+              <img class="valign center flea_img_s" src="<%= m.image_url %>" style="max-height:80px;">
+            </div>
+            <div class="col s6">
+              <p style="font-size:15px;"><%=short_title(m.title)%></p>
+            </div>
+          </a>
+          <div class="col s2">
+            <% if false %>
+              <a class="enjoy-css right" href="/flea_update_view/<%=m.id%>" style="height:40px;">
+                <i class="material-icons"style="font-size:1.5rem; height:40px;">mode_edit</i></a>
+              <a class="enjoy-css right" href="/flea_delete/<%=m.id%>" style="height:40px;">
+                <i class="material-icons" style="font-size:1.5rem; height:40px;">delete</i></a>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% else %>
+      <li>
+        <div class="row"  style="margin-bottom:0;">
+          <a class="tooltipped left"  data-delay="50"  data-position="left" data-html="true"
+            data-tooltip='
+            <div class="row valign-wrapper" style="width:450px;">
+              <div class="col s4 valign center">
+                <img src="<%= m.image_url %>" width="180px">
+              </div>
+              <div class="col s7 offset-s1 valign center">
+                <p >[정기마켓]<%= m.title %></p>
+                <p> 기간 : <%= m.term_start.strftime("%m/%d %H:%M") %> - <%= m.term_end.to_s(:time) %></p>
+                <p> 셀러 모집 기간 : <%= m.sel_term_start.strftime("%m/%d") %> - <%= m.sel_term_end.strftime("%m/%d") %></p>
+              </div>
+            </div>' href="/flea_info/<%=m.id%>" style="height: 80px; width:250px; display: inline-block;">
+            <div class="col s4">
+              <img class="valign center flea_img_s" src="<%= m.image_url %>"  style="max-height:80px;">
+            </div>
+            <div class="col s8">
+              <p style="font-size:10px;">[정기]<%=short_title(m.title)%></p>
+            </div>
+          </a>
+          <div class="col s2">
+            <% if false %>
+              <a class="enjoy-css right" href="/flea_update_view/<%=m.id%>"  style="height:40px;">
+                <i class="material-icons"style="font-size:1.5rem; height:40px;">mode_edit</i></a>
+              <a class="enjoy-css right" href="/flea_delete/<%=m.id%>"style="height:40px;">
+                <i class="material-icons" style="font-size:1.5rem; height:40px;">delete</i></a>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
