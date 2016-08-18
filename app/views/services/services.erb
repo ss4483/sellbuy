@@ -1,0 +1,49 @@
+<div>
+  <i class="material-icons" style="font-size: 2.5rem; color:orange;">live_help</i>
+  <span style="font-size:30px; margin-bottom:10px;">Q & A</span>
+  <span>
+</div>
+<a class="right enjoy-css" href="/service_write_view" style="height:30px;">
+  <i class="material-icons" style="display:inline-block;">mode_edit</i>
+  <span style="font-size:18px; margin-bottom:10px;">글쓰기</span>
+</a>
+<div class="col s12 center" style="border-bottom: 1px solid black;padding:3px; margin:3px; font-size:20px">
+  <div class="col s1 m1 l1">
+    No.
+  </div>
+  <div class="col s3 m5 l5">
+    <span class="left">제목</span>
+  </div>
+  <div class="col s3 m2 l2">
+    작성자
+  </div>
+  <div class="col s3 m2 l2">
+    날짜
+  </div>
+  <div class="col s2 m2 l2">
+    답변
+  </div>
+</div>
+<div class="row">
+  <% @services.each do |s| %>
+    <div class="col s12 center" style="margin:3px; font-size:20px">
+      <div class="col s1 m1 l1" style="padding:0px;">
+        <%= s.id %>
+      </div>
+      <div class="col s3 m5 l5">
+        <%= service_title(s) %>
+      </div>
+      <div class="col s3 m2 l2">
+        <%= q_nickname_page(s.user.id) %>
+      </div>
+      <div class="col s3 m2 l2">
+        <%= s.created_at.strftime("%y-%m-%d") %>
+      </div>
+      <div class="col s2 m2 l2">
+        <%= s.service_replies.all.count %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= will_paginate @services, :param_name => "services_page", class: "services_pagination center", style: "margin:10px;" %>

@@ -1,57 +1,17 @@
 <a href="#" data-activates="flea" class="button-collapse black-text right">
   <i class="large material-icons">menu</i>
 </a>
-<ul id="flea" class="side-nav fixed" style="margin-top:60px; background-color: rgba(255,255,255,0.5);">
+<ul id="flea" class="side-nav fixed scroll style-3" style="margin-top:60px; background-color: rgba(255,255,255,0.5);">
   <% if user_signed_in? && @one_user != current_user %>
     <a class="modal-trigger" href="#write_1"><i class="material-icons enjoy-css" style="display:inline-block;">mode_edit</i>후기 작성</a>
   <% else %>
     <a class="grey-text" style="pointer-events: none; cursor: default;"><i class="material-icons" style="display:inline-block;">mode_edit</i>후기 작성</a>
   <% end %>
   <li class="center"><br>후기</li>
-  <% @posts.each do |e| %>
-    <% if e.kind == "epilogue" && e.other_user == @one_user.id %>
-      <li>
-        <div class="row"  style="margin-bottom:0;">
-          <a class="modal-trigger left" href="#ep_<%=e.id%>" style="height: 90px; width:250px; display: inline-block;">
-            <div class="col s4" style="padding:0;">
-              <% unless e.image_url.nil? %>
-                <img src="<%= e.image_url %>" alt="your image" style="max-width:100%;"/>
-              <% end %>
-            </div>
-            <div class="col s6">
-            <span style="font-size:10px; color:black;"><%= current_user.nickname %>   </span>
-              <span class="star-rating small_star">
-                <% 1.upto(5) do |i| %>
-                  <% if i == e.rating.to_i %>
-                    <i class="on"></i>
-                  <% else %>
-                    <i></i>
-                  <% end %>
-                <% end %>
-              </span>
-            </div>
-          </a>
-          <div class="col s2">
-            <!-- 수정, 삭제 버튼 -->
-            <% if user_signed_in? && e.user == current_user  %>
-              <a class="modal-trigger enjoy-css right" href="#update<%= e.id%>" style="height:45px;">
-                <i class="material-icons"style="font-size:1.5rem">mode_edit</i></a>
-              <a class="enjoy-css right" href="/epilogue_delete/<%=e.id%>" style="height:45px;">
-                <i class="material-icons" style="font-size:1.5rem">delete</i></a>
-            <% elsif user_signed_in? && @one_user == current_user && e.index_check %>
-              <a class="enjoy-css" href="/epilogue_check/<%=e.id%>">
-                <i class="small material-icons">settings_backup_restore</i>
-              </a>
-            <% elsif user_signed_in? && @one_user == current_user  %>
-              <a class="enjoy-css" href="/epilogue_check/<%=e.id%>">
-                <i class="small material-icons">done</i>
-              </a>
-            <% end %>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  <% end %>
-
-
+  <div id="ep_pages">
+    <%= render partial: "/user_page/small_ep", collection: @ep_posts, as: :post %>
+  </div>
+  <li class="center">
+    <%= will_paginate @ep_posts, :param_name => 'ep_page', class: "ep_pagination" %>
+  </li>
 </ul>

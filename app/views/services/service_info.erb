@@ -1,0 +1,110 @@
+<div>
+  <i class="material-icons" style="font-size: 2.5rem; color:orange;">live_help</i>
+  <span style="font-size:30px; margin-bottom:10px;">Q & A</span>
+  <span>
+</div>
+<div class="row" style="margin-top:10px; padding:15px;">
+  <div class="col s12 center" style="border-bottom: 2px solid silver;">
+    <span style="font-size:30px;"><%= @service.title %></span><br>
+    <% if @service.public_check %>
+      <span class="left" style="font-size:12px;">공개 질문</span>
+    <% else %>
+      <span class="left" style="font-size:12px;">비공개 질문</span>
+    <% end %>
+    <span class="right" style="font-size:12px;"> 작성자 : <%= q_nickname_page(@service.user.id) %></span>
+  </div>
+  <div class="col s12" style="margin-top:10px; border-bottom: 3px solid silver; margin-bottom:10px;">
+    <br>
+    <div style="font-size:18px; margin-left:10px; margin-right:10px;"><%= @service.content %></div>
+    <br>
+    <div class="right" style="margin-top:10px;">
+      <% if current_user == @service.user %>
+        <a class="enjoy-css" href="/service_update_view/<%=@service.id%>"><i class="small material-icons">mode_edit</i></a>
+        <!-- Modal Trigger -->
+        <a class="enjoy-css modal-trigger" href="#post_delete_modal_<%= @service.id %>"><i class="small material-icons">delete</i></a>
+          <!-- Modal Structure -->
+          <div id="post_delete_modal_<%= @service.id %>" class="modal modal-fixed-footer" style="height:35%; width:35%;">
+            <div class="modal-content">
+              <h4>게시물 삭제</h4>
+              <hr>
+              <p>정말로 삭제 하시겠습니까??</p>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">
+                <i class="material-icons" style="font-size:2rem">settings_backup_restore</i></a>
+             <a class=" modal-action modal-close waves-effect waves-green btn-flat " href="/service_delete/<%=@service.id%>">
+               <i class="material-icons" style="font-size:2rem">done</i></a>
+            </div>
+          </div>
+      <% end %>
+      <a class="enjoy-css" href="/services"><i class="small material-icons">view_list</i></a>
+    </div>
+  </div>
+
+  <!-- 답글 -->
+  <div class="col s12">
+    <% @service.service_replies.all.each do |r| %>
+      <div clss="col s12" style="padding-top:10px; padding-bottom:10px; border-bottom: 1px dotted silver;">
+        <div>
+          <span style="vertical-align:super;"><%= q_nickname_page(r.user.id) %></span>
+          <% if r.user == current_user %>
+          <a class="enjoy-css modal-trigger" href="#service_update_modal_<%= r.id %>"><i class="tiny material-icons">mode_edit</i></a>
+            <!-- Modal Structure -->
+            <div id="service_update_modal_<%= r.id %>" class="modal modal-fixed-footer" style="height:35%; width:35%;">
+              <form action="/service_reply_update/<%=r.id%>" method="POST">
+                <div class="modal-content">
+                  <h4>답변 수정</h4>
+                  <hr>
+                    <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+                    <input name ="utf8" type="hidden", value="✓">
+                    <div class="input-field" style="padding-top:10px;">
+                      <i class="material-icons prefix">question_answer</i>
+                      <textarea id="reply_update" name="content"  class="materialize-textarea"><%=r.content%></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">
+                    <i class="material-icons" style="font-size:2rem">settings_backup_restore</i></a>
+                  <button class=" modal-action modal-close waves-effect waves-green btn-flat ">
+                   <i class="material-icons" style="font-size:2rem">done</i></button>
+                 </div>
+               </form>
+             </div>
+            <a class="enjoy-css modal-trigger" href="#service_delete_modal_<%= r.id %>"><i class="tiny material-icons">delete</i></a>
+              <!-- Modal Structure -->
+              <div id="service_delete_modal_<%= r.id %>" class="modal modal-fixed-footer" style="height:35%; width:35%;">
+                <div class="modal-content">
+                  <h4>답변 삭제</h4>
+                  <hr>
+                  <p>정말로 삭제 하시겠습니까??</p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">
+                    <i class="material-icons" style="font-size:2rem">settings_backup_restore</i></a>
+                 <a class=" modal-action modal-close waves-effect waves-green btn-flat " href="/service_reply_delete/<%=r.id%>">
+                   <i class="material-icons" style="font-size:2rem">done</i></a>
+                 </div>
+               </div>
+           <% end %>
+        </div>
+        <div style="padding:10px; font-size:17px;"><%= r.content %></div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col s12" style="position: relative;">
+    <form action="/service_reply/<%=@service.id%>" method="POST">
+      <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+      <input name ="utf8" type="hidden", value="✓">
+        <div class="input-field col s10">
+          <i class="material-icons prefix">question_answer</i>
+          <textarea id="reply" name="content"  class="materialize-textarea"></textarea>
+          <label for="reply">답변</label>
+        </div>
+        <div class="col s2" style="position: absolute; vertical-align:bottom; bottom:0px; right:0px;">
+          <button type="submit" class="enjoy-css" style="height:100%; margin-bottom:15px;">
+          <i class="small material-icons prefix">done</i><span style="vertical-align:super;">
+            답변하기</span></button>
+        </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="row">
+  <img src="<%=image_path("like.png")%>" alt="market image" style="max-height:35px;" />
+  <span style="font-size:30px; font-weight:bold;">좋아요 글</span>
+</div>
+<div id="likes" class="row">
+  <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
+  <%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
+  <%= render partial: '/posts/post', collection: @like_posts, as: :post %>
+</div>
+<%= will_paginate @like_posts, :param_name => 'like_posts_page', class: "like_posts_pagination" %>

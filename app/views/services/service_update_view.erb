@@ -1,0 +1,47 @@
+<div>
+  <i class="material-icons" style="font-size: 2.5rem; color:orange;">live_help</i>
+  <span style="font-size:30px; margin-bottom:10px;">Q & A</span>
+  <span>
+</div>
+<div class ="row field"style="padding: 10px; margin: 20px;">
+  <form action="/service_update/<%=@one_service.id%>" method="POST" >
+    <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+    <input name ="utf8" type="hidden", value="✓">
+      <div class="input-field col s12">
+         <label for="title">제목</label>
+         <input autofocus="autofocus" type="text" id="title" name="title" value="<%= @one_service.title %>" required>
+      </div>
+      <div class="input-field col s12">
+        <textarea id="textarea1" class="materialize-textarea" name="content" required><%= @one_service.content %></textarea>
+      </div>
+
+      <div class="col s6 m3 offset-m5 l3 offset-l5 ">
+        <span class="right">공개 질문</span>
+      </div>
+      <% if @one_service.public_check %>
+        <div class="col s3 m2 l2">
+          <input class="with-gap" name="public_check" type="radio" id="public_check1" value="true" checked required>
+          <label for="public_check1">○</label>
+        </div>
+        <div class="col s3 m2 l2">
+           <input class="with-gap" name="public_check" type="radio" id="public_check2" value="false">
+           <label for="public_check2">X</label>
+        </div>
+      <% else %>
+        <div class="col s3 m2 l2">
+          <input class="with-gap" name="public_check" type="radio" id="public_check1" value="true" required>
+          <label for="public_check1">○</label>
+        </div>
+        <div class="col s3 m2 l2">
+           <input class="with-gap" name="public_check" type="radio" id="public_check2" value="false" checked >
+           <label for="public_check2">X</label>
+        </div>
+      <% end %>
+
+      <div class="col s12">
+        <button type="submit" class="enjoy-css right" style="height:100%; padding-top:8px;">
+          <i class="material-icons" style="font-size: 1.5rem;">done</i>
+          <span style="vertical-align:super;">질문하기<span></button>
+      </div>
+  </form>
+</div>

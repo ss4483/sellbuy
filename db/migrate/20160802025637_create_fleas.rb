@@ -1,7 +1,7 @@
 class CreateFleas < ActiveRecord::Migration
   def change
     create_table :fleas do |t|
-      
+
       t.string :kind #short/long
       t.string :title #제목
       t.datetime :term_start  # 마켓개최시간
@@ -9,6 +9,7 @@ class CreateFleas < ActiveRecord::Migration
       t.datetime :sel_term_start # 셀러 모집시간
       t.datetime :sel_term_end # 셀러모집 마감시간
       t.string :address #주소
+      t.string :address2 #상세주소
       t.string :post #주제
       t.string :supervision #주체, 주관
       t.string :condition #참가비& 환불& 지원항목

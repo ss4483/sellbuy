@@ -6,4 +6,5 @@ class Post < ActiveRecord::Base
 # post 좋아요 M(포스트):N(user)
   has_many :post_likes
   has_many :users, through: :post_likes
+
 end

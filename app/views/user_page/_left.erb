@@ -1,18 +1,31 @@
 <% if user_signed_in? %>
-<div class="row">
-  <div class="col s6 m12 l12">
-    <p> <a href="/user_page/<%= current_user.id %>">My Page</a></p>
-    <p><%= link_to 'Edit Profile',edit_user_registration_path %></p>
-  </div>
-  <div class="col s6 m12 l12">
-    <p> <i class="tiny material-icons prefix">grade</i>즐겨찾는 셀러</p>
-    <ul class="favorites">
-      <% current_user.favorites.each do |f| %>
-        <li class="seller_<%=f.id%>"><%= user_nickname_page(f.id) %></li>
+  <div class="col s4 m12 l12" style="margin-top:30px;">
+    <div class='dropdown-button  enjoy-css' href='#' data-activates='my' style="width:100%; height:30px; cursor:pointer; ">▼ 내 정보</div>
+    <ul id='my' class='dropdown-content favorites valign-wrapper'>
+      <li><a href="/user_page/<%= current_user.id %>">내 페이지</a></li>
+      <li class="divider" ></li>
+      <li><a href="/like_post">좋아요 글</a></li>
+      <li class="divider" ></li>
+      <li ><%= link_to '정보 수정',edit_user_registration_path %></li>
+      <% if current_user.kind =="M" %>
+        <li><a href="/user_list">회원 목록</a></li>
       <% end %>
     </ul>
   </div>
-</div>
+  <div class="col s4 m12 l12" style="margin-top:30px;">
+    <div class='dropdown-button  enjoy-css' href='#' data-activates='favorites' style="width:100%; height:30px; cursor:pointer; ">▼ 즐겨찾는 셀러 (<%= current_user.favorites.count%>)</div>
+    <ul id='favorites' class='dropdown-content favorites valign-wrapper'>
+      <% current_user.favorites.each do |f| %>
+        <li class="seller_<%=f.id%> valign center" ><%= user_nickname_page(f.id) %></li>
+        <li class="divider"></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col s4 m12 l12" style="margin-top:30px;">
+    <a href="/services" class="black-text">
+      <div class="enjoy-css "style="width:100%; height:30px;">● Q & A</div></a>
+
+  </div>
 <%else%>
   <br>
 <%end%>

@@ -1,5 +1,5 @@
 <div class="row"><br>
-  <div class="z-depth-3 col s6 offset-s1" style="width: 900px; background-color:white;">
+  <div class="z-depth-3 col l6 offset-l1" style="width: 100%; background-color:white;">
     <h2>로그인</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -16,9 +16,14 @@
       </div>
 
       <div class="actions">
-        <%= f.submit "로그인" %>
+        <div class="col s12" style="height:40px; text-align:right;">
+            <button type="submit" class="enjoy-css" style="height:100%;">
+            <i class="small material-icons prefix">done</i><span style="vertical-align:super;">로그인</span></button>
+        </div>
       </div>
     <% end %>
-    <%= render "users/shared/links" %>
+    <div class="col s12" style="height:40px; text-align:right;">
+      <%= render "users/shared/links" %>
+    </div>
   </div>
 </div>

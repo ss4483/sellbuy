@@ -7,9 +7,13 @@ class CreatePosts < ActiveRecord::Migration
       t.text :content  # 내용
       t.string :image_url,    default: ""  # 이미지
 
+      # market참가 항목
+      t.datetime :term_end
+      t.string :banner
+
       # epilogue 항목
       t.integer :other_user
-      t.string :rating
+      t.string :rating 
 
       t.integer :user_id
 

@@ -1,59 +1,139 @@
 
 <br>
-<div class="z-depth-2 row"  style="padding:5px; background-color:white;">
-  <a href="/flea_update_view/<%=@one_flea.id%>" style="width:100px; display:inline;">[수정]</a>
-  <a href="/flea_delete/<%=@one_flea.id%>" style="width:100px; display:inline;">[X]</a>
-  <h3 class="center">
-    <%= @one_flea.title %>
+<div class="z-depth-2 row"  style="position: relative;padding:5px; background-color:white; font-size:18px;">
+  <% if user_signed_in? && current_user.kind == "M" %>
+    <div class="right">
+      <a class='enjoy-css' href="/flea_update_view/<%=@one_flea.id%>" style="width:100px; display:inline;">
+        <i class="material-icons" style="font-size:22px;">mode_edit</i></a>
+      <a class='enjoy-css' href="/flea_delete/<%=@one_flea.id%>" style="width:100px; display:inline;">
+        <i class="material-icons" style="font-size:22px;">delete</i></a>
+    </div>
+  <% end %><br>
+  <% if @one_flea.sel_term_end.to_f > Time.zone.now.to_datetime.to_f && @one_flea.term_end.to_f > Time.zone.now.to_datetime.to_f%>
+    <span class="badge red-text" >셀러 모집 중</span>
+  <% elsif  @one_flea.term_end.to_f > Time.zone.now.to_datetime.to_f %>
+    <span class="badge green-text">셀러 모집 완료</span>
+  <% end %>
+  <% if @one_flea.term_end.to_f < Time.zone.now.to_datetime.to_f %>
+    <span class="badge red-text">완료 마켓</span>
+  <% end %>
+
+  <h4 class="center" id="flea_title"><%= @one_flea.title %></h4>
     <img class="materialboxed "  src="<%= @one_flea.image_url %>" style="margin:auto;"height="500px;">
-  </h3>
-  <div class="col s3 center">
-        주관
+    <br>
+  <div class="col s12">
+    <div class="col s3 center" style="margin-bottom:10px;">
+          주관
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+      <%= @one_flea.supervision %>
+    </div>
   </div>
-  <div class="col s9">
-    <%= @one_flea.supervision %>
+  <div class="col s12">
+    <div class="col s3 center" style="margin-bottom:10px;">
+          기간
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+    <%= @one_flea.term_start.strftime("%m/%d %H:%M") %> - <%= @one_flea.term_end.to_s(:time) %>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="col s3 center" style="margin-bottom:10px;">
+          셀러 모집 기간
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+      <%= @one_flea.sel_term_start.strftime("%m/%d") %> - <%= @one_flea.sel_term_end.strftime("%m/%d") %>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="col s3 center" style="margin-bottom:10px;">
+          마켓 주제
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+      <%= @one_flea.post%>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="col s3 center" style="margin-bottom:10px;">
+        품목
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+      <%= @one_flea.sel_item %>
+      <br>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="col s3 center" style="margin-bottom:10px;">
+      참가비 환불 지원항목
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+     <%= @one_flea.condition %>
+     <br>
+    </div>
+  </div>
+  <div class="col s12">
+    <div class="col s3 center">
+      주소
+    </div>
+    <div class="col s9" id="flea_address">
+      <%= @one_flea.address %><br>
+      <%= @one_flea.address2 %>
+    </div>
   </div>
 
-  <div class="col s3 center">
-        기간
-  </div>
-  <div class="col s9">
-  <%= @one_flea.term_start.strftime("%m/%d %H:%M") %> - <%= @one_flea.term_end.to_s(:time) %>
-  </div>
+  <div class="col s12"id="map" style="width:100%; height:350px; "></div>
 
-  <div class="col s3 center">
-        셀러 모집 기간
+  <div class="col s6 center" style="padding:15px;">
+    <a class="enjoy-css " href="<%=@one_flea.enter_link%>" target="_blank">
+    <i class="small material-icons">web</i><span style="vertical-align:super;">참가 신청하기</span></a>
   </div>
-  <div class="col s9">
-    <%= @one_flea.sel_term_start.strftime("%m/%d") %> - <%= @one_flea.sel_term_end.strftime("%m/%d") %>
+  <div class="col s6 center"  style="padding:15px;">
   </div>
-
-  <div class="col s3 center">
-        마켓 주제
-  </div>
-  <div class="col s9">
-    <%= @one_flea.post%>
-  </div>
-
-  <div class="col s3 center">
-      품목
-  </div>
-  <div class="col s9">
-    <%= @one_flea.sel_item %>
-  </div>
-
-  <div class="col s3 center">
-    참가비 환불 지원항목
-  </div>
-  <div class="col s9">
-   <%= @one_flea.condition %>
-  </div>
-
-  <div class="col s3 center">
-    주소
-  </div>
-  <div class="col s9">
-    <%= @one_flea.address %>
-  </div>
-
 </div>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=adasf&libraries=services"></script>
+
+
+<script>
+
+
+
+
+var flea_address = $('#flea_address').text();
+var flea_title = $('#flea_title').text();
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+// 지도를 생성합니다
+var map = new daum.maps.Map(mapContainer, mapOption);
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new daum.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addr2coord(flea_address, function(status, result) {
+
+    // 정상적으로 검색이 완료됐으면
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new daum.maps.InfoWindow({
+        content: '<div style="width:170px;text-align:center;padding:6px 0;">' + flea_title +' </div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    }
+});
+</script>

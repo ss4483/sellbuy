@@ -1,0 +1,155 @@
+<% if @one_user.kind == "seller" %>
+    <div class="row z-depth-2" style="position: relative; background-color: white;">
+      <br>
+      <div class="col s3">
+       <%= user_page_profile(@one_user.id) %>
+        <br>
+        <% if user_signed_in? && @check_favorite %>
+          <a class="enjoy-css" href="/user_favorite/<%= @one_user.id %>" method="post"><i class="small material-icons">delete</i>즐겨찾기 제거</a>
+        <% elsif user_signed_in? %>
+          <a class="enjoy-css" href="/user_favorite/<%= @one_user.id %>" method="post"><i class="small material-icons">store</i>즐겨찾기</a>
+        <% end %>
+      </div>
+      <div class="col s9 row"><input type="hidden" value="<%=@one_user.id%>" class="seller_id"><br>
+        <div class="col s3 center" style="margin-bottom:10px;">
+          이메일
+        </div>
+        <div class="col s9" style="margin-bottom:10px;">
+          <span id="seller" ><%= @one_user.email %></span>
+        </div>
+
+        <div class="col s3 center" style="margin-bottom:10px;">
+          이름
+        </div>
+        <div class="col s9" style="margin-bottom:10px;">
+          <span id="seller" ><%= @one_user.name %></span>
+        </div>
+
+        <div class="col s3 center" style="margin-bottom:10px;">
+          닉네임
+        </div>
+        <div class="col s9" style="margin-bottom:10px;">
+          <span id="nickname"><%= @one_user.nickname%> </span>
+        </div>
+
+        <div class="col s3 center" style="margin-bottom:10px;">
+          연락처
+        </div>
+        <div class="col s9" style="margin-bottom:10px;">
+          <span id="seller" ><%= @one_user.phone_num%></span>
+        </div>
+
+        <div class="col s3 center" style="margin-bottom:10px;">
+          참가 경력
+        </div>
+        <div class="col s9" style="margin-bottom:10px;"><br>
+          <span id="seller" ><%= @one_user.career%></span>
+        </div>
+
+        <div class="col s3 center" style="margin-bottom:10px;">
+          판매 제품
+        </div>
+        <div class="col s9" style="margin-bottom:10px;">
+          <br>
+          <span id="seller" ><%= @one_user.category%></span>
+        </div>
+
+        <div class="col s5 offset-s7" style="text-align:right;">
+          <%= facebook_url(@one_user.facebook_url) %>
+          <%= instar_url(@one_user.instar_url) %>
+          <%= twitter_url(@one_user.twitter_url) %>
+          <%= blog_url(@one_user.blog_url) %>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 참여마켓 -->
+<!--  && p.term_end.to_f  > Time.zone.now.to_datetime.to_f -->
+<div class="flexslider" style="background-color:transparent; border: 0px; -webkit-box-shadow: 0 0px 0px; margin-bottom:30px;">
+  <ul class="slides">
+    <% @market_posts.each do |m| %>
+      <% if m.term_end.to_f > Time.zone.now.to_datetime.to_f %>
+        <%= render partial: "/user_page/flea_attend", locals: m, as: :post %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+<%= render partial: "/user_page/flea_attend_modal", collection: @market_posts, as: :post %>
+
+    <%= render partial: "/user_page/goods" %>
+    <div id="ep_modals">
+      <%= render partial: "/user_page/ep_modal", collection: @ep_posts, as: :post %>
+    </div>
+
+<!-------------------------------------------------------------------------------------------------------------------------------------------------->
+<% elsif user_signed_in? && @one_user == current_user %>
+  <div class="row z-depth-2" style="position: relative; background-color: white;">
+    <br>
+    <div class="col s3">
+     <%= user_page_profile(@one_user.id) %>
+      <br>
+      <% if user_signed_in? && @check_favorite %>
+        <a class="enjoy-css" href="/user_favorite/<%= @one_user.id %>" method="post"><i class="small material-icons">delete</i>즐겨찾기 제거</a>
+      <% elsif user_signed_in? %>
+        <a class="enjoy-css" href="/user_favorite/<%= @one_user.id %>" method="post"><i class="small material-icons">store</i>즐겨찾기</a>
+      <% end %>
+    </div>
+    <div class="col s9 row"><input type="hidden" value="<%=@one_user.id%>" class="seller_id">
+      <div class="col s3 center" style="margin-bottom:10px;">
+        이메일
+      </div>
+      <div class="col s9" style="margin-bottom:10px;">
+        <span id="seller" ><%= @one_user.email %></span>
+      </div>
+
+      <div class="col s3 center" style="margin-bottom:10px;">
+        이름
+      </div>
+      <div class="col s9" style="margin-bottom:10px;">
+        <span id="seller" ><%= @one_user.name %></span>
+      </div>
+
+      <div class="col s3 center" style="margin-bottom:10px;">
+        닉네임
+      </div>
+      <div class="col s9" style="margin-bottom:10px;">
+        <span id="nickname"><%= @one_user.nickname%> </span>
+      </div>
+
+      <div class="col s3 center" style="margin-bottom:10px;">
+        연락처
+      </div>
+      <div class="col s9" style="margin-bottom:10px;">
+        <span id="seller" ><%= @one_user.phone_num%></span>
+      </div>
+
+      <div class="col s3 center" style="margin-bottom:10px;">
+        참가 경력
+      </div>
+      <div class="col s9" style="margin-bottom:10px;"><br>
+        <span id="seller" ><%= @one_user.career%></span>
+      </div>
+
+      <div class="col s3 center" style="margin-bottom:10px;">
+        판매 제품
+      </div>
+      <div class="col s9" style="margin-bottom:10px;">
+        <br>
+        <span id="seller" ><%= @one_user.category%></span>
+      </div>
+
+      <div class="col s5 offset-s7" style="text-align:right;">
+        <%= facebook_url(@one_user.facebook_url) %>
+        <%= instar_url(@one_user.instar_url) %>
+        <%= twitter_url(@one_user.twitter_url) %>
+        <%= blog_url(@one_user.blog_url) %>
+      </div>
+    </div>
+  </div>
+  <%= render partial: "/user_page/goods" %>
+<% else %>
+  <script>
+    alert("권한이 없습니다.")
+  </script>
+<% end %>

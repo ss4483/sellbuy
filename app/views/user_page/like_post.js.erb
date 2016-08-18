@@ -1,0 +1,10 @@
+$(function(){
+  $('#likes').append('<%= j render partial: '/posts/post', collection: @like_posts,as: :post %>');
+  $('.like_posts_pagination').replaceWith('<%= escape_javascript will_paginate(@like_posts), :param_name => "like_posts_page", class: "like_posts_pagination"  %>');
+
+  // post 좋아요 버튼
+  $('.modal-trigger').leanModal({
+    dismissible: false
+  });
+
+})

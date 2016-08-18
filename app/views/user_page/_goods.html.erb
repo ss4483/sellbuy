@@ -1,0 +1,36 @@
+<div class="col s12">
+  <ul class="tabs" style="background-color: Transparent;">
+    <% if @one_user.kind == "seller"%>
+      <li class="tab col s6"><a class="active" href="#goods">등록한상품</a></li>
+    <% end%>
+    <% if user_signed_in? && @one_user == current_user %>
+      <li class="tab col s6"><a href="#ep">나의 후기</a></li>
+    <%end%>
+  </ul>
+ </div>
+<!--*************************************************************************************************-->
+<!-- 등록한 상품 -->
+<% if @one_user.kind == "seller"%>
+  <div id="goods" class="col s12"><br><br>
+    <div id="goods_pages" class="row"style="display:block;">
+      <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
+      <%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
+      <%= render partial: '/user_page/small_post', collection: @goods_posts,as: :post %>
+    </div>
+    <sapn class="center" id="goods_paginate">
+      <%= will_paginate @goods_posts, :param_name => 'goods_page', class: "goods_pagination"%>
+    </span>
+  </div>
+<% end %>
+<!---------------------------------------------------------------------------------------------------------->
+
+<% if user_signed_in? && @one_user == current_user %>
+  <!-- 나의 후기  -->
+  <div id="ep" class="col s12"><br>
+    <div id="my_ep_pages" class="row"style="display:block;">
+      <%= render partial: '/user_page/small_post', collection: @my_ep_posts, as: :post %>
+    </div>
+    <br>
+    <sapn class=center><%= will_paginate @my_ep_posts, :param_name => 'my_ep_page', class: "my_ep_pagination"  %></span>
+  </div>
+<%end%>

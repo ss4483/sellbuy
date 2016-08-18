@@ -1,0 +1,2 @@
+$('#fleas').append('<%= j render partial: "/posts/searches_flea", collection: @fleas, as: :flea%>');
+$('.past_fleas_pagination').replaceWith('<%= escape_javascript will_paginate @fleas, :param_name => "past_fleas_page", class: "past_fleas_pagination"  %>');

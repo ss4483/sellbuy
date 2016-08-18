@@ -1,0 +1,39 @@
+<div class="col s12 center" style="border-bottom: 1px solid black;padding:3px; margin:3px; font-size:20px">
+  <div class="col s1">
+    No.
+  </div>
+  <div class="col s3">
+    이메일
+  </div>
+  <div class="col s3">
+    이름
+  </div>
+  <div class="col s3">
+    닉네임
+  </div>
+  <div class="col s2">
+    kind
+  </div>
+
+</div>
+<% @users.each do |u| %>
+  <div class="col s12 center" style="margin:3px; font-size:20px">
+    <div class="col s1">
+      <%= u.id %>
+    </div>
+    <div class="col s3">
+      <%= u.email %>
+    </div>
+    <div class="col s3">
+      <%= u.name %>
+    </div>
+    <div class="col s3">
+      <%= user_nickname_page(u.id) %>
+    </div>
+    <div class="col s2">
+      <%= u.kind %>
+    </div>
+  </div>
+<% end %>
+
+<%= will_paginate @users, :param_name => "user_list_page", class: "user_list_pagination center", style: "margin:10px;" %>

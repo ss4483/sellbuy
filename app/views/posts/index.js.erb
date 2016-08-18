@@ -1,0 +1,2 @@
+  $('#posts').append('<%= j render(partial: "/posts/post", collection: @posts,as: :post)%>');
+  $('.posts_pagination').replaceWith('<%= escape_javascript will_paginate @posts, :param_name => "posts_page", class: "posts_pagination"  %>');

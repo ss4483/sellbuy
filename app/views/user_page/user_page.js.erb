@@ -1,0 +1,24 @@
+$(function(){
+  if ($('.ep_pagination')[0]) {
+    $('#ep_pages').append('<%= j render partial: "/user_page/small_ep", collection: @ep_posts,as: :post %>');
+    $('#ep_modals').append('<%= j render partial: "/user_page/ep_modal", collection: @ep_posts,as: :post %>');
+    $('.ep_pagination').replaceWith('<%= escape_javascript will_paginate(@ep_posts), :param_name => "ep_page", class: "ep_pagination"  %>');
+  }
+  if ($('.my_ep_pagination')[0]) {
+    $('#my_ep_pages').append('<%= j render partial: "/user_page/small_post", collection: @my_ep_posts,as: :post %>');
+    $('.my_ep_pagination').replaceWith('<%= escape_javascript will_paginate(@my_ep_posts), :param_name => "my_ep_page", class: "my_ep_pagination"  %>');
+  }
+  if ($('.goods_pagination')[0]) {
+    $('#goods_pages').append('<%= j render partial: "/user_page/small_post", collection: @goods_posts,as: :post %>');
+    $('.goods_pagination').replaceWith('<%= escape_javascript will_paginate(@goods_posts), :param_name => "goods_page", class: "goods_pagination"  %>');
+  }
+
+
+  $('.modal-trigger').leanModal({
+    dismissible: false
+  });
+  // 후기 modal
+  $('.modal-trigger_ep').leanModal({
+  });
+
+});

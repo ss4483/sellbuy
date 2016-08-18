@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802081355) do
+ActiveRecord::Schema.define(version: 20160816140752) do
 
   create_table "fleas", force: :cascade do |t|
     t.string   "kind"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160802081355) do
     t.datetime "sel_term_start"
     t.datetime "sel_term_end"
     t.string   "address"
+    t.string   "address2"
     t.string   "post"
     t.string   "supervision"
     t.string   "condition"
@@ -52,11 +53,30 @@ ActiveRecord::Schema.define(version: 20160802081355) do
     t.boolean  "index_check", default: true
     t.text     "content"
     t.string   "image_url",   default: ""
+    t.datetime "term_end"
+    t.string   "banner"
     t.integer  "other_user"
     t.string   "rating"
     t.integer  "user_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "service_replies", force: :cascade do |t|
+    t.string   "content"
+    t.integer  "service_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.boolean  "public_check"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "user_likes", force: :cascade do |t|

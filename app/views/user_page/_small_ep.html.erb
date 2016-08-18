@@ -1,0 +1,41 @@
+<li>
+  <div class="row"  style="margin-bottom:0;">
+    <a class="modal-trigger_ep left" href="#ep_<%=post.id%>" style="height: 90px; width:250px; display: inline-block;">
+      <div class="col s4" style="padding:0;">
+        <% unless post.image_url.nil? %>
+          <img src="<%= post.image_url %>" alt="your image" style="max-width:100%;"/>
+        <% end %>
+      </div>
+      <div class="col s6">
+      <span style="font-size:10px; color:black;"><%= post.user.nickname %>   </span>
+        <span class="star-rating small_star">
+          <% 1.upto(5) do |i| %>
+            <% if i == post.rating.to_i %>
+              <i class="on"></i>
+            <% else %>
+              <i></i>
+            <% end %>
+          <% end %>
+        </span>
+      </div>
+    </a>
+    <div class="col s2">
+      <!-- 수정, 삭제 버튼 -->
+      <% if user_signed_in? && post.user == current_user  %>
+        <a class="modal-trigger enjoy-css right" href="#update<%= post.id%>" style="height:45px;">
+          <i class="material-icons"style="font-size:1.5rem">mode_edit</i></a>
+        <a class="enjoy-css right modal-trigger" href="#post_delete_modal_<%= post.id %>" style="height:45px;">
+          <i class="material-icons" style="font-size:1.5rem">delete</i></a>
+
+      <% elsif user_signed_in? && @one_user == current_user && post.index_check %>
+        <a class="enjoy-css" href="/epilogue_check/<%=post.id%>">
+          <i class="small material-icons">settings_backup_restore</i>
+        </a>
+      <% elsif user_signed_in? && @one_user == current_user  %>
+        <a class="enjoy-css" href="/epilogue_check/<%=post.id%>">
+          <i class="small material-icons">done</i>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</li>

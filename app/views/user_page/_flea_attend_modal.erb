@@ -1,0 +1,89 @@
+    <%= render partial: '/posts/post_ud' , locals: {post: post} %>
+<!-- 포스트 자세히 보기 -->
+<div id="user_page_<%=post.id%>" class="modal"  style="max-height:800px; width:700px;">
+  <div style="padding:20px;">
+    <div class="row" style="min-height:30px;position: relative; font-size:20px; padding-left: 20px; margin-bottom:0px;">
+      <span class="left">
+        <% if  post.kind == 'epilogue' %>
+          <%= user_profile(user_find(post.other_user).id) %><%= user_nickname_page(user_find(post.other_user).id) %>셀러님의 상품 후기
+        <% end %>
+      </span>
+      <span class="right" style="position: absolute; bottom: 0px; right:0px;">
+        <%= post.created_at.strftime("%m/%d %H:%M") %>
+      </span>
+    </div>
+    <img src="<%= post.image_url %>" alt="your image" style="max-height:500px;max-width:100%; display:block; margin-left:auto;margin-right:auto;"/>
+    <!-- post 내용 -->
+    <span style="margin-bottom:0px; font-size:15px; ">
+      <br>
+      <%= user_profile(post.user.id) %><%=  user_nickname_page(post.user.id) %>
+      <% if  post.kind == 'epilogue' %>
+        <span class="star-rating small_star" style="vertical-align: sub;" >
+          <% 1.upto(5) do |i| %>
+            <% if i == post.rating.to_i %>
+              <i class="on"></i>
+            <% else %>
+              <i></i>
+            <% end %>
+          <% end %>
+        </span>
+      <% end %>
+
+      <div class="right">
+        좋아요
+        <span class="like_count_<%=post.id%>" style="font-size:22px;"><%= post.post_likes.all.count %></span>
+        <!-- 좋아요 -->
+        <%= like_btn(post)%>
+      </div>
+      <br>
+      <span style="font-size:20px;">
+      <%= post.content %>
+      </span>
+    </span>
+      <!-- 댓글 쓰기 -->
+      <br>
+      <!-- 댓글 쓰기 -->
+        <div class="re_view" value="<%=post.id%>" style="margin-top:15px; cursor:pointer;">댓글 보기 (<%= post.post_replies.all.count %>)</div>
+        <div id="reply_<%= post.id%>" style="display:none;"><br>
+          <% if user_signed_in?%>
+            <div id="re_form_<%=post.id%>" action="/post_reply">
+              <span>댓글 : </span><input id="re_input_<%=post.id%>" type="text" name ="content" style="width:80%;"  length="255" required>
+              <button class="re_submit enjoy-css" value="<%=post.id%>" style="height:20px;"><i class="material-icons right small">textsms</i></button>
+            </div>
+          <% end %>
+
+
+          <!-- one_댓글 -->
+          <% post.post_replies.reverse.each do |r| %>
+            <div id="one_reply_<%=r.id%>" class="reply_div" style="margin-bottom:5px;">
+              <span ><%= user_nickname_page(r.user.id) %> : <span id="re_content_<%=r.id%>"><%= r.content %></span> </span>
+             <!-- 댓글 수정,삭제 버튼 -->
+              <% if user_signed_in? && (r.user == current_user || current_user.kind == "M") %>
+               <button class="reply_update enjoy-css" id="reply_update_<%=r.id%>" value="<%= r.id%>" style="height: 20px;">
+                 <i class="material-icons" style="font-size:22px;">mode_edit</i>
+               </button>
+               <button class="reply_delete enjoy-css" id="reply_delete_<%=r.id%>" value="<%= r.id%>" style="height: 20px;">
+                 <i class="material-icons" style="font-size:22px;">delete</i>
+               </button>
+               <br>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+  </div>
+</div>
+<!-- 삭제 알림창 -->
+<!-- Modal Structure -->
+<div id="post_delete_modal" class="modal modal-fixed-footer" style="height:35%; width:35%;">
+  <div class="modal-content">
+    <h4>게시물 삭제</h4>
+    <hr>
+    <p>정말로 삭제 하시겠습니까??</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">
+      <i class="material-icons" style="font-size:2rem">settings_backup_restore</i></a>
+   <a class=" modal-action modal-close waves-effect waves-green btn-flat " href="/post_delete/<%=post.id%>">
+     <i class="material-icons" style="font-size:2rem">done</i></a>
+  </div>
+</div>

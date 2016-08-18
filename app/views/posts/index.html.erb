@@ -1,0 +1,13 @@
+<!-- post 쓰기-->
+  <% if user_signed_in? && current_user.kind == "seller" %>
+    <%= render partial: "posts/write_post" %>
+  <% end %>
+<!-- 각각 post -->
+<%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
+<%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
+<div id="posts" class="row">
+  <%= render partial: '/posts/post', collection: @posts %>
+</div>
+
+
+<%= will_paginate @posts, :param_name => "posts_page", class: "posts_pagination" %>

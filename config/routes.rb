@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
   devise_for :users
-  root 'post#index'
+  root 'posts#index'
 
 # post
-  get 'post/index'
+  get 'posts/index'
     # post CRUD
-  post '/post_write' => 'post#post_write'
-  get '/post_delete/:post_id' => 'post#post_delete'
-  post '/post_update/:post_id' => 'post#post_update'
-  get '/searches' => 'post#searches'
+  post '/post_write' => 'posts#post_write'
+  get '/post_delete/:post_id' => 'posts#post_delete'
+  post '/post_update/:post_id' => 'posts#post_update'
+  get '/searches' => 'posts#searches'
     # reply CRUD
-  post '/post_reply' => 'post#post_reply'
-  get '/reply_delete' => 'post#reply_delete'
-  post '/reply_update' => 'post#reply_update'
+  post '/post_reply' => 'posts#post_reply'
+  get '/reply_delete' => 'posts#reply_delete'
+  post '/reply_update' => 'posts#reply_update'
     # post 좋아요
-  post '/post_like' => 'post#post_like'
+  post '/post_like' => 'posts#post_like'
 #flea
     # flea CRUD
   get '/flea_enroll_view' => 'flea#flea_enroll_view'
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get '/flea_update_view/:flea_id' => 'flea#flea_update_view'
   post '/flea_update/:flea_id' => 'flea#flea_update'
   get '/flea_info/:flea_id'  => 'flea#flea_info'
-
+  get '/past_flea' => 'flea#past_flea'
 #user_page
   get '/user_page/:user_id' => 'user_page#user_page'
   # 즐겨찾기
@@ -33,6 +33,26 @@ Rails.application.routes.draw do
   get '/epilogue_delete/:epilogue_id' => 'user_page#epilogue_delete'
   post '/epilogue_update/:epilogue_id' => 'user_page#epilogue_update'
   get '/epilogue_check/:epilogue_id' => 'user_page#epilogue_check'
+  # 좋아요 글
+  get '/like_post' => 'user_page#like_post'
+
+  get '/user_list' => 'user_page#user_list'
+# services
+  get '/about_us' => 'services#about_us'
+  get '/services' => 'services#services'
+  get '/service_write_view' => 'services#service_write_view'
+  post '/service_write' => 'services#service_write'
+  get '/service_info/:service_id' => 'services#service_info'
+  get '/service_delete/:service_id' => 'services#service_delete'
+  get '/service_update_view/:service_id' => 'services#service_update_view'
+  post '/service_update/:service_id' => 'services#service_update'
+    # reply CRUD
+    post '/service_reply/:service_id' => 'services#service_reply'
+    get '/service_reply_delete/:re_id' => 'services#service_reply_delete'
+    post '/service_reply_update/:re_id' => 'services#service_reply_update'
+
+post'/services/same_nickname'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

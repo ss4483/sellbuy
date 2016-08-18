@@ -1,0 +1,42 @@
+<div class="col s12">
+  <ul class="tabs" style="background-color: Transparent;">
+    <li class="tab col s4"><a class="active" href="#seller_search">셀러 검색</a></li>
+    <li class="tab col s4"><a href="#post_search">글 검색</a></li>
+    <li class="tab col s4"><a href="#flea_search">마켓 검색</a></li>
+  </ul>
+</div>
+<!--*************************************************************************************************-->
+<div id="seller_search" class="col s12"><br>
+  <% if @user_searches.empty?%>
+    <p class="center" style="font-size:20px;">'<%= @search %>'(으)로 검색한 결과가 없습니다.</p>
+  <% else %>
+    <div id="user_searches" class="row">
+      <%= render partial: '/posts/searches_user', collection: @user_searches, as: :user %>
+    </div>
+    <%= will_paginate @user_searches, :param_name => 'user_searches_page', class: "user_searches_pagination" %>
+  <% end %>
+</div>
+<!---------------------------------------------------------------------------------------------------------->
+<div id="post_search" class="col s12"><br>
+  <% if @post_searches.empty?%>
+    <p class="center" style="font-size:20px;">'<%= @search %>'(으)로 검색 결과가 없습니다.</p>
+  <% else %>
+    <div id="post_searches" class="row">
+      <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
+      <%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
+      <%= render partial: '/posts/searches_post', collection: @post_searches, as: :post %>
+    </div>
+    <%= will_paginate @post_searches, :param_name => 'post_searches_page', class: "post_searches_pagination" %>
+  <% end %>
+</div>
+<!---------------------------------------------------------------------------------------------------------->
+<div id="flea_search" class="col s12"><br>
+  <% if @flea_searches.empty?%>
+    <p  class="center" style="font-size:20px;">'<%= @search %>'(으)로 검색 결과가 없습니다.</p>
+  <% else %>
+    <div id="flea_searches" class="row">
+      <%= render partial: '/posts/searches_flea', collection: @flea_searches, as: :flea %>
+    </div>
+    <%= will_paginate @flea_searches, :param_name => 'flea_searches_page', class: "flea_searches_pagination" %>
+  <% end %>
+</div>

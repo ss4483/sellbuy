@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Market</title>
+  <title>와라! 플리마켓</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -11,45 +11,61 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
-<body id="style-3" class="scroll">
+<body class="scroll style-3" style="font-family:NGB; font-size:14px;">
   <header>
     <div class="navbar-fixed">
       <nav class="nav">
         <div class="nav-wrapper ">
-          <div class="nav-wrapper container black-text">
+          <div class="nav-wrapper  black-text">
             <div class="row" style="max-height:60px;">
-              <div class="col s2 m2 l2" style="max-height:60px;">
+              <div class="col s1 m2 l1 offset-l5" style="max-height:60px; text-align:right; padding-left:0px; padding-right:0px;">
                 <a href="/">
                   <img src="<%=image_path("logo.png")%>" alt="logo" height="55px"/>
                 </a>
               </div>
-              <div class="col s3 m3 l4" style="max-height:60px;">
-                <form action="/searches" method="get" style="max-height:60px;">
-                  <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
-                  <input name ="utf8" type="hidden", value="✓">
-                  <div class="col s9">
-                    <input name ="search"  type="text" value="<%= search(@search) %>">
-                  </div>
-                  <div class="col s3">
-                    <button class="enjoy-css left" style="max-height:60px;">
-                      <i class="material-icons right medium" style="font-size:1.5rem;max-height:60px;">search</i></button>
+              <div class="col s2 m2 l1" style="max-height:60px;  padding-left:0px;">
+                <br>
+              </div>
+
+              <div class="col s3 m3 l2" style="padding-left:0px;padding-right:0px;">
+                <form id="search_form" action="/searches" method="get" style="max-height:60px;">
+                  <div class="input-field" style="height:60px;">
+                    <button class="enjoy-css prefix" style="max-height:60px; display:inline;">
+                      <i class="material-icons " style="font-size:1.5rem;max-height:60px;">search</i></button>
+                    <input style="max-height:30px; padding-left:0px; font-size:13px;" name ="search"  type="text" value="<%= search(@search) %>" required>
                   </div>
                 </form>
               </div>
-              <div class="col s7 m7 l3 offset-l3">
-                <span stlye="left">
-                  <% if user_signed_in? %>
-                    <%= current_user.email %>
-                    <a class="black-text" href="/users/sign_out">로그아웃</a>
-                  <% else %>
-                    <a class="black-text" href="/users/sign_in">로그인</a>
-                    <a class="black-text" href="/users/sign_up">회원가입</a>
-                  <% end %>
-                </span>
-                  <%= render partial: '/user_page/epilogue' if @seller_check %>
-                  <%= render partial: '/flea/right' if @check %>
+
+              <% if user_signed_in? %>
+              <div class="col s2 m2 l1 center" style="max-height:60px; font-size:17px; padding-left:0px;padding-right:0px;">
+                <span id="current_user_nick"><%= current_user.nickname %></span>
+                <input type="hidden" id="current_user_id" value="<%=current_user.id%>">
+                <input type="hidden" id="current_user_kind" value="<%=current_user.kind%>">
               </div>
+              <div class="col s3 m2 l1 center" style="max-height:60px; font-size:17px;padding-left:0px;padding-right:0px;">
+                <a class="black-text" href="/users/sign_out">로그아웃</a>
+              </div>
+              <div class="col s1 m1 l1" style="padding-left:0px;padding-right:0px;">
+                <%= render partial: '/user_page/epilogue' if @seller_check %>
+                <%= render partial: '/flea/right' if @check %>
+              </div>
+              <% else %>
+              <div class="col s2 m2 l1 center" style="max-height:60px; font-size:17px;padding-left:0px;padding-right:0px;">
+                <a class="black-text" href="/users/sign_in"><span>로그인</sapn></a>
+              </div>
+              <div class="col s3 m2 l1 center" style="max-height:60px; font-size:17px;padding-left:0px;padding-right:0px;">
+                <br>
+              </div>
+              <div class="col s1 m1 l1" style="padding-left:0px;padding-right:0px;">
+                <%= render partial: '/user_page/epilogue' if @seller_check %>
+                <%= render partial: '/flea/right' if @check %>
+              </div>
+              <% end %>
+
+
             </div>
           </div>
         </div>
@@ -59,19 +75,18 @@
   <main>
     <div class="container">
       <div class="row">
-        <div class="col s12 m2 l2">
+        <div class="row col s12 m2 l2" style="margin-bottom:0px;">
           <%= render partial: '/user_page/left'%>
         </div>
-        <div class=" col s12 m10 l8">
+        <div class=" col s12 m10 l8" style="padding:0px;">
+          <br>
+          <% if PostReply.nil? %>
+            <input type="hidden" id="last_re_id" value="<%= PostReply.last.id%>">
+          <% end %>
           <%= yield %>
         </div>
       </div>
     </div>
   </main>
-
-  <% if flash[:notice] %>
-  <%= flash[:notice] %>
-  <% end %>
-
 </body>
 </html>

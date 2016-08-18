@@ -1,0 +1,66 @@
+<div class="row z-depth-2" style="position: relative; background-color: white;">
+  <br>
+  <div class="col s3">
+   <%= user_page_profile(user.id) %>
+    <br>
+    <% if user_signed_in? && @check_favorite %>
+      <a class="enjoy-css" href="/user_favorite/<%= user.id %>" method="post"><i class="small material-icons">delete</i>즐겨찾기 제거</a>
+    <% elsif user_signed_in? %>
+      <a class="enjoy-css" href="/user_favorite/<%= user.id %>" method="post"><i class="small material-icons">store</i>즐겨찾기</a>
+    <% end %>
+  </div>
+  <div class="col s9 row"><input type="hidden" value="<%=user.id%>" class="seller_id">
+    <div class="col s3 center" style="margin-bottom:10px;">
+      이메일
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+      <span id="seller" ><%= user.email %></span>
+    </div>
+
+    <div class="col s3 center" style="margin-bottom:10px;">
+      이름
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+      <span id="seller" ><%= user.name %></span>
+    </div>
+
+    <div class="col s3 center" style="margin-bottom:10px;">
+      닉네임
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+      <span id="nickname"><%= user.nickname%> </span>
+    </div>
+
+    <div class="col s3 center" style="margin-bottom:10px;">
+      연락처
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+      <span id="seller" ><%= user.phone_num%></span>
+    </div>
+
+    <div class="col s3 center" style="margin-bottom:10px;">
+      참가 경력
+    </div>
+    <div class="col s9" style="margin-bottom:10px;"><br>
+      <span id="seller" ><%= user.career%></span>
+    </div>
+
+    <div class="col s3 center" style="margin-bottom:10px;">
+      판매 제품
+    </div>
+    <div class="col s9" style="margin-bottom:10px;">
+      <br>
+      <span id="seller" ><%= user.category%></span>
+    </div>
+
+    <div class="col s4"><br>
+      <a href="/user_page/<%=user.id%>">셀러 페이지로 가기</a>
+    </div>
+    <div class="col s5 offset-s3" style="text-align:right;">
+      <%= facebook_url(user.facebook_url) %>
+      <%= instar_url(user.instar_url) %>
+      <%= twitter_url(user.twitter_url) %>
+      <%= blog_url(user.blog_url) %>
+    </div>
+  </div>
+</div>

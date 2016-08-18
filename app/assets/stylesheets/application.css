@@ -15,6 +15,25 @@
  */
 
 /* application*/
+.user_img_round {
+  border: 1px solid white;
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -o-border-radius: 15px;
+}
+@font-face {font-family:NG;
+            src: url("../fonts/NanumGothic_Coding.ttf")
+            format("opentype");}
+@font-face {font-family:NGB;
+            src: url("../fonts/NanumGothic_Coding_Bold.ttf")
+            format("opentype");}
+  .progress {
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+  .indeterminate {
+    background-color: black !important;
+  }
   body {
     display: flex;
     flex-direction: column;
@@ -87,8 +106,8 @@
     background-color: Transparent;
   }
   .profile{
-  width:35px;
-  height:35px;
+  width:50px;
+  height:50px;
   }
   /* 마켓 */
   .flea_img_s{
@@ -168,19 +187,110 @@ i {
   height: 25px;
 }
 /* scroll bar*/
-#style-3::-webkit-scrollbar-track
+.style-3::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
 }
 
-#style-3::-webkit-scrollbar
+.style-3::-webkit-scrollbar
 {
 	width: 6px;
 	background-color: #F5F5F5;
 }
 
-#style-3::-webkit-scrollbar-thumb
+.style-3::-webkit-scrollbar-thumb
 {
 	background-color: #000000;
+}
+.user_page {
+  width: 100%;
+  height: 80%;
+}
+.side-nav.fixed a {
+  display: inline-block !important;
+}
+/* post write button */
+.btn {
+  background-color: pink !important;
+  color: gray !important;
+  opacity: 0.8 !important;
+}
+.dropdown-content li>span{
+  background-color: pink !important;
+  color: gray !important;
+  opacity: 0.8 !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.dropdown-content li{
+  min-height: 100% !important;
+}
+/* post write color*/
+textarea:focus {
+  border-bottom: 1px solid pink !important;
+  box-shadow: 0 1px 0 0 pink !important;
+}
+textarea:valid {
+  border-bottom: 1px solid pink !important;
+  box-shadow: 0 1px 0 0 pink !important;
+}
+ .prefix.active {
+  color: pink !important;
+}
+
+/* search color*/
+input:focus {
+  border-bottom: 1px solid pink !important;
+  box-shadow: 0 1px 0 0 pink !important;
+}
+input:valid {
+  border-bottom: 1px solid pink !important;
+  box-shadow: 0 1px 0 0 pink !important;
+}
+ .prefix.active {
+  color: pink !important;
+}
+.user_input:placeholder-shown {
+  border-bottom: 0px solid pink !important;
+  box-shadow: 0 0px 0 0 pink !important;
+}
+.user_input:focus {
+  border-bottom: 1px solid pink !important;
+  box-shadow: 0 1px 0 0 pink !important;
+}
+.user_input {
+  border-bottom: 0px solid pink !important;
+  box-shadow: 0 0px 0 0 pink !important;
+}
+
+ .dropdown-content li>a {
+   color: black !important;
+ }
+ .dropdown-content li>a:hover {
+   color: pink !important;
+   font-size:17px;
+ }
+.seller_nickname {
+  color: gray;
+  font-size: 20px;
+}
+.seller_nickname:hover {
+  color: pink !important;
+}
+.nickname {
+  color: gray;
+  font-size: 20px;
+}
+
+.q_seller_nickname {
+  color: gray;
+  font-size: 17px;
+}
+.q_seller_nickname:hover {
+  color: pink !important;
+}
+.q_nickname {
+  color: gray;
+  font-size: 17px;
 }
