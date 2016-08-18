@@ -68,9 +68,18 @@
 <!--  && p.term_end.to_f  > Time.zone.now.to_datetime.to_f -->
 <div class="flexslider" style="background-color:transparent; border: 0px; -webkit-box-shadow: 0 0px 0px; margin-bottom:30px;">
   <ul class="slides">
-    <% @market_posts.each do |m| %>
-      <% if m.term_end.to_f > Time.zone.now.to_datetime.to_f %>
-        <%= render partial: "/user_page/flea_attend", locals: m, as: :post %>
+    <% @market_posts.each do |post| %>
+      <% if post.term_end.to_f > Time.zone.now.to_datetime.to_f %>
+      <li class="center" style="font-size:25px;">
+        <a class="modal-trigger_ep nickname" href="#user_page_<%= post.id %>" style="display: inline;">
+          <span> <%= post.banner %>  </span>
+        </a>
+        <% if user_signed_in? && (post.user == current_user || current_user.kind == "M") %>
+          <a class="modal-trigger enjoy-css" href="#update<%= post.id%>"><i class="material-icons" style="font-size:1.5rem">mode_edit</i></a>
+          <!-- Modal Trigger -->
+          <a class="enjoy-css modal-trigger" href="#post_delete_modal"><i class="material-icons" style="font-size:1.5rem">delete</i></a>
+        <% end %>
+      </li>
       <% end %>
     <% end %>
   </ul>
@@ -79,6 +88,42 @@
 
     <%= render partial: "/user_page/goods" %>
     <div id="ep_modals">
+      <% if user_signed_in? %>
+        <!-- 후기 쓰기 -->
+        <div id="write_1" class="modal modal-fixed-footer"  style="max-height:770px; height:770px; max-width:700px;">
+          <br>
+          <form action="/epilogue/<%=@one_user.id%>" method="POST" enctype="multipart/form-data" style="height:initial;">
+            <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+            <input name ="utf8" type="hidden", value="✓">
+            <input name="kind" type="hidden" value="epilogue">
+            <img id="image_write_in" class="image" src="<%=image_path("black.png")%>" alt="your image" style="max-height:400px; max-width:100%; display:block; margin-left:auto;margin-right:auto;"/>
+
+            <div class="field" style="padding-left:20px;,padding-right:20px;">
+              <label class="filebox"for="goods_content">
+                <img src="<%=image_path("profile.jpg")%>" alt="profile" style="width:40px;height:40px float:left;" >
+                <span style="font-size:20px; color:black;"><%= current_user.nickname %>   </span>
+                <label for="write_in">사진 업로드</label>
+                <input id="write_in" class="image_in" type="file" name="pic">
+                별점
+                <span class="star-rating small_star">
+                  <input type="radio" name="rating" id="star1" value="1" required><i></i><label for="star1" ></label>
+                  <input type="radio" name="rating" id="star2" value="2"><i></i><label for="star2"></label>
+                  <input type="radio" name="rating" id="star3" value="3"><i></i><label for="star3"></label>
+                  <input type="radio" name="rating" id="star4" value="4"><i></i><label for="star4"></label>
+                  <input type="radio" name="rating" id="star5" value="5"><i></i><label for="star5"></label>
+                </span>
+              </label>
+              <textarea id="goods_content" class="materialize-textarea" name="content" placeholder="내용을 입력하세요" style="width:90%; margin-left:10px;" required></textarea>
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">
+                <i class="material-icons" style="font-size:2rem">settings_backup_restore</i></a>
+             <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">
+               <i class="material-icons" style="font-size:2rem">textsms</i></button>
+            </div>
+          </form>
+        </div>
+      <% end %>
       <%= render partial: "/user_page/ep_modal", collection: @ep_posts, as: :post %>
     </div>
 

@@ -2,8 +2,8 @@ CarrierWave.configure do |config|
   # config.fog_provider = 'fog/aws'   (필요없음. 없애야 동작이 됨)                # required
   config.fog_credentials = {
     provider:              'AWS',                        # required
-    aws_access_key_id:     '',                        # required
-    aws_secret_access_key: '',                        # required
+    aws_access_key_id:     ENV['AWS_ACCESS_KEY_ID'],                        # required
+    aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],                        # required
     region:                'ap-northeast-2',                  # optional, defaults to 'us-east-1'
     # host:                  's3.example.com',   (필요없음. 없애도 됨)           # optional, defaults to nil
     endpoint:              'https://s3.ap-northeast-2.amazonaws.com' # optional, defaults to nil

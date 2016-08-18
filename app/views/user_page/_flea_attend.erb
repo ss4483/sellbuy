@@ -1,11 +1,10 @@
 <li class="center" style="font-size:25px;">
-  <a class="modal-trigger_ep nickname" href="#user_page_<%=post.id%>" style="display: inline;">
+  <a class="modal-trigger_ep nickname" href="#user_page_<%= post.id %>" style="display: inline;">
     <span> <%= post.banner %>  </span>
   </a>
   <% if user_signed_in? && (post.user == current_user || current_user.kind == "M") %>
     <a class="modal-trigger enjoy-css" href="#update<%= post.id%>"><i class="material-icons" style="font-size:1.5rem">mode_edit</i></a>
     <!-- Modal Trigger -->
     <a class="enjoy-css modal-trigger" href="#post_delete_modal"><i class="material-icons" style="font-size:1.5rem">delete</i></a>
-
   <% end %>
 </li>

@@ -14,8 +14,7 @@ class PostsController < ApplicationController
                           rating: params[:rating],
                           user: current_user,
                           term_end: params[:term_end],
-                          banner: params[:banner],
-                          rating: params[:market_id])# 마켓 id
+                          banner: params[:banner])# 마켓 id
         if params[:image_url] == ""
           uploader = SellbuyUploader.new   # post 이미지
           uploader.store!(params[:pic])    # 파일 aws에 보내서 저장, aws에 파일 올림.
@@ -105,5 +104,18 @@ class PostsController < ApplicationController
     @user_searches = seller_user.where("email LIKE ? OR nickname LIKE ?", "%#{@search}%", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:user_searches_page], :per_page => 12)
     @post_searches = Post.where("content LIKE ?", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:post_searches_page], :per_page => 12)
     @flea_searches = Flea.where("sel_item LIKE ? OR title LIKE ? OR post LIKE ?", "%#{@search}%", "%#{@search}%", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:flea_searches_page], :per_page => 12)
+  end
+
+
+
+  # ajax
+  def last_re_id
+    if PostReply.last.nil?
+      last_re_id= 0
+    else
+      last_re_id = PostReply.last.id
+    end
+
+    render :text => last_re_id.to_json
   end
 end

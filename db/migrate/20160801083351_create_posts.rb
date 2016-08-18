@@ -13,7 +13,7 @@ class CreatePosts < ActiveRecord::Migration
 
       # epilogue 항목
       t.integer :other_user
-      t.string :rating 
+      t.string :rating
 
       t.integer :user_id
 

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem "figaro"
 gem 'will_paginate'
 gem 'devise'
 gem 'carrierwave'

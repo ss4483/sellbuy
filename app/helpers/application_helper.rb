@@ -1,7 +1,7 @@
 module ApplicationHelper
   def user_nickname_page(user_id)
     if User.find(user_id).kind == "seller"
-        link_to(User.find(user_id).nickname , "/user_page/#{user_id}", method: :get, class:"selller_nickname")
+        link_to(User.find(user_id).nickname , "/user_page/#{user_id}", method: :get, class:"seller_nickname")
     else
       content_tag(:span, "#{User.find(user_id).nickname}", class:"nickname")
     end

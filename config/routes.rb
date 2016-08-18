@@ -53,6 +53,7 @@ Rails.application.routes.draw do
 
 post'/services/same_nickname'
 
+get'/posts/last_re_id'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

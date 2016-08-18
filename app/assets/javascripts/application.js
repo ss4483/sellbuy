@@ -21,7 +21,7 @@ $(function(){
 
   $(".button-collapse").sideNav({
      edge: 'right',
-    menuWidth: 300, // Default is 240
+    menuWidth: 250, // Default is 240
   });
   $('.modal-trigger').leanModal({
     dismissible: false
@@ -31,7 +31,6 @@ $(function(){
   });
   flatpickr('.flatpickr')
   // polar 글쓰기
-
   $("#polar").css( 'cursor', 'pointer' );
   $("#polar").click(function(){
     if($("#polar-write").css("display") == "none"){
@@ -120,76 +119,83 @@ $(function(){
     $('body').on('click', '.re_submit', function (){
             var post_id = $(this).val();
             if ( $('#re_input_'+post_id).val() != '') {
-              reply_id = parseInt($('#last_re_id').val());
-              user_id = $('#current_user_id').val();
-              user_kind = $('#current_user_kind').val();
-              user_nick = $('#current_user_nick').text();
-              reply_content = $('#re_input_'+post_id).val();
-
-              var reply_content_span = $('<span />',{
-                'id': 're_content_' + String(reply_id + 1)
-              })
-              var seller_nick = $('<a />',{
-                'class': 'nickname',
-                'style': 'display:inline-block font-size:15px;',
-                'href': '/user_page/'+ user_id
-              })
-              var buyer_nick = $('<span />',{
-                'style': 'color: gray;  font-size: 20px;'
-              })
-              var in_span = $('<span />', {})
-              var out_div = $('<div />', {
-                  'id': 'one_reply_'+ String(reply_id + 1),
-                  'style': "margin-bottom:5px"
-                });
-              // 댓글 수정,삭제 버튼
-              var edit_i = $('<i />', {
-                'class': 'material-icons',
-                'text': 'mode_edit',
-                'style': 'font-size:22px'
-              });
-              var delete_i = $('<i />', {
-                'class': 'material-icons',
-                'text': 'delete',
-                'style': 'font-size:22px'
-              });
-              var edit_btn =$('<button />', {
-                'class': 'reply_update enjoy-css',
-                'style': 'height: 20px;',
-                'id': 'reply_update_'+ String(reply_id+1),
-                'value': String(reply_id+1)
-              });
-              var delete_btn = $('<button />', {
-                'class': 'reply_delete enjoy-css',
-                'style': 'height: 20px;',
-                'id': 'reply_delete_'+ String(reply_id+1),
-                'value': String(reply_id+1)
-             });
-              $('#re_form_'+post_id).after('<div class="progress" id="re_preload"><div class="indeterminate"></div></div>');
               $.ajax({
-                method: "post",
-                url: "/post_reply",
-                data: {post_id: post_id, content: reply_content},
-                success: function(){
-                  $('#last_re_id').val(reply_id + 1);
-                  $('#re_input_'+post_id).val('');
-                  $('#re_preload').remove();
-                  $('#re_form_'+post_id).after(out_div);
-                  $('#one_reply_'+String(reply_id + 1)).append(in_span);
-                  if ( user_kind == "seller") {
-                    $('#one_reply_'+String(reply_id + 1)).children().append(seller_nick.append(user_nick));
-                  }
-                  else {
-                    $('#one_reply_'+String(reply_id + 1)).children().append(buyer_nick.append(user_nick));
-                  }
-                  $('#one_reply_'+String(reply_id + 1)).children().append(" : ");
-                  $('#one_reply_'+String(reply_id + 1)).children().append(reply_content_span.append(reply_content));
-                  $('#one_reply_'+ String(reply_id + 1)).append(edit_btn);
-                  $('#reply_update_' +String(reply_id + 1)).append(edit_i);
-                  $('#one_reply_'+ String(reply_id + 1)).append(delete_btn);
-                  $('#reply_delete_' + String(reply_id + 1)).append(delete_i);
+                method: "get",
+                dataType: "json",
+                url: "/posts/last_re_id",
+                success: function(json){
+                  reply_id = $.parseJSON(json);
+                  user_id = $('#current_user_id').val();
+                  user_kind = $('#current_user_kind').val();
+                  user_nick = $('#current_user_nick').text();
+                  reply_content = $('#re_input_'+post_id).val();
+
+                  var reply_content_span = $('<span />',{
+                    'id': 're_content_' + String(reply_id + 1)
+                  })
+                  var seller_nick = $('<a />',{
+                    'class': 'nickname',
+                    'style': 'display:inline-block font-size:15px;',
+                    'href': '/user_page/'+ user_id
+                  })
+                  var buyer_nick = $('<span />',{
+                    'style': 'color: gray;  font-size: 20px;'
+                  })
+                  var in_span = $('<span />', {})
+                  var out_div = $('<div />', {
+                      'id': 'one_reply_'+ String(reply_id + 1),
+                      'style': "margin-bottom:5px"
+                    });
+                  // 댓글 수정,삭제 버튼
+                  var edit_i = $('<i />', {
+                    'class': 'material-icons',
+                    'text': 'mode_edit',
+                    'style': 'font-size:22px'
+                  });
+                  var delete_i = $('<i />', {
+                    'class': 'material-icons',
+                    'text': 'delete',
+                    'style': 'font-size:22px'
+                  });
+                  var edit_btn =$('<button />', {
+                    'class': 'reply_update enjoy-css',
+                    'style': 'height: 20px;',
+                    'id': 'reply_update_'+ String(reply_id+1),
+                    'value': String(reply_id+1)
+                  });
+                  var delete_btn = $('<button />', {
+                    'class': 'reply_delete enjoy-css',
+                    'style': 'height: 20px;',
+                    'id': 'reply_delete_'+ String(reply_id+1),
+                    'value': String(reply_id+1)
+                 });
+                  $('#re_form_'+post_id).after('<div class="progress" id="re_preload"><div class="indeterminate"></div></div>');
+                  $.ajax({
+                    method: "post",
+                    url: "/post_reply",
+                    data: {post_id: post_id, content: reply_content},
+                    success: function(){
+                      $('#re_input_'+post_id).val('');
+                      $('#re_preload').remove();
+                      $('#re_form_'+post_id).after(out_div);
+                      $('#one_reply_'+String(reply_id + 1)).append(in_span);
+                      if ( user_kind == "seller") {
+                        $('#one_reply_'+String(reply_id + 1)).children().append(seller_nick.append(user_nick));
+                      }
+                      else {
+                        $('#one_reply_'+String(reply_id + 1)).children().append(buyer_nick.append(user_nick));
+                      }
+                      $('#one_reply_'+String(reply_id + 1)).children().append(" : ");
+                      $('#one_reply_'+String(reply_id + 1)).children().append(reply_content_span.append(reply_content));
+                      $('#one_reply_'+ String(reply_id + 1)).append(edit_btn);
+                      $('#reply_update_' +String(reply_id + 1)).append(edit_i);
+                      $('#one_reply_'+ String(reply_id + 1)).append(delete_btn);
+                      $('#reply_delete_' + String(reply_id + 1)).append(delete_i);
+                    }
+                  });
+
                 }
-              });
+              })
             }
             return false;
         });
