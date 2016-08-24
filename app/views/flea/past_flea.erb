@@ -1,4 +1,4 @@
-<div id="fleas" class="row">
+<div id="fleas" class=" col s12 m10 offset-m1 l8 offset-l2">
   <%= render partial: '/posts/searches_flea', collection: @fleas, as: :flea%>
 </div>
 <%= will_paginate @fleas, :param_name => "past_fleas_page", class: "past_fleas_pagination" %>

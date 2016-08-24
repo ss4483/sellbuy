@@ -12,9 +12,14 @@
  *
  *= require_tree .
  *= require_self
+ *= require flatpickr.material_orange.min
+ *= require flexslider
  */
 
 /* application*/
+
+
+
 .user_img_round {
   border: 1px solid white;
   border-radius: 15px;
@@ -34,11 +39,14 @@
   .indeterminate {
     background-color: black !important;
   }
+  html {
+    height: 100%;
+  }
   body {
     display: flex;
     flex-direction: column;
     position: relative;
-    min-height: 1000px;
+    min-height: 100%;
   }
   body:after {
       content : "";
@@ -46,32 +54,27 @@
       position: absolute;
       top: 0;
       left: 0;
-      /*background-image: url(<%=image_path("bg3.jpg")%>) ;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;*/
-      background: linear-gradient( to bottom, white, pink );
+        background: linear-gradient( to bottom,  #F6F6F5 , #F6F6F5 );
       width: 100%;
       height: 100%;
-      opacity : 0.5;
+      opacity : 1;
       z-index: -1;
   }
-  main {
-    flex: 1 0 auto;
-  }
+
   .nav {
-      height: 60px;
+      height: 90px;
       width: 100%;
       margin: 0 auto;
       background-color: rgba(255,255,255,0.5);
   }
+
+
   /* input type=file css*/
 .filebox label {
   display: inline-block;
   padding: .5em .75em;
   color: black;
-  font-size: 15px;
+  font-size: 12px;
   line-height: normal;
   vertical-align: middle;
   background-color: #fdfdfd;
@@ -106,8 +109,8 @@
     background-color: Transparent;
   }
   .profile{
-  width:50px;
-  height:50px;
+  width:40px;
+  height:40px;
   }
   /* 마켓 */
   .flea_img_s{
@@ -189,7 +192,7 @@ i {
 /* scroll bar*/
 .style-3::-webkit-scrollbar-track
 {
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0.3,0,0.3);
 	background-color: #F5F5F5;
 }
 
@@ -203,6 +206,7 @@ i {
 {
 	background-color: #000000;
 }
+
 .user_page {
   width: 100%;
   height: 80%;
@@ -266,21 +270,22 @@ input:valid {
 
  .dropdown-content li>a {
    color: black !important;
+   font-size: 12px !important;
  }
  .dropdown-content li>a:hover {
    color: pink !important;
-   font-size:17px;
+   font-size: 12px;
  }
 .seller_nickname {
-  color: gray;
-  font-size: 20px;
+  color: #ec407a;
+  font-size: 18px;
 }
 .seller_nickname:hover {
   color: pink !important;
 }
 .nickname {
-  color: gray;
-  font-size: 20px;
+  color: #616161;
+  font-size: 18px;
 }
 
 .q_seller_nickname {
@@ -293,4 +298,18 @@ input:valid {
 .q_nickname {
   color: gray;
   font-size: 17px;
+}
+.user_title {
+  padding:5px 15px 20px 15px;
+}
+.user_label {
+  font-size: 0.8rem !important;
+}
+.user_input_label {
+  font-size: 0.8rem !important;
+  margin-left: 2.5rem !important;
+}
+.user_i {
+  width: 2rem !important;
+  font-size: 1.5rem !important;
 }

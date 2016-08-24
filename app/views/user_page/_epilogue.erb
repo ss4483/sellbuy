@@ -1,14 +1,17 @@
 <a href="#" data-activates="flea" class="button-collapse black-text right">
-  <i class="large material-icons">menu</i>
+  <i class="medium material-icons">menu</i>
 </a>
-<ul id="flea" class="side-nav fixed scroll style-3" style="margin-top:60px; background-color: rgba(255,255,255,0.5);">
+<ul id="flea" class="side-nav fixed scroll style-3" style="direction:rtl; text-align:right; background-color: rgba(255,255,255,0); position:fixed; left:5px; top:90px; height:calc(100% - (90px)); padding-top:10px;">
+  <li class="center" style="height:48px; margin-bottom:10px;">
+    <span style="vertical-align:super; font-size:15px;">후기</span></li>
   <% if user_signed_in? && @one_user != current_user %>
-    <a class="modal-trigger" href="#write_1"><i class="material-icons enjoy-css" style="display:inline-block;">mode_edit</i>후기 작성</a>
+    <a class="modal-trigger enjoy-css" href="#write_1" style="font-size:15px;">후기 작성<i class="material-icons enjoy-css" style="display:inline-block; font-size:1.4rem;">mode_edit</i></a>
   <% else %>
-    <a class="grey-text" style="pointer-events: none; cursor: default;"><i class="material-icons" style="display:inline-block;">mode_edit</i>후기 작성</a>
+    <a class="grey-text" style="pointer-events: none; cursor: default;">후기 작성
+      <i class="material-icons" style="display:inline-block; font-size:1.4rem;">mode_edit</i></a>
   <% end %>
-  <li class="center"><br>후기</li>
-  <div id="ep_pages">
+
+  <div id="ep_pages" style="width:210px">
     <%= render partial: "/user_page/small_ep", collection: @ep_posts, as: :post %>
   </div>
   <li class="center">

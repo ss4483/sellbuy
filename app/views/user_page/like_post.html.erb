@@ -1,6 +1,8 @@
 <div class="row">
-  <img src="<%=image_path("like.png")%>" alt="market image" style="max-height:35px;" />
-  <span style="font-size:30px; font-weight:bold;">좋아요 글</span>
+  <div class="col s12 m12 l2 offset-l1 ">
+    <img src="<%=image_path("like.png")%>" alt="market image" style="max-height:30px;" />
+    <span style="font-size:25px; font-weight:bold;">좋아요</span>
+  </div>
 </div>
 <div id="likes" class="row">
   <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>

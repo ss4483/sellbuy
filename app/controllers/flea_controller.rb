@@ -13,7 +13,8 @@ class FleaController < ApplicationController
                           address: params[:address],address2: params[:address2],
                           post: params[:post],supervision: params[:supervision],
                           sel_item: params[:sel_item],
-                          condition: params[:condition],enter_link: params[:enter_link])
+                          condition: params[:condition],enter_link: params[:enter_link],
+                          location: params[:location])
 
       uploader = SellbuyUploader.new   # 플리마켓 포스터
       uploader.store!(params[:pic])    # 파일 aws에 보내서 저장, aws에 파일 올림.
@@ -47,9 +48,10 @@ class FleaController < ApplicationController
       @one_flea.sel_item = params[:sel_item]
       @one_flea.condition = params[:condition]
       @one_flea.enter_link = params[:enter_link]
+      @one_flea.location = params[:location]
       if params[:pic].nil?
         @one_flea.image_url = @one_flea.image_url
-      elsex
+      else
         uploader = SellbuyUploader.new   # post 이미지
         uploader.store!(params[:pic])    # 파일 aws에 보내서 저장, aws에 파일 올림.
         @one_flea.image_url = uploader.url   # 파일 db에 저장(OOO.url만 찍어주면 그 파일의 url 주소가 뜸.)
@@ -73,5 +75,24 @@ class FleaController < ApplicationController
   def past_flea
     @fleas = Flea.all.order('updated_at DESC').where("term_end < ?", Time.zone.now.to_datetime ).paginate(:page => params[:past_fleas_page], :per_page => 12)
     @check = true
+  end
+
+  def pdf_upload
+    if user_signed_in? && current_user.kind == "M"
+      @one_flea = Flea.find(params[:flea_id])
+      uploader = SellbuyUploader.new   # post 이미지
+      uploader.store!(params[:pdf_url])    # 파일 aws에 보내서 저장, aws에 파일 올림.
+      @one_flea.pdf_url = uploader.url   # 파일 db에 저장(OOO.url만 찍어주면 그 파일의 url 주소가 뜸.)
+      @one_flea.save
+    end
+    redirect_to :back
+  end
+  def pdf_upload_delete
+    if user_signed_in? && current_user.kind == "M"
+      @one_flea = Flea.find(params[:flea_id])
+      @one_flea.pdf_url = ""
+      @one_flea.save
+    end
+    redirect_to :back
   end
 end

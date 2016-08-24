@@ -56,11 +56,12 @@ class PostsController < ApplicationController
 # post_reply CRUD
   def post_reply
     if user_signed_in?
-      PostReply.create(content: params[:content],
+      r = PostReply.create(content: params[:content],
                          post_id: params[:post_id],
                          user: current_user)
    end
-    redirect_to '/'
+   re_time = r.created_at.in_time_zone("Asia/Seoul").strftime("%m월%d일 %H:%M")
+   render :text => re_time.to_json
   end
 
   def reply_delete
@@ -103,7 +104,7 @@ class PostsController < ApplicationController
     seller_user = User.where(kind: "seller")
     @user_searches = seller_user.where("email LIKE ? OR nickname LIKE ?", "%#{@search}%", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:user_searches_page], :per_page => 12)
     @post_searches = Post.where("content LIKE ?", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:post_searches_page], :per_page => 12)
-    @flea_searches = Flea.where("sel_item LIKE ? OR title LIKE ? OR post LIKE ?", "%#{@search}%", "%#{@search}%", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:flea_searches_page], :per_page => 12)
+    @flea_searches = Flea.where("sel_item LIKE ? OR title LIKE ? OR post LIKE ? OR location LIKE ?", "%#{@search}%", "%#{@search}%", "%#{@search}%", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:flea_searches_page], :per_page => 12)
   end
 
 

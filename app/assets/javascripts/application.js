@@ -13,15 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-
+//= require flatpickr
+//= require jquery.flexslider
 
 
 $(function(){
   $('.flexslider').flexslider({});
 
   $(".button-collapse").sideNav({
-     edge: 'right',
-    menuWidth: 250, // Default is 240
+    menuWidth: 220// Default is 240
   });
   $('.modal-trigger').leanModal({
     dismissible: false
@@ -131,15 +131,16 @@ $(function(){
                   reply_content = $('#re_input_'+post_id).val();
 
                   var reply_content_span = $('<span />',{
-                    'id': 're_content_' + String(reply_id + 1)
+                    'id': 're_content_' + String(reply_id + 1),
+                    'style': "margin-right:5px"
                   })
                   var seller_nick = $('<a />',{
                     'class': 'nickname',
-                    'style': 'display:inline-block font-size:15px;',
+                    'style': 'display:inline-block font-size:15px; color: #ec407a;',
                     'href': '/user_page/'+ user_id
                   })
                   var buyer_nick = $('<span />',{
-                    'style': 'color: gray;  font-size: 20px;'
+                    'style': 'color: gray;  font-size: 18px;'
                   })
                   var in_span = $('<span />', {})
                   var out_div = $('<div />', {
@@ -150,12 +151,12 @@ $(function(){
                   var edit_i = $('<i />', {
                     'class': 'material-icons',
                     'text': 'mode_edit',
-                    'style': 'font-size:22px'
+                    'style': 'font-size:12px'
                   });
                   var delete_i = $('<i />', {
                     'class': 'material-icons',
                     'text': 'delete',
-                    'style': 'font-size:22px'
+                    'style': 'font-size:12px'
                   });
                   var edit_btn =$('<button />', {
                     'class': 'reply_update enjoy-css',
@@ -169,14 +170,29 @@ $(function(){
                     'id': 'reply_delete_'+ String(reply_id+1),
                     'value': String(reply_id+1)
                  });
+                 var down_div = $('<div />',{
+                   'id' : 'down_div' + String(reply_id+1),
+                   'style' : 'text-align: right'
+                 })
+
+
                   $('#re_form_'+post_id).after('<div class="progress" id="re_preload"><div class="indeterminate"></div></div>');
                   $.ajax({
                     method: "post",
                     url: "/post_reply",
                     data: {post_id: post_id, content: reply_content},
-                    success: function(){
+                    success: function(json){
+                      re_time = $.parseJSON(json);
                       $('#re_input_'+post_id).val('');
                       $('#re_preload').remove();
+                      $('#re_form_'+post_id).after(down_div);
+                      $('#down_div'+ String(reply_id + 1)).append(edit_btn);
+                      $('#reply_update_' +String(reply_id + 1)).append(edit_i);
+                      $('#down_div'+ String(reply_id + 1)).append(' ');
+                      $('#down_div'+ String(reply_id + 1)).append(delete_btn);
+                      $('#reply_delete_' + String(reply_id + 1)).append(delete_i);
+                      $('#down_div'+ String(reply_id + 1)).append(' ');
+                      $('#down_div'+ String(reply_id + 1)).append(re_time);
                       $('#re_form_'+post_id).after(out_div);
                       $('#one_reply_'+String(reply_id + 1)).append(in_span);
                       if ( user_kind == "seller") {
@@ -187,10 +203,8 @@ $(function(){
                       }
                       $('#one_reply_'+String(reply_id + 1)).children().append(" : ");
                       $('#one_reply_'+String(reply_id + 1)).children().append(reply_content_span.append(reply_content));
-                      $('#one_reply_'+ String(reply_id + 1)).append(edit_btn);
-                      $('#reply_update_' +String(reply_id + 1)).append(edit_i);
-                      $('#one_reply_'+ String(reply_id + 1)).append(delete_btn);
-                      $('#reply_delete_' + String(reply_id + 1)).append(delete_i);
+
+
                     }
                   });
 
@@ -202,7 +216,7 @@ $(function(){
 //댓글 삭제
     $(document).on('click', '.reply_delete',  function (){
           reply_id = this.value;
-          load = '<div id="preload_btn" class="preloader-wrapper active" style="width:25px; height:25px;"><div class="spinner-layer spinner-red-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>';
+          load = '<div id="preload_btn" class="preloader-wrapper active" style="width:20px; height:20px;"><div class="spinner-layer spinner-red-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>';
           $(this).html(load);
           $.ajax({
             method: "get",
@@ -222,15 +236,17 @@ $(function(){
                   'id': 're_content_update_'+ reply_id,
                   'name': 'content',
                   'value': reply_content,
-                  'style': "width:50%"
+                  'style': "width:75%; height: 2rem; margin-bottom:0px;"
                 });
               var done = $('<i />', {
-                'class': 'small material-icons',
-                'text': 'done'
+                'class': 'material-icons',
+                'text': 'done',
+                'style': 'font-size: 1.4rem;'
               });
               var settings_backup_restore = $('<i />', {
-                'class': 'small material-icons',
-                'text': 'settings_backup_restore'
+                'class': 'material-icons',
+                'text': 'settings_backup_restore',
+                'style': 'font-size: 1.4rem;'
               });
               var ok =$('<button />', {
                 'class': 'reply_ok enjoy-css',
@@ -238,7 +254,7 @@ $(function(){
               });
               var cancel = $('<button />', {
                 'class': 'reply_cancel enjoy-css',
-                'style': 'height: 20px;'
+                'style': 'height: 20px; margin-left:5px;'
               });
               $('#re_content_'+reply_id).parent().append(input);
               $('#re_content_'+reply_id).parent().append(ok);
@@ -261,7 +277,7 @@ $(function(){
           //수정 확인 버튼
           $(document).on('click', '.reply_ok', function (){
               $('.reply_cancel').remove();
-              load = '<div id="preload_btn" class="preloader-wrapper active" style="width:25px; height:25px;"><div class="spinner-layer spinner-red-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>';
+              load = '<div id="preload_btn" class="preloader-wrapper active" style="width:20px; height:20px;"><div class="spinner-layer spinner-red-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>';
               $(this).html(load);
               text = $('#re_content_update_'+reply_id).val();
               $.ajax({

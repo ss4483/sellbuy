@@ -1,38 +1,37 @@
-
-<div class="z-depth-3 row" style="width:100%; height:100%; background-color:white; padding:10px; padding-top:15px;">
-  <h2 style="text-align:center">정보수정</h2>
+<div class="z-depth-3 col s12 m12 l8 offset-l2" style="background-color:white; margin-bottom:50px;">
+  <h4 style="text-align:center">정보수정</h4>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, :html => { :multipart => true}) do |f| %>
 
   <div class="col s6">
-    <h4 style="text-align:center">필수 항목</h4>
+    <h5 style="text-align:center; margin-bottom:20px;">필수 항목</h5>
   </div>
   <div class="col s6">
-    <h4 style="text-align:center">선택 항목</h4>
+    <h5 style="text-align:center; margin-bottom:20px;">선택 항목</h5>
   </div>
  <!--앞-->
-  <div class="col s6">
+  <div class="col s6" style="padding-right:20px;">
     <div class="row">
       <div class="col s3">
-        <span style="font-size:20px">구   분</span>
+        <span class="user_label">구   분</span>
       </div>
     <!--셀러/바이어-->
       <% if current_user.kind == "seller" %>
         <div class="col s4">
           <input class="with-gap" name="user[kind]" type="radio" id="kind1" value="seller" disabled="disabled" required checked/>
-          <label for="kind1">Seller</label>
+          <label for="kind1" class="user_label" >Seller</label>
         </div>
         <div class="col s4">
           <input class="with-gap" name="user[kind]" type="radio" id="kind2"disabled="disabled"  value="buyer">
-          <label for="kind2">Shopper</label>
+          <label for="kind2" class="user_label">Shopper</label>
         </div>
       <%else%>
         <div class="col s4">
           <input class="with-gap" name="user[kind]" type="radio" id="kind1"disabled="disabled"  value="seller" required>
-          <label for="kind1">Seller</label>
+          <label for="kind1" class="user_label">Seller</label>
         </div>
         <div class="col s4">
           <input class="with-gap" name="user[kind]" type="radio" id="kind2" value="buyer"disabled="disabled"  checked/>
-          <label for="kind2">Shopper</label>
+          <label for="kind2" class="user_label">Shopper</label>
         </div>
       <% end %>
       <div class="col s1">
@@ -40,22 +39,22 @@
     </div>
     <!-- 이메일 -->
       <div class="input-field">
-       <i class="material-icons prefix">email</i>
-         <label for="user_email">이메일</label>
-         <input readonly="readonly" value="<%= current_user.email %>" type="email"  name="user[email]" id="user_email"  required>
+       <i class="user_i material-icons prefix">email</i>
+         <label for="user_email" class="user_input_label">이메일</label>
+         <input class="user_input_label" readonly="readonly" value="<%= current_user.email %>" type="email"  name="user[email]" id="user_email"  required>
       </div>
     <!-- 현재 비밀번호 -->
       <div class="input-field">
-        <i class="material-icons prefix">vpn_key</i>
-          <label for="user_current_password">현재 비밀번호</label>
-          <input autocomplete="off" type="password" name="user[current_password]" id="user_current_password"  style="border-bottom: 2px solid pink !important;" required>
+        <i class="user_i material-icons prefix">vpn_key</i>
+          <label class="user_input_label" for="user_current_password">현재 비밀번호</label>
+          <input class="user_input_label" autocomplete="off" type="password" name="user[current_password]" id="user_current_password"  style="border-bottom: 2px solid pink !important;" required>
       </div>
       <!-- 닉네임 -->
       <div class="row" style="position: relative;">
         <div class="input-field col s9">
-          <i class="material-icons prefix">account_circle</i>
-          <input id="nickname" name="user[nickname]"  type="text" class="validate" value="<%= current_user.nickname %>" readonly="readonly" required>
-          <label for="nickname">닉네임</label>
+          <i class="user_i material-icons prefix">account_circle</i>
+          <input class="user_input_label" id="nickname" name="user[nickname]"  type="text" class="validate" value="<%= current_user.nickname %>" readonly="readonly" required>
+          <label class="user_input_label" for="nickname">닉네임</label>
         </div>
         <div class="col s3 center" style="position: absolute; bottom:0px; right:0px; ">
           <button type="button" id="nickname_check" class="enjoy-css" style="height:100%; margin-bottom:20px; display:none;">중복확인</button>
@@ -70,7 +69,7 @@
           </div>
           <div class="modal-footer">
             <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">
-              <i class="material-icons" style="font-size:2rem">done</i></a>
+              <i class="user_i material-icons" style="font-size:2rem">done</i></a>
           </div>
         </div>
       </div>
@@ -79,33 +78,33 @@
 
     <!-- 이름 -->
       <div class="input-field">
-        <i class="material-icons prefix">assignment_ind</i>
-        <input id="name" type="text" name="user[name]" value="<%= current_user.name %>"class="validate" required>
-        <label for="name">이름</label>
+        <i class="user_i material-icons prefix">assignment_ind</i>
+        <label class="user_input_label" for="name">이름</label>
+        <input class="user_input_label" id="name" type="text" name="user[name]" value="<%= current_user.name %>"required>
       </div>
     <!-- 전화번호 -->
       <div class="input-field">
-        <i class="material-icons prefix">phone</i>
-        <input id="icon_telephone" value="<%= current_user.phone_num %>" name="user[phone_num]"  type="text" pattern="[0-9]*" class="validate" required>
-        <label for="icon_telephone">전화번호</label>
+        <i class="user_i material-icons prefix">phone</i>
+        <label class="user_input_label" for="icon_telephone">전화번호</label>
+        <input class="user_input_label" id="icon_telephone" value="<%= current_user.phone_num %>" name="user[phone_num]"  type="text" pattern="[0-9]*" required>
       </div>
       <!-- 비밀번호 변경하기 -->
         <div class="input-field">
-         <i class="material-icons prefix">lock</i>
-           <label for="user_password">비밀번호 변경하기</label>
-           <input autocomplete="off" type="password" name="user[password]" placeholder="6글자 이상으로 해주세요" id="user_password" >
+         <i class="user_i material-icons prefix">lock</i>
+           <label class="user_input_label" for="user_password">비밀번호 변경하기</label>
+           <input class="user_input_label" autocomplete="off" type="password" name="user[password]" placeholder="6글자 이상으로 해주세요" id="user_password" >
         </div>
       <!-- 비밀번호 확인 -->
         <div class="input-field">
-         <i class="material-icons prefix">vpn_key</i>
-           <label for="user_password_confirmation">비밀번호 변경 확인</label>
-           <input autocomplete="off" type="password" name="user[password_confirmation]" id="user_password_confirmation">
+         <i class="user_i material-icons prefix">vpn_key</i>
+           <label class="user_input_label" for="user_password_confirmation">비밀번호 변경 확인</label>
+           <input class="user_input_label" autocomplete="off" type="password" name="user[password_confirmation]" id="user_password_confirmation">
         </div>
 
     </div>
 
   <!--뒤-->
-    <div class="col s6" style="border-left: 5px solid #6bcae8;">
+    <div class="col s6" style="border-left: 5px solid #6bcae8; padding-left:20px;">
       <!-- 프로필 -->
       <label class="filebox">
         <% if current_user.profile.blank?%>
@@ -119,35 +118,35 @@
       <!--성별-->
       <div class="row">
         <div class="col s3">
-          <span style="font-size:20px">성   별</span>
+          <span class="user_label">성   별</span>
         </div>
       <!--셀러/바이어-->
         <% if current_user.gender == "m" %>
           <div class="col s4">
             <input class="with-gap" name="user[gender]" type="radio" id="gender1" value="m" checked/>
-            <label for="gender1">남</label>
+            <label class="user_label" for="gender1">남</label>
           </div>
           <div class="col s4">
             <input class="with-gap" name="user[gender]" type="radio" id="gender2" value="f">
-            <label for="gender2">여</label>
+            <label class="user_label" for="gender2">여</label>
           </div>
         <% elsif  current_user.gender == "f"  %>
           <div class="col s4">
             <input class="with-gap" name="user[gender]" type="radio" id="gender1"value="m">
-            <label for="gender1">남</label>
+            <label class="user_label" for="gender1">남</label>
           </div>
           <div class="col s4">
             <input class="with-gap" name="user[gender]" type="radio" id="gender2"value="f" checked/>
-            <label for="gender2">여</label>
+            <label class="user_label" for="gender2">여</label>
           </div>
         <% else %>
           <div class="col s4">
             <input class="with-gap" name="user[gender]" type="radio" id="gender1"value="m">
-            <label for="gender1">남</label>
+            <label class="user_label" for="gender1">남</label>
           </div>
           <div class="col s4">
             <input class="with-gap" name="user[gender]" type="radio" id="gender2"value="f" />
-            <label for="gender2">여</label>
+            <label class="user_label" for="gender2">여</label>
           </div>
         <% end %>
         <div class="col s1">
@@ -156,34 +155,34 @@
   <!--지역-->
       <div class="row">
         <div class="col s3">
-          <span style="font-size:20px">지  역</span>
+          <span class="user_label">지  역</span>
         </div>
         <% if current_user.location == "busan" %>
           <div class="col s4">
             <input class="with-gap" name="user[location]" type="radio" id="location1" value="busan" checked/>
-            <label for="location1">부 산</label>
+            <label class="user_label" for="location1">부 산</label>
           </div>
           <div class="col s4">
             <input class="with-gap" name="user[location]" type="radio" id="location2" value="deagu">
-            <label for="location2">대 구</label>
+            <label class="user_label" for="location2">대 구</label>
           </div>
         <% elsif current_user.location == "deagu" %>
           <div class="col s4">
             <input class="with-gap" name="user[location]" type="radio" id="location1" value="busan">
-            <label for="location1">부 산</label>
+            <label class="user_label" for="location1">부 산</label>
           </div>
           <div class="col s4">
             <input class="with-gap" name="user[location]" type="radio" id="location2" value="deagu" checked/>
-            <label for="location2">대 구</label>
+            <label class="user_label" for="location2">대 구</label>
           </div>
         <% else %>
           <div class="col s4">
             <input class="with-gap" name="user[location]" type="radio" id="location1" value="busan">
-            <label for="location1">부 산</label>
+            <label class="user_label" for="location1">부 산</label>
           </div>
           <div class="col s4">
             <input class="with-gap" name="user[location]" type="radio" id="location2" value="deagu" />
-            <label for="location2">대 구</label>
+            <label class="user_label" for="location2">대 구</label>
           </div>
         <% end %>
         <div class="col s2">
@@ -193,9 +192,9 @@
       <div class="col s12">
         <div class="row">
           <div class="input-field col s12">
-            <i class="material-icons prefix">mode_edit</i>
-            <textarea id="career" name="user[career]" class="materialize-textarea" length="255" placeholder="ex) ○○마켓, ☆☆마켓"><%=current_user.career%></textarea>
-            <label for="career">셀러의 참가경력</label>
+            <i class="user_i material-icons prefix">mode_edit</i>
+            <label class="user_input_label" for="career">셀러의 참가경력</label>
+            <textarea id="career" name="user[career]" class="materialize-textarea user_input_label" length="255" placeholder="ex) ○○마켓, ☆☆마켓"><%=current_user.career%></textarea>
           </div>
         </div>
       </div>
@@ -203,9 +202,9 @@
       <div class="col s12">
         <div class="row">
           <div class="input-field col s12">
-            <i class="material-icons prefix">mode_edit</i>
-            <textarea id="category" name="user[category]" class="materialize-textarea" length="255" placeholder="ex) 휴대폰케이스, 팔찌, 목걸이"><%=current_user.category%></textarea>
-            <label for="category">판매 제품</label>
+            <i class="user_i material-icons prefix">mode_edit</i>
+            <label for="category" class="user_input_label" >판매 제품</label>
+            <textarea id="category" name="user[category]" class="materialize-textarea user_input_label" length="255" placeholder="ex) 휴대폰케이스, 팔찌, 목걸이"><%=current_user.category%></textarea>
           </div>
         </div>
       </div>
@@ -214,19 +213,19 @@
         <h4>SNS</h4>
         <div class="input-field" style="height:60px;">
             <img src="<%= image_path('facebook.png') %>" class="user_img_round prefix" style="width:35px; vertical-align:middle;">
-          <input class="user_input" style="max-height:30px; padding-left:0px; font-size:13px; margin-bottom:10px;" name="search" type="text"  value="<%=current_user.facebook_url%>" placeholder="https://wwww.example.com">
+          <input class="user_input user_input_label" style="max-height:30px; padding-left:0px; font-size:13px; margin-bottom:10px;" name="search" type="text"  value="<%=current_user.facebook_url%>" placeholder="https://wwww.example.com">
         </div>
         <div class="input-field" style="height:60px;">
             <img src="<%= image_path('instagram.png') %>" class="user_img_round prefix" style="width:35px; vertical-align:middle;">
-            <input class="user_input" style="max-height:30px; padding-left:0px; font-size:13px; margin-bottom:10px;" name="user[instar_url]" value="<%=current_user.instar_url%>" placeholder=" ">
+            <input class="user_input user_input_label" style="max-height:30px; padding-left:0px; font-size:13px; margin-bottom:10px;" name="user[instar_url]" value="<%=current_user.instar_url%>" placeholder=" ">
         </div>
         <div class="input-field" style="height:60px;">
             <img src="<%= image_path('twitter.png') %>" class="user_img_round prefix" style="width:35px; vertical-align:middle;">
-            <input class="user_input" style="max-height:30px; padding-left:0px; font-size:13px; margin-bottom:10px;" name="user[twitter_url]" value="<%=current_user.twitter_url%>" placeholder=" ">
+            <input class="user_input user_input_label" style="max-height:30px; padding-left:0px; font-size:13px; margin-bottom:10px;" name="user[twitter_url]" value="<%=current_user.twitter_url%>" placeholder=" ">
         </div>
         <div class="input-field" style="height:60px;">
             <img src="<%= image_path('blog.png') %>" class="user_img_round prefix" style="width:35px; vertical-align:middle;">
-            <input class="user_input" style="max-height:30px; padding-left:0px; font-size:13px; margin-bottom:10px; " name="user[blog_url]" value="<%=current_user.blog_url%>" placeholder=" ">
+            <input class="user_input user_input_label" style="max-height:30px; padding-left:0px; font-size:13px; margin-bottom:10px; " name="user[blog_url]" value="<%=current_user.blog_url%>" placeholder=" ">
         </div>
       </div>
     </div>
@@ -235,12 +234,12 @@
     <!-- 가입하기 -->
         <div id="same_ok" class="col s4 offset-s8" style="height:40px; text-align:right;">
             <button type="submit" class="enjoy-css" style="height:100%;">
-            <i class="small material-icons prefix">done</i><span style="vertical-align:super;">가입하기</span></button>
+            <i class="user_i small material-icons prefix">done</i><span style="vertical-align:super;">가입하기</span></button>
         </div>
 
          <div id="same_check" class="col s4 offset-s8" style="height:40px; text-align:right;  display:none;">
            <a href="#same_check_modal" class="enjoy-css modal-trigger" style="height:100%;">
-           <i class="small material-icons prefix">done</i><span style="vertical-align:super;">가입하기</span></a>
+           <i class="user_i small material-icons prefix">done</i><span style="vertical-align:super;">가입하기</span></a>
          </div>
          <!-- Modal Structure -->
          <div id="same_check_modal" class="modal modal-fixed-footer" style="height:35%; width:30%;">
@@ -251,7 +250,7 @@
            </div>
            <div class="modal-footer">
              <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">
-               <i class="material-icons" style="font-size:2rem">done</i></a>
+               <i class="user_i material-icons" style="font-size:2rem">done</i></a>
             </div>
           </div>
 

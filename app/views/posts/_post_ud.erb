@@ -1,14 +1,14 @@
 <!-- 수정 팝업창 -->
-<div id="update<%= post.id%>" class="modal modal-fixed-footer" style="max-height:770px; height:770px; width:700px;">
+<div id="update<%= post.id%>" class="modal modal-fixed-footer" style="max-height:650px; height:600px; width:580px;">
   <form action="/post_update/<%= post.id %>" method="POST" enctype="multipart/form-data">
     <input name ="utf8" type="hidden", value="✓">
     <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
-    <div class="modal-content">
-      <img id="image_goods_<%=post.id%>" src="<%=post.image_url%>" alt="your image" style="max-height:400px; display:block; margin-left:auto;margin-right:auto;"/>
-      <div class="field">
+    <div class="modal-content" style="padding:18px;">
+      <img id="image_goods_<%=post.id%>" src="<%=post.image_url%>" alt="your image" style="max-height:600px; max-width:450px; display:block; margin-left:auto;margin-right:auto;"/>
+      <div class="field" style="height:120px; width: 90%; display:block; margin-left:auto;margin-right:auto;">
         <label class="filebox" for="update_<%=post.id%>">
           <%= user_profile(post.user.id) %>
-          <span style="font-size:20px; color:black;"><%= post.user.nickname %></span>
+          <span style="font-size:15px; color:black;"><%= post.user.nickname %></span>
           <% if post.kind == "goods" || post.kind == "epilogue"%>
             <label for="goods_<%=post.id%>">사진 업로드</label>
             <input id="goods_<%=post.id%>" class="image_in" type="file" name="image_url">
@@ -25,14 +25,14 @@
             </span>
           <% end %>
         </label>
-        <textarea id="update_<%=post.id%>" class="materialize-textarea" name="content" required><%= post.content %></textarea>
+        <textarea id="update_<%=post.id%>" class="materialize-textarea" name="content" style="margin-bottom:0px; padding-bottom:15px;"required><%= post.content %></textarea>
       </div>
     </div>
-    <div class="modal-footer">
-       <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">
-         <i class="large material-icons" style="font-size:2rem">settings_backup_restore</i></a>
-      <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">
-        <i class="large material-icons" style="font-size:2rem">done</i></button>
+    <div class="modal-footer"  style="height:40px;  padding:0px;">
+       <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat " style="margin:0px;">
+         <i class="large material-icons" style="font-size:1.5rem">settings_backup_restore</i></a>
+      <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action" style="margin:0px;">
+        <i class="large material-icons" style="font-size:1.5rem">done</i></button>
     </div>
   </form>
 </div>

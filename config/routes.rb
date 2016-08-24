@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   post '/flea_update/:flea_id' => 'flea#flea_update'
   get '/flea_info/:flea_id'  => 'flea#flea_info'
   get '/past_flea' => 'flea#past_flea'
+  post '/pdf_upload' => 'flea#pdf_upload'
+  get '/pdf_upload_delete/:flea_id' => 'flea#pdf_upload_delete'
+
 #user_page
   get '/user_page/:user_id' => 'user_page#user_page'
   # 즐겨찾기

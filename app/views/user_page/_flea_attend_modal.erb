@@ -1,22 +1,27 @@
     <%= render partial: '/posts/post_ud' , locals: {post: post} %>
 <!-- 포스트 자세히 보기 -->
-<div id="user_page_<%=post.id%>" class="modal"  style="max-height:800px; width:700px;">
-  <div style="padding:20px;">
+<div id="user_page_<%=post.id%>" class="modal"  style="max-height:650px; height:600px; width:580px;">
+  <div style="padding:15px;">
     <div class="row" style="min-height:30px;position: relative; font-size:20px; padding-left: 20px; margin-bottom:0px;">
       <span class="left">
         <% if  post.kind == 'epilogue' %>
-          <%= user_profile(user_find(post.other_user).id) %><%= user_nickname_page(user_find(post.other_user).id) %>셀러님의 상품 후기
+          <%= user_nickname_page(user_find(post.other_user).id) %>셀러님의 상품 후기
         <% end %>
       </span>
-      <span class="right" style="position: absolute; bottom: 0px; right:0px;">
+      <span class="right" style="position: absolute; bottom: 0px; right:0px; font-size:12px;">
         <%= post.created_at.strftime("%m/%d %H:%M") %>
       </span>
     </div>
-    <img src="<%= post.image_url %>" alt="your image" style="max-height:500px;max-width:100%; display:block; margin-left:auto;margin-right:auto;"/>
-    <!-- post 내용 -->
+    <% if  post.kind == 'markets' %>
+      <a href="<%= market_link(post.image_url)%>">
+        <img src="<%= post.image_url %>" style="max-height:450px; max-width:100%; display:block; margin-left:auto;margin-right:auto;">
+      </a>
+    <% else %>
+    <img src="<%= post.image_url %>" style="max-height:450px; max-width:100%; display:block; margin-left:auto;margin-right:auto;">
+    <% end %>
     <span style="margin-bottom:0px; font-size:15px; ">
       <br>
-      <%= user_profile(post.user.id) %><%=  user_nickname_page(post.user.id) %>
+      <%=  user_nickname_page(post.user.id) %>
       <% if  post.kind == 'epilogue' %>
         <span class="star-rating small_star" style="vertical-align: sub;" >
           <% 1.upto(5) do |i| %>
@@ -36,7 +41,7 @@
         <%= like_btn(post)%>
       </div>
       <br>
-      <span style="font-size:20px;">
+      <span style="font-size:15px;">
       <%= post.content %>
       </span>
     </span>
@@ -52,21 +57,22 @@
             </div>
           <% end %>
 
-
           <!-- one_댓글 -->
-          <% post.post_replies.reverse.each do |r| %>
+          <% post.post_replies.order('updated_at DESC').each do |r| %>
             <div id="one_reply_<%=r.id%>" class="reply_div" style="margin-bottom:5px;">
-              <span ><%= user_nickname_page(r.user.id) %> : <span id="re_content_<%=r.id%>"><%= r.content %></span> </span>
-             <!-- 댓글 수정,삭제 버튼 -->
-              <% if user_signed_in? && (r.user == current_user || current_user.kind == "M") %>
-               <button class="reply_update enjoy-css" id="reply_update_<%=r.id%>" value="<%= r.id%>" style="height: 20px;">
-                 <i class="material-icons" style="font-size:22px;">mode_edit</i>
-               </button>
-               <button class="reply_delete enjoy-css" id="reply_delete_<%=r.id%>" value="<%= r.id%>" style="height: 20px;">
-                 <i class="material-icons" style="font-size:22px;">delete</i>
-               </button>
-               <br>
-              <% end %>
+              <span ><%= user_nickname_page(r.user.id) %> : <span id="re_content_<%=r.id%>" style="margin-right:5px;"><%= r.content %></span></span>
+              <div id ="down_div<%=r.id%>" style="text-align:right">
+                <!-- 댓글 수정,삭제 버튼 -->
+                 <% if user_signed_in? && (r.user == current_user || current_user.kind == "M") %>
+                  <button class="reply_update enjoy-css" id="reply_update_<%=r.id%>" value="<%= r.id%>" style="height: 20px;">
+                    <i class="material-icons" style="font-size:12px;">mode_edit</i>
+                  </button>
+                  <button class="reply_delete enjoy-css" id="reply_delete_<%=r.id%>" value="<%= r.id%>" style="height: 20px;">
+                    <i class="material-icons" style="font-size:12px;">delete</i>
+                  </button>
+                 <% end %>
+                 <%= r.created_at.in_time_zone("Asia/Seoul").strftime("%m월%d일 %H:%M") %>
+               </div>
             </div>
           <% end %>
         </div>

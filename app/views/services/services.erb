@@ -1,13 +1,22 @@
-<div>
-  <i class="material-icons" style="font-size: 2.5rem; color:orange;">live_help</i>
-  <span style="font-size:30px; margin-bottom:10px;">Q & A</span>
-  <span>
+<div class="row">
+  <div class="col s12 m12 l2 offset-l1 ">
+    <a class="enjoy-css" href="/services">
+      <i class="material-icons" style="font-size: 2.5rem; color:orange;">live_help</i>
+      <span style="font-size:30px; margin-bottom:10px;">Q & A</span>
+      <span>
+    </a>
+  </div>
+  <br>
+  <div class="col s3 offset-s9 m2 offset-m10 l2 offset-l9">
+    <a class="enjoy-css left" href="/service_write_view" style="height:30px;">
+      <i class="material-icons" style="display:inline-block;">mode_edit</i>
+      <span style="font-size:18px; margin-bottom:10px;">글쓰기</span>
+    </a>
+  </div>
 </div>
-<a class="right enjoy-css" href="/service_write_view" style="height:30px;">
-  <i class="material-icons" style="display:inline-block;">mode_edit</i>
-  <span style="font-size:18px; margin-bottom:10px;">글쓰기</span>
-</a>
-<div class="col s12 center" style="border-bottom: 1px solid black;padding:3px; margin:3px; font-size:20px">
+
+
+<div class="col s12 m10 offset-m1 l8 offset-l2" style="border-bottom: 1px solid black; font-size:20px">
   <div class="col s1 m1 l1">
     No.
   </div>
@@ -24,7 +33,9 @@
     답변
   </div>
 </div>
-<div class="row">
+
+
+<div class="col s12 m10 offset-m1 l8 offset-l2">
   <% @services.each do |s| %>
     <div class="col s12 center" style="margin:3px; font-size:20px">
       <div class="col s1 m1 l1" style="padding:0px;">

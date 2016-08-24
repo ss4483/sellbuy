@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+  <link rel="shortcut icon" href="/public/favicon.ico"/>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 
@@ -13,80 +14,94 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
-<body class="scroll style-3" style="font-family:NGB; font-size:14px;">
+<body class="scroll style-3" style="font-family:NGB; font-size:12px;">
   <header>
-    <div class="navbar-fixed">
-      <nav class="nav">
-        <div class="nav-wrapper ">
-          <div class="nav-wrapper  black-text">
-            <div class="row" style="max-height:60px;">
-              <div class="col s1 m2 l1 offset-l5" style="max-height:60px; text-align:right; padding-left:0px; padding-right:0px;">
-                <a href="/">
-                  <img src="<%=image_path("11.png")%>" alt="logo" height="45px" style="padding-top:13px;"/>
-                </a>
-              </div>
-              <div class="col s2 m2 l1" style="max-height:60px;  padding-left:0px;">
-                <br>
-              </div>
+   <div class="navbar-fixed" style="height:90px;">
+     <nav class="nav"  style="background-color: rgba(255,255,255,0); ">
+       <div class="nav-wrapper ">
+         <div class="nav-wrapper  black-text ">
+           <div class="row" style="max-height:90px; ">
+             <div class="col s5 m3 l2" style="max-height:90px; text-align:center;padding-right:0px;">
+               <a href="/">
+                 <img  src="<%=image_path("logo.png")%>" alt="logo" height="70px" style="padding-top:12px;"/>
+               </a>
+             </div>
 
-              <div class="col s3 m3 l2" style="padding-left:0px;padding-right:0px;">
-                <form id="search_form" action="/searches" method="get" style="max-height:60px;">
-                  <div class="input-field" style="height:60px;">
-                    <button class="enjoy-css prefix" style="max-height:60px; display:inline;">
-                      <i class="material-icons " style="font-size:1.5rem;max-height:60px;">search</i></button>
-                    <input style="max-height:30px; padding-left:0px; font-size:13px;" name ="search"  type="text" value="<%= search(@search) %>" required>
-                  </div>
-                </form>
-              </div>
+             <div class="col s3 m3 offset-m2 l2 offset-l4" style="max-height:90px; padding-left:10px;padding-right:0px; margin-top:25px;">
+               <form id="search_form" action="/searches" method="get" style="max-height:60px;">
+                 <div class="input-field" style="height:60px;">
+                   <button class="enjoy-css prefix" style=" right:0px;max-height:60px; display:inline;">
+                     <i class="material-icons " style="font-size:1.5rem;max-height:60px;">search</i></button>
+                   <input style="margin-left:0px;border-bottom: 1px solid black;max-height:30px; padding-left:0px; font-size:13px;" name ="search"  type="text" value="<%= search(@search) %>" required>
+                 </div>
+               </form>
+             </div>
 
-              <% if user_signed_in? %>
-              <div class="col s2 m2 l1 center" style="max-height:60px; font-size:17px; padding-left:0px;padding-right:0px;">
-                <span id="current_user_nick"><%= current_user.nickname %></span>
-                <input type="hidden" id="current_user_id" value="<%=current_user.id%>">
-                <input type="hidden" id="current_user_kind" value="<%=current_user.kind%>">
-              </div>
-              <div class="col s3 m2 l1 center" style="max-height:60px; font-size:17px;padding-left:0px;padding-right:0px;">
-                <a class="black-text" href="/users/sign_out">로그아웃</a>
-              </div>
-              <div class="col s1 m1 l1" style="padding-left:0px;padding-right:0px;">
-                <%= render partial: '/user_page/epilogue' if @seller_check %>
-                <%= render partial: '/flea/right' if @check %>
-              </div>
-              <% else %>
-              <div class="col s2 m2 l1 center" style="max-height:60px; font-size:17px;padding-left:0px;padding-right:0px;">
-                <a class="black-text" href="/users/sign_in"><span>로그인</sapn></a>
-              </div>
-              <div class="col s3 m2 l1 center" style="max-height:60px; font-size:17px;padding-left:0px;padding-right:0px;">
-                <br>
-              </div>
-              <div class="col s1 m1 l1" style="padding-left:0px;padding-right:0px;">
-                <%= render partial: '/user_page/epilogue' if @seller_check %>
-                <%= render partial: '/flea/right' if @check %>
-              </div>
-              <% end %>
+             <% if user_signed_in? %>
+             <div class="col s1 m1 l1 center" style="max-height:90px; padding-left:0px;padding-right:0px; margin-top:25px;">
+               <div class='dropdown-button  enjoy-css'id="current_user_nick" style="height:100%; cursor:pointer;"href='#' data-activates='my' ><%= user_nickname_index(current_user.id) %></div>
+               <ul id='my' class='dropdown-content favorites valign-wrapper' style="margin-top:65px;">
+                 <li><a href="/user_page/<%= current_user.id %>">내 페이지</a></li>
+                 <li class="divider" ></li>
+                 <li><a href="/like_post">좋아요 글</a></li>
+                 <li class="divider" ></li>
+                 <li ><%= link_to '정보 수정',edit_user_registration_path %></li>
+                 <% if current_user.kind =="M" %>
+                   <li><a href="/user_list">회원 목록</a></li>
+                 <% end %>
+                 <li><a href="/users/sign_out">로그아웃</a></li>
+               </ul>
+
+               <input type="hidden" id="current_user_id" value="<%=current_user.id%>">
+               <input type="hidden" id="current_user_kind" value="<%=current_user.kind%>">
+             </div>
+             <div class="col s1 m1 l1 center" style="max-height:90px; font-size:17px;padding-left:0px;padding-right:0px;  margin-top:25px;">
+               <div class='dropdown-button  enjoy-css' href='#' data-activates='favorites' style=" height:100%; cursor:pointer;">
+                <i class="material-icons ">stars</i></div>
+               <ul id='favorites' class='dropdown-content favorites valign-wrapper' style="margin-top:65px;">
+                 <% current_user.favorites.each do |f| %>
+                   <li class="seller_<%=f.id%> valign center" ><%= user_nickname_page(f.id) %></li>
+                   <li class="divider"></li>
+                 <% end %>
+               </ul>
+             </div>
+             <div class="col s1 m1 l1 center" style="max-height:90px; font-size:17px;padding-left:0px;padding-right:0px;  margin-top:25px;">
+               <div class='dropdown-button  enjoy-css' href='#' data-activates='about' style=" height:100%; cursor:pointer;">
+                <i class="material-icons ">live_help</i></div>
+               <ul id='about' class='dropdown-content favorites valign-wrapper' style="margin-top:65px;">
+                 <li><a href="/services" class="black-text">Q & A</a></li>
+                 <li><a href="/about_us"> About Us </a></li>
+                 <li class="divider"></li>
+               </ul>
+             </div>
+
+             <div class="col s1 m1 l1 center" style="padding-left:0px;padding-right:0px; margin-top:25px;">
+               <%= render partial: '/user_page/epilogue' if @seller_check %>
+               <%= render partial: '/flea/right' if @check %>
+             </div>
+             <% else %>
+             <div class="col s2 offset-s1 m2 l1 center" style="max-height:90px; padding-left:0px;padding-right:0px; margin-top:25px;">
+               <a class="enjoy-css black-text" href="/users/sign_in" style="font-size:18px">로그인</a>
+             </div>
+             <div class="col s1 m1 offset-m1 l1 offset-l2" style="max-height:90px; padding-left:0px;padding-right:0px; margin-top:25px;">
+               <%= render partial: '/user_page/epilogue' if @seller_check %>
+               <%= render partial: '/flea/right' if @check %>
+             </div>
+             <% end %>
 
 
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </header>
-  <main>
-    <div class="container">
-      <div class="row">
-        <div class="row col s12 m2 l2" style="margin-bottom:0px;">
-          <%= render partial: '/user_page/left'%>
-        </div>
-        <div class=" col s12 m10 l8" style="padding:0px;">
-          <br>
-          <% if PostReply.nil? %>
-            <input type="hidden" id="last_re_id" value="<%= PostReply.last.id%>">
-          <% end %>
-          <%= yield %>
-        </div>
-      </div>
-    </div>
-  </main>
+           </div>
+         </div>
+       </div>
+     </nav>
+   </div>
+ </header>
+ <main>
+   <div class="container">
+     <div class="row" style="position:relative; margin:0px;  display: block; margin-left: auto; margin-right: auto;"><br>
+         <%= yield %>
+     </div>
+   </div>
+ </main>
 </body>
 </html>

@@ -1,4 +1,19 @@
 module ApplicationHelper
+  def user_nickname_ep(user_id)
+    if User.find(user_id).kind == "seller"
+      content_tag(:span, "#{User.find(user_id).nickname}", class:"seller_nickname", style: "cursor: pointer; font-size:12px;")
+    else
+      content_tag(:span, "#{User.find(user_id).nickname}", class:"nickname", style: "cursor: pointer; font-size:12px;")
+    end
+  end
+  def user_nickname_index(user_id)
+    if User.find(user_id).kind == "seller"
+      content_tag(:span, "#{User.find(user_id).nickname}", class:"seller_nickname", style: "cursor: pointer")
+    else
+      content_tag(:span, "#{User.find(user_id).nickname}", class:"nickname", style: "cursor: pointer")
+    end
+  end
+
   def user_nickname_page(user_id)
     if User.find(user_id).kind == "seller"
         link_to(User.find(user_id).nickname , "/user_page/#{user_id}", method: :get, class:"seller_nickname")
@@ -62,4 +77,9 @@ module ApplicationHelper
   end
 
 
+  def market_link(url)
+    unless Flea.where("image_url LIKE ?", "%#{url}%").empty?
+      p "/flea_info/#{Flea.where("image_url LIKE ?", "%#{url}%").take.id}"
+    end
+  end
 end

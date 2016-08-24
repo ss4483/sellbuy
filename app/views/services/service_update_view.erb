@@ -1,10 +1,14 @@
-<div>
-  <i class="material-icons" style="font-size: 2.5rem; color:orange;">live_help</i>
-  <span style="font-size:30px; margin-bottom:10px;">Q & A</span>
-  <span>
+<div class="row">
+  <div class="col s12 m12 l2 offset-l1 ">
+    <a class="enjoy-css" href="/services">
+      <i class="material-icons" style="font-size: 2.5rem; color:orange;">live_help</i>
+      <span style="font-size:30px; margin-bottom:10px;">Q & A</span>
+      <span>
+    </a>
+  </div>
 </div>
-<div class ="row field"style="padding: 10px; margin: 20px;">
-  <form action="/service_update/<%=@one_service.id%>" method="POST" >
+<div class ="row field">
+  <form  class="col s12 m10 offset-m1 l8 offset-l2" action="/service_update/<%=@one_service.id%>" method="POST" >
     <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
     <input name ="utf8" type="hidden", value="✓">
       <div class="input-field col s12">
@@ -41,7 +45,7 @@
       <div class="col s12">
         <button type="submit" class="enjoy-css right" style="height:100%; padding-top:8px;">
           <i class="material-icons" style="font-size: 1.5rem;">done</i>
-          <span style="vertical-align:super;">질문하기<span></button>
+          <span style="vertical-align:super;">수정하기<span></button>
       </div>
   </form>
 </div>

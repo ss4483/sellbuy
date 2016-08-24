@@ -1,23 +1,32 @@
-<div>
-  <i class="material-icons" style="font-size: 2.5rem; color:orange;">live_help</i>
-  <span style="font-size:30px; margin-bottom:10px;">Q & A</span>
-  <span>
+<div class="row">
+  <div class="col s12 m12 l2 offset-l1 ">
+    <a class="enjoy-css" href="/services">
+      <i class="material-icons" style="font-size: 2.5rem; color:orange;">live_help</i>
+      <span style="font-size:30px; margin-bottom:10px;">Q & A</span>
+      <span>
+    </a>
+  </div>
 </div>
-<div class="row" style="margin-top:10px; padding:15px;">
-  <div class="col s12 center" style="border-bottom: 2px solid silver;">
+
+<div class="row">
+  <div class="col s12 m10 offset-m1 l8 offset-l2 center" style="border-bottom: 2px solid silver;">
     <span style="font-size:30px;"><%= @service.title %></span><br>
     <% if @service.public_check %>
       <span class="left" style="font-size:12px;">공개 질문</span>
     <% else %>
       <span class="left" style="font-size:12px;">비공개 질문</span>
     <% end %>
-    <span class="right" style="font-size:12px;"> 작성자 : <%= q_nickname_page(@service.user.id) %></span>
+    <span class="right"><%= @service.created_at.in_time_zone("Asia/Seoul").strftime("%m월%d일 %H:%M") %></span>
+
   </div>
-  <div class="col s12" style="margin-top:10px; border-bottom: 3px solid silver; margin-bottom:10px;">
+  <div class="col s12 m10 offset-m1 l8 offset-l2 " style="margin-top:10px; border-bottom: 3px solid silver; margin-bottom:10px;">
+    <span class="right" style="font-size:12px;"> 작성자 : <%= q_nickname_page(@service.user.id) %></span>
     <br>
     <div style="font-size:18px; margin-left:10px; margin-right:10px;"><%= @service.content %></div>
     <br>
     <div class="right" style="margin-top:10px;">
+
+
       <% if current_user == @service.user %>
         <a class="enjoy-css" href="/service_update_view/<%=@service.id%>"><i class="small material-icons">mode_edit</i></a>
         <!-- Modal Trigger -->
@@ -42,7 +51,7 @@
   </div>
 
   <!-- 답글 -->
-  <div class="col s12">
+  <div class="col s12 m10 offset-m1 l8 offset-l2 ">
     <% @service.service_replies.all.each do |r| %>
       <div clss="col s12" style="padding-top:10px; padding-bottom:10px; border-bottom: 1px dotted silver;">
         <div>
@@ -50,7 +59,7 @@
           <% if r.user == current_user %>
           <a class="enjoy-css modal-trigger" href="#service_update_modal_<%= r.id %>"><i class="tiny material-icons">mode_edit</i></a>
             <!-- Modal Structure -->
-            <div id="service_update_modal_<%= r.id %>" class="modal modal-fixed-footer" style="height:35%; width:35%;">
+            <div id="service_update_modal_<%= r.id %>" class="modal modal-fixed-footer" style="height:40%; width:35%;">
               <form action="/service_reply_update/<%=r.id%>" method="POST">
                 <div class="modal-content">
                   <h4>답변 수정</h4>
@@ -88,10 +97,11 @@
            <% end %>
         </div>
         <div style="padding:10px; font-size:17px;"><%= r.content %></div>
+        <span class="right"style="font-size:12px;"><%= r.updated_at.in_time_zone("Asia/Seoul").strftime("%m월%d일 %H:%M") %></span><br>
       </div>
     <% end %>
   </div>
-  <div class="col s12" style="position: relative;">
+  <div class="col s12 m10 offset-m1 l8 offset-l2 " style="position: relative;">
     <form action="/service_reply/<%=@service.id%>" method="POST">
       <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
       <input name ="utf8" type="hidden", value="✓">

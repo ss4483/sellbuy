@@ -1,13 +1,13 @@
 <div class="row">
-  <div class="col s12">
+  <div class="col s12 m12 l2 offset-l1 ">
     <div id="polar" style="display:inline-block;" >
-      <img src="<%=image_path("polaroid.png")%>" alt="market image" style="max-height:50px;"/>
-      <span style="font-size:20px;">글 남기기</span>
+      <img src="<%=image_path("polaroid.png")%>" alt="market image" style="max-height:40px;"/>
+      <span style="font-size:15px;">글쓰기</span>
     </div>
   </div>
 </div>
 <!-- post 쓰기-->
-<div id="polar-write" class="z-depth-2" style="padding:15px; background-color:white; display:none;">
+<div id="polar-write" class="z-depth-2" style="display: block;margin-left: auto;margin-right: auto;  width:650px;padding:15px; background-color:white; display:none; ">
   <div class="row">
     <div class="col s12">
       <ul class="tabs">
@@ -23,14 +23,14 @@
        <input name="kind" type="hidden" value="goods">
        <input type="hidden" name="image_url" value="">
        <br>
-       <img id="image_write_in" class="image" src="<%=image_path("black.png")%>" alt="your image" style="max-height:600px; max-width:100%; display:block; margin-left:auto;margin-right:auto;"/>
+       <img id="image_write_in" class="image" src="<%=image_path("black.png")%>" alt="your image" style="max-height:450px; max-width:95%; display:block; margin-left:auto;margin-right:auto;"/>
        <br>
        <!-- 텍스트 입력 -->
-       <div class="field row" style="margin-bottom:0px;">
+       <div class="field row">
          <div class="col s12 m12 l11 offset-l1">
            <label class="filebox"for="goods_content">
              <%= user_profile(current_user.id) %>
-             <span style="font-size:20px; color:black;"><%= current_user.nickname %>   </span>
+             <span style="font-size:18px; color:black;"><%= current_user.nickname %>   </span>
                  <label for="write_in">사진 업로드</label>
              <input id="write_in" class="image_in" type="file" name="pic" required>
            </label><br>
@@ -39,7 +39,7 @@
            <textarea id="goods_content" class="materialize-textarea" name="content" placeholder="내용을 입력하세요" required></textarea>
          </div>
          <div class="col s3 m2 l2">
-           <button class="enjoy-css"><i class="material-icons right medium">textsms</i></button>
+           <button class="enjoy-css"><i class="material-icons right small">textsms</i></button>
          </div>
        </div>
      </form>
@@ -50,7 +50,7 @@
         <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
         <input name ="utf8" type="hidden", value="✓">
         <input name="kind" type="hidden" value="markets"><br>
-        <img id="marketImg" src="<%=image_path("black.png")%>" alt="market image" style="max-height:600px; max-width:100%;  display:block; margin-left:auto;margin-right:auto;" />
+        <img id="marketImg" src="<%=image_path("black.png")%>" alt="market image" style="max-height:450px; max-width:100%;  display:block; margin-left:auto;margin-right:auto;" />
         <input id="marketIn" type="hidden" name="image_url" value="">
         <br>
         <!-- 참여마켓 선택 -->
@@ -84,13 +84,13 @@
                <% end %>
              </ul>
            </div>
-         </div><br>
+         </div>
       <!-- 텍스트 입력 -->
         <div class="field row" style="margin-bottom:0px;">
           <div class="col s12 m12 l11 offset-l1">
             <label class="filebox"for="attend_text">
               <%= user_profile(current_user.id) %>
-              <span style="font-size:20px; color:black;"><%= current_user.nickname %></span>
+              <span style="font-size:18px; color:black;"><%= current_user.nickname %></span>
               <input type="hidden" id="banner" name="banner">
               <input type="hidden" id="term_end" name="term_end">
             </label>
@@ -99,10 +99,10 @@
             <textarea id="attend_text" class="attend materialize-textarea" name="content" placeholder="내용을 입력하세요" required></textarea>
           </div>
           <div class="col s3 m2 l2">
-            <button class="enjoy-css"><i class="material-icons right medium">textsms</i></button>
+            <button class="enjoy-css" ><i class="material-icons right small" style="">textsms</i></button>
           </div>
         </div>
       </form>
     </div>
   </div>
-  </div><br><br>
+  </div><br>

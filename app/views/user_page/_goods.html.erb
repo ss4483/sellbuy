@@ -1,4 +1,5 @@
-<div class="col s12">
+<div class="col s12 m10 offset-m1 l8 offset-l2">
+
   <ul class="tabs" style="background-color: Transparent;">
     <% if @one_user.kind == "seller"%>
       <li class="tab col s6"><a class="active" href="#goods">등록한상품</a></li>
@@ -11,7 +12,7 @@
 <!--*************************************************************************************************-->
 <!-- 등록한 상품 -->
 <% if @one_user.kind == "seller"%>
-  <div id="goods" class="col s12"><br><br>
+  <div id="goods" class="col s12 m10 offset-m1 l8 offset-l2"><br><br>
     <div id="goods_pages" class="row"style="display:block;">
       <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
       <%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
@@ -26,7 +27,7 @@
 
 <% if user_signed_in? && @one_user == current_user %>
   <!-- 나의 후기  -->
-  <div id="ep" class="col s12"><br>
+  <div id="ep" class="col s12 m10 offset-m1 l8 offset-l2"><br>
     <div id="my_ep_pages" class="row"style="display:block;">
       <%= render partial: '/user_page/small_post', collection: @my_ep_posts, as: :post %>
     </div>

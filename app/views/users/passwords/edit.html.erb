@@ -1,6 +1,5 @@
-<div class="row"><br>
-  <div class="z-depth-3 col l6 offset-l1" style="width: 100%; background-color:white;">
-    <h2>비밀번호 변경하기</h2>
+  <div class="z-depth-3 col s12 m10 offset-m1 l8 offset-l2" style="background-color:white;">
+    <h4 class="user_title">비밀번호 변경하기</h4>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
 
@@ -8,20 +7,20 @@
 
       <div class="input-field">
        <i class="material-icons prefix">lock</i>
-         <label for="user_password">새로운 비밀번호</label>
-         <input autocomplete="off" type="password" name="user[password]" id="user_password" required>
+         <label for="user_password" class="user_label">새로운 비밀번호</label>
+         <input autocomplete="off" type="password" name="user[password]" id="user_password"  class="user_label"required>
       </div>
     <!-- 비밀번호 확인 -->
       <div class="input-field">
        <i class="material-icons prefix">vpn_key</i>
-         <label for="user_password_confirmation">비밀번호 확인</label>
-         <input autocomplete="off" type="password" name="user[password_confirmation]" id="user_password_confirmation" required>
+         <label for="user_password_confirmation" class="user_label">비밀번호 확인</label>
+         <input autocomplete="off" type="password" name="user[password_confirmation]" id="user_password_confirmation" class="user_label" required>
       </div>
 
 
 
       <div class="actions">
-        <div class="col s12" style="height:40px; text-align:right;">
+        <div class="col s12" style="height:40px; text-align:right; margin-top:20px;">
             <button type="submit" class="enjoy-css" style="height:100%;">
             <i class="small material-icons prefix">done</i><span style="vertical-align:super;">비밀번호 변경하기</span></button>
         </div>
@@ -31,4 +30,3 @@
       <%= render "users/shared/links" %>
     </div>
   </div>
-</div>

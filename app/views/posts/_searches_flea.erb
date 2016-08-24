@@ -1,9 +1,9 @@
 <a href="/flea_info/<%=flea.id%>">
-  <div class="row z-depth-2 white" style=" padding-top:10px; padding-left:10px; padding-right:10px; padding-bottom:10px;">
-    <div class="col s4 valign-demo valign-wrapper" style="height:300px;" >
+  <div class="row z-depth-2 white" style="display: block;margin-left: auto;margin-right: auto; width:90%; padding-top:10px; padding-left:10px; padding-right:10px; padding-bottom:10px;">
+    <div class="col s4 valign-wrapper" style="height:200px;" >
       <img class="flea_img_s valign center" src="<%= flea.image_url %>"  style="display: block;margin-left: auto;margin-right: auto; max-height:100%; width:auto; max-width:100%; height:auto; vertical-align: middle">
     </div>
-    <div class="col s8 black-text" style="font-size:18px;">
+    <div class="col s8 black-text" style="font-size:12px;">
       <% if flea.sel_term_end.to_f > Time.zone.now.to_datetime.to_f && flea.term_end.to_f > Time.zone.now.to_datetime.to_f%>
         <span class="right red-text">셀러 모집 중</span>
       <% elsif  flea.term_end.to_f > Time.zone.now.to_datetime.to_f %>
@@ -12,13 +12,14 @@
       <% if flea.term_end.to_f < Time.zone.now.to_datetime.to_f %>
         <span class="right red-text">완료 마켓</span>
       <% end %>
-      <p style="margin-top:25px;">
-        <% if flea.kind == "long" %>
-          [정기마켓]
-        <% end %>
+      <% if flea.kind == "long" %>
+        <span class="left" style="font-size:12px">[정기마켓]</span>
+      <% end %>
+      <p class="center" style="margin-top:25px; font-size:15px">
         <%= flea.title %></p>
-      <p> 기간 : <%= flea.term_start.strftime("%m/%d %H:%M") %> - <%= flea.term_end.to_s(:time) %></p>
-      <p> 셀러 모집 기간 : <%= flea.sel_term_start.strftime("%m/%d") %> - <%= flea.sel_term_end.strftime("%m/%d") %></p>
+      <p style="font-size:13px"> 　　　　　지역 : <%= flea.location %></p>
+      <p style="font-size:13px"> 마켓 개최 기간 : <%= flea.term_start.strftime("%m/%d %H:%M") %> - <%= flea.term_end.to_s(:time) %></p>
+      <p style="font-size:13px"> 셀러 모집 기간 : <%= flea.sel_term_start.strftime("%m/%d") %> - <%= flea.sel_term_end.strftime("%m/%d") %></p>
     </div>
   </div>
 </a>

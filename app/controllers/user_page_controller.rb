@@ -1,7 +1,7 @@
 class UserPageController < ApplicationController
   #  Seller_page
   def user_page
-    @goods_posts = Post.where("kind LIKE ? AND user_id LIKE ?", "%goods%", "%#{params[:user_id]}%").order('updated_at DESC').paginate(:page => params[:goods_page], :per_page => 12)
+    @goods_posts = Post.where("kind LIKE ? AND user_id LIKE ?", "%goods%", "%#{params[:user_id]}%").order('updated_at DESC').paginate(:page => params[:goods_page], :per_page => 9)
 
     @market_posts = Post.where("kind LIKE ? AND user_id LIKE ?", "%markets%", "%#{params[:user_id]}%").order('updated_at DESC')
 

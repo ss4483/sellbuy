@@ -1,5 +1,5 @@
 <% if @one_user.kind == "seller" %>
-    <div class="row z-depth-2" style="position: relative; background-color: white;">
+    <div class="z-depth-3 col s12 m10 offset-m1 l8 offset-l2" style="background-color:white;">
       <br>
       <div class="col s3">
        <%= user_page_profile(@one_user.id) %>
@@ -63,10 +63,8 @@
       </div>
     </div>
 
-
     <!-- 참여마켓 -->
-<!--  && p.term_end.to_f  > Time.zone.now.to_datetime.to_f -->
-<div class="flexslider" style="background-color:transparent; border: 0px; -webkit-box-shadow: 0 0px 0px; margin-bottom:30px;">
+<div class="flexslider col s12 m10 offset-m1 l8 offset-l2" style="background-color:transparent; border: 0px; -webkit-box-shadow: 0 0px 0px; margin-bottom:30px; margin-top:30px;">
   <ul class="slides">
     <% @market_posts.each do |post| %>
       <% if post.term_end.to_f > Time.zone.now.to_datetime.to_f %>
@@ -89,18 +87,16 @@
     <%= render partial: "/user_page/goods" %>
     <div id="ep_modals">
       <% if user_signed_in? %>
-        <!-- 후기 쓰기 -->
-        <div id="write_1" class="modal modal-fixed-footer"  style="max-height:770px; height:770px; max-width:700px;">
-          <br>
-          <form action="/epilogue/<%=@one_user.id%>" method="POST" enctype="multipart/form-data" style="height:initial;">
-            <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
-            <input name ="utf8" type="hidden", value="✓">
-            <input name="kind" type="hidden" value="epilogue">
-            <img id="image_write_in" class="image" src="<%=image_path("black.png")%>" alt="your image" style="max-height:400px; max-width:100%; display:block; margin-left:auto;margin-right:auto;"/>
+      <!-- 수정 팝업창 -->
+      <div id="write_1" class="modal modal-fixed-footer" style="max-height:650px; height:600px; width:580px;">
+        <form action="/epilogue/<%=@one_user.id%>" method="POST" enctype="multipart/form-data" style="height:initial;">
+          <input name ="utf8" type="hidden", value="✓">
+          <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+          <div class="modal-content" style="padding:18px;">
+            <img id="image_write_in"  class="image" src="<%=image_path("black.png")%>" alt="your image" style="max-height:600px; max-width:450px; display:block; margin-left:auto;margin-right:auto;"/>
 
-            <div class="field" style="padding-left:20px;,padding-right:20px;">
+            <div class="field" style="height:120px; width: 90%; display:block; margin-left:auto;margin-right:auto;">
               <label class="filebox"for="goods_content">
-                <img src="<%=image_path("profile.jpg")%>" alt="profile" style="width:40px;height:40px float:left;" >
                 <span style="font-size:20px; color:black;"><%= current_user.nickname %>   </span>
                 <label for="write_in">사진 업로드</label>
                 <input id="write_in" class="image_in" type="file" name="pic">
@@ -113,16 +109,21 @@
                   <input type="radio" name="rating" id="star5" value="5"><i></i><label for="star5"></label>
                 </span>
               </label>
-              <textarea id="goods_content" class="materialize-textarea" name="content" placeholder="내용을 입력하세요" style="width:90%; margin-left:10px;" required></textarea>
+              <textarea id="goods_content" class="materialize-textarea" name="content" style="margin-bottom:0px; padding-bottom:15px;"required></textarea>
             </div>
-            <div class="modal-footer">
-              <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat ">
-                <i class="material-icons" style="font-size:2rem">settings_backup_restore</i></a>
-             <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action">
-               <i class="material-icons" style="font-size:2rem">textsms</i></button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="modal-footer"  style="height:40px;  padding:0px;">
+             <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat " style="margin:0px;">
+               <i class="large material-icons" style="font-size:1.5rem">settings_backup_restore</i></a>
+            <button class="modal-action modal-close waves-effect waves-green btn-flat" type="submit" name="action" style="margin:0px;">
+              <i class="large material-icons" style="font-size:1.5rem">done</i></button>
+          </div>
+        </form>
+      </div>
+
+
+
+
       <% end %>
       <%= render partial: "/user_page/ep_modal", collection: @ep_posts, as: :post %>
     </div>

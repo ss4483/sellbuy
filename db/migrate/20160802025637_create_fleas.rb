@@ -16,6 +16,9 @@ class CreateFleas < ActiveRecord::Migration
       t.string :enter_link #신청방법
       t.string :sel_item #품목
       t.string :image_url,    default: ""  #포스터(default는 이미지를 저장할 수도 안할수도 있으니 저장안했을 때는 기본값 넣겠다는 뜻)
+      t.string :pdf_url,    default: ""
+
+      t.string :location
 
       t.timestamps null: false
     end

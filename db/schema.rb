@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20160816140752) do
     t.string   "enter_link"
     t.string   "sel_item"
     t.string   "image_url",      default: ""
+    t.string   "pdf_url",        default: ""
+    t.string   "location"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
