@@ -1,5 +1,5 @@
 <% if user_signed_in? && current_user.kind == "M" %>
-  <div class = "z-depth-3 col s12 m10 offset-m1 l8 offset-l2 white"style="padding: 10px; margin: 10px;">
+  <div class = "z-depth-3 col s12 m10 offset-m1 l8 offset-l2 white">
   <p>마켓 등록</p>
         <form action="/flea_enroll" method="POST" enctype="multipart/form-data">
           <!-- 윗줄: enctype="multipart/form-data"  pdf, 이미지, 동영상파일 등 파일 업로드 경우 꼭 써주어야 함!(안 넣으면 동작 X) 글 쓰기나 그냥 텍스트만 있는 경우는 없어도 됨. -->
