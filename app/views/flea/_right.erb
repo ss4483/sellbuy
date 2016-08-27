@@ -31,7 +31,7 @@
                       <span class="left" style="font-size:12px">[정기마켓]</span>
                     <% end %>
                     <br>
-                    <div class="" style="text-align:center; font-size:12px;"><%= short_title(m.title) %></div>
+                    <div class="" style="text-align:center; font-size:15px;"><%= short_title(m.title) %></div>
                     <span class="left" style="font-size:12px;">마켓 개최 기간 :
                       <% if m.term_start.strftime("%m/%d") == m.term_end.strftime("%m/%d") %>
                         <%= m.term_start.strftime("%m월 %d일") %>
