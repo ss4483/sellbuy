@@ -73,7 +73,7 @@ class FleaController < ApplicationController
   end
 
   def past_flea
-    @fleas = Flea.all.order('updated_at DESC').where("term_end < ?", Time.zone.now.to_datetime ).paginate(:page => params[:past_fleas_page], :per_page => 12)
+    @fleas = Flea.all.order('updated_at DESC').where("term_end < ?", Time.zone.now.to_datetime ).paginate(:page => params[:past_fleas_page], :per_page => 9)
     @check = true
   end
 

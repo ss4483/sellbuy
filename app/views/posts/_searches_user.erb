@@ -4,10 +4,11 @@
    <%= user_page_profile(user.id) %>
     <br>
     <% if user_signed_in? && @check_favorite %>
-      <a class="enjoy-css" href="/user_favorite/<%= user.id %>" method="post"><i class="small material-icons">delete</i>즐겨찾기 제거</a>
+      <a class="enjoy-css right" href="/user_favorite/<%= user.id %>" method="post" style="height:24px;"><i class="samll material-icons">stars</i><span style="vertical-align:super;">즐겨찾기 취소</span></a>
     <% elsif user_signed_in? %>
-      <a class="enjoy-css" href="/user_favorite/<%= user.id %>" method="post"><i class="small material-icons">store</i>즐겨찾기</a>
-    <% end %>
+      <a class="enjoy-css right" href="/user_favorite/<%= user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;">즐겨찾기</span></a>
+    <% end %><br><br>
+      <a class="enjoy-css" style="font-size:15px;" href="/user_page/<%=user.id%>"> <i class="material-icons" style="font-size:1.2rem;">visibility</i>셀러 구경하기</a>
   </div>
   <div class="col s9 row"><input type="hidden" value="<%=user.id%>" class="seller_id">
     <div class="col s3 center" style="margin-bottom:10px;">
@@ -37,26 +38,24 @@
     <div class="col s9" style="margin-bottom:10px;">
       <span id="seller" ><%= user.phone_num%></span>
     </div>
+    <div class=" col s12">
+      <div class="col s3 center" style="margin-bottom:10px;">
+        판매 제품
+      </div>
+      <div class="col s9" style="margin-bottom:10px;">
+        <%= user.category%>
+      </div>
+    </div>
+    <div class=" col s12">
+      <div class="col s3 center" style="margin-bottom:10px;">
+        참가 경력
+      </div>
+      <div class="col s9" style="margin-bottom:10px;"><br>
+        <%= user.career%>
+      </div>
+    </div>
 
-    <div class="col s3 center" style="margin-bottom:10px;">
-      참가 경력
-    </div>
-    <div class="col s9" style="margin-bottom:10px;"><br>
-      <span id="seller" ><%= user.career%></span>
-    </div>
-
-    <div class="col s3 center" style="margin-bottom:10px;">
-      판매 제품
-    </div>
-    <div class="col s9" style="margin-bottom:10px;">
-      <br>
-      <span id="seller" ><%= user.category%></span>
-    </div>
-
-    <div class="col s5"><br>
-      <a href="/user_page/<%=user.id%>">셀러 페이지로 가기</a>
-    </div>
-    <div class="col s5 offset-s2" style="text-align:right;">
+    <div class="col s12" style="text-align:right;">
       <%= facebook_url(user.facebook_url) %>
       <%= instar_url(user.instar_url) %>
       <%= twitter_url(user.twitter_url) %>

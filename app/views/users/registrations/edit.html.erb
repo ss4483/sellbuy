@@ -213,7 +213,7 @@
         <h4>SNS</h4>
         <div class="input-field" style="height:60px;">
             <img src="<%= image_path('facebook.png') %>" class="user_img_round prefix" style="width:35px; vertical-align:middle;">
-          <input class="user_input user_input_label" style="max-height:30px; padding-left:0px; font-size:13px; margin-bottom:10px;" name="search" type="text"  value="<%=current_user.facebook_url%>" placeholder="https://wwww.example.com">
+          <input class="user_input user_input_label" style="max-height:30px; padding-left:0px; font-size:13px; margin-bottom:10px;" name="user[facebook_url]" type="text"  value="<%=current_user.facebook_url%>" placeholder="https:// 또는 http://를 붙여주세요">
         </div>
         <div class="input-field" style="height:60px;">
             <img src="<%= image_path('instagram.png') %>" class="user_img_round prefix" style="width:35px; vertical-align:middle;">
@@ -234,12 +234,12 @@
     <!-- 가입하기 -->
         <div id="same_ok" class="col s4 offset-s8" style="height:40px; text-align:right;">
             <button type="submit" class="enjoy-css" style="height:100%;">
-            <i class="user_i small material-icons prefix">done</i><span style="vertical-align:super;">가입하기</span></button>
+            <i class="user_i small material-icons prefix">done</i><span style="vertical-align:super;">수정하기</span></button>
         </div>
 
          <div id="same_check" class="col s4 offset-s8" style="height:40px; text-align:right;  display:none;">
            <a href="#same_check_modal" class="enjoy-css modal-trigger" style="height:100%;">
-           <i class="user_i small material-icons prefix">done</i><span style="vertical-align:super;">가입하기</span></a>
+           <i class="user_i small material-icons prefix">done</i><span style="vertical-align:super;">수정하기</span></a>
          </div>
          <!-- Modal Structure -->
          <div id="same_check_modal" class="modal modal-fixed-footer" style="height:35%; width:30%;">

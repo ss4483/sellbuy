@@ -1,13 +1,13 @@
 <% if @one_user.kind == "seller" %>
-    <div class="z-depth-3 col s12 m10 offset-m1 l8 offset-l2" style="background-color:white;">
+    <div class="z-depth-2 col s12 m10 offset-m1 l8 offset-l2" style="background-color:white;">
       <br>
       <div class="col s3">
        <%= user_page_profile(@one_user.id) %>
-        <br>
+        <br><br><br>
         <% if user_signed_in? && @check_favorite %>
-          <a class="enjoy-css" href="/user_favorite/<%= @one_user.id %>" method="post"><i class="small material-icons">delete</i>즐겨찾기 제거</a>
+          <a class="enjoy-css right" href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기 취소</span></a>
         <% elsif user_signed_in? %>
-          <a class="enjoy-css" href="/user_favorite/<%= @one_user.id %>" method="post"><i class="small material-icons">store</i>즐겨찾기</a>
+          <a class="enjoy-css right" href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기</span></a>
         <% end %>
       </div>
       <div class="col s9 row"><input type="hidden" value="<%=@one_user.id%>" class="seller_id"><br>
@@ -39,20 +39,25 @@
           <span id="seller" ><%= @one_user.phone_num%></span>
         </div>
 
-        <div class="col s3 center" style="margin-bottom:10px;">
-          참가 경력
-        </div>
-        <div class="col s9" style="margin-bottom:10px;"><br>
-          <span id="seller" ><%= @one_user.career%></span>
+        <div styl="col s12">
+          <div class="col s3 center" style="margin-bottom:10px;">
+            판매 제품
+          </div>
+          <div class="col s9" style="margin-bottom:10px;">
+            <span id="seller" ><%= @one_user.category%></span>
+          </div>
         </div>
 
-        <div class="col s3 center" style="margin-bottom:10px;">
-          판매 제품
+        <div styl="col s12">
+          <div class="col s3 center" style="margin-bottom:10px;">
+            참가 경력
+          </div>
+          <div class="col s9" style="margin-bottom:10px;"><br>
+            <span id="seller" ><%= @one_user.career%></span>
+          </div>
         </div>
-        <div class="col s9" style="margin-bottom:10px;">
-          <br>
-          <span id="seller" ><%= @one_user.category%></span>
-        </div>
+
+
 
         <div class="col s5 offset-s7" style="text-align:right;">
           <%= facebook_url(@one_user.facebook_url) %>
@@ -130,7 +135,7 @@
 
 <!-------------------------------------------------------------------------------------------------------------------------------------------------->
 <% elsif user_signed_in? && @one_user == current_user %>
-  <div class="row z-depth-2" style="position: relative; background-color: white;">
+  <div class="z-depth-2 col s12 m10 offset-m1 l8 offset-l2" style="background-color:white;">
     <br>
     <div class="col s3">
      <%= user_page_profile(@one_user.id) %>

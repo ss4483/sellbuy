@@ -2,15 +2,15 @@ $(function(){
 
   if ($('.user_searches_pagination')[0] || <%= @user_searches.nil? %>) {
     $('#seller_search').append('<%= j render partial: "/posts/searches_user", collection: @user_searches,as: :user %>');
-    $('.user_searches_pagination').replaceWith('<%= escape_javascript will_paginate(@user_searches), :param_name => "user_searches_page", class: "user_searches_pagination" %>');
+    $('.user_searches_pagination').replaceWith('<%= escape_javascript will_paginate @user_searches, :param_name => "user_searches_page", class: "user_searches_pagination" %>');
   }
   if ($('.post_searches_pagination')[0]) {
     $('#post_searches').append('<%= j render partial: "/posts/searches_post", collection: @post_searches, as: :post %>');
-    $('.post_searches_pagination').replaceWith('<%= escape_javascript will_paginate(@post_searches), :param_name => "post_searches_page", class: "post_searches_pagination" %>');
+    $('.post_searches_pagination').replaceWith('<%= escape_javascript will_paginate @post_searches, :param_name => "post_searches_page", class: "post_searches_pagination" %>');
   }
   if ($('.flea_searches_pagination')[0]) {
     $('#flea_searches').append('<%= j render partial: "/posts/searches_flea", collection: @flea_searches, as: :flea  %>');
-    $('.flea_searches_pagination').replaceWith('<%= escape_javascript will_paginate(@flea_searches), :param_name => "flea_searches_page", class: "flea_searches_pagination" %>');
+    $('.flea_searches_pagination').replaceWith('<%= escape_javascript will_paginate @flea_searches, :param_name => "flea_searches_page", class: "flea_searches_pagination" %>');
   }
 
 

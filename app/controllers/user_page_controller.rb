@@ -1,7 +1,7 @@
 class UserPageController < ApplicationController
   #  Seller_page
   def user_page
-    @goods_posts = Post.where("kind LIKE ? AND user_id LIKE ?", "%goods%", "%#{params[:user_id]}%").order('updated_at DESC').paginate(:page => params[:goods_page], :per_page => 9)
+    @goods_posts = Post.where("kind LIKE ? AND user_id LIKE ?", "%goods%", "%#{params[:user_id]}%").order('updated_at DESC').paginate(:page => params[:goods_page], :per_page => 12)
 
     @market_posts = Post.where("kind LIKE ? AND user_id LIKE ?", "%markets%", "%#{params[:user_id]}%").order('updated_at DESC')
 
@@ -107,7 +107,7 @@ class UserPageController < ApplicationController
           post_where.push"#{like.post_id}"
       end
 
-      @like_posts = Post.where(id: post_where).paginate(:page => params[:like_posts_page], :per_page => 10)
+      @like_posts = Post.where(id: post_where).paginate(:page => params[:like_posts_page], :per_page => 12)
       @check = true
     end
   end

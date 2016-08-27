@@ -13,9 +13,12 @@
 <!-- 등록한 상품 -->
 <% if @one_user.kind == "seller"%>
   <div id="goods" class="col s12 m10 offset-m1 l8 offset-l2"><br><br>
+    <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
+    <%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
     <div id="goods_pages" class="row"style="display:block;">
-      <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
-      <%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
+      <% if @goods_posts.empty? %>
+        <p class="center" style="font-size:15px;">등록한 상품이 없습니다.</p>
+      <% end %>
       <%= render partial: '/user_page/small_post', collection: @goods_posts,as: :post %>
     </div>
     <sapn class="center" id="goods_paginate">
@@ -29,6 +32,9 @@
   <!-- 나의 후기  -->
   <div id="ep" class="col s12 m10 offset-m1 l8 offset-l2"><br>
     <div id="my_ep_pages" class="row"style="display:block;">
+      <% if @my_ep_posts.empty? %>
+        <p class="center" style="font-size:15px;">등록한 후기가 없습니다.</p>
+      <% end %>
       <%= render partial: '/user_page/small_post', collection: @my_ep_posts, as: :post %>
     </div>
     <br>

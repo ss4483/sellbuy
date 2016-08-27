@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     @check = true
-    @posts = Post.where(index_check: true).order('updated_at DESC').paginate(:page => params[:posts_page], :per_page => 10)
+    @posts = Post.where(index_check: true).order('updated_at DESC').paginate(:page => params[:posts_page], :per_page => 9)
     @shorts = Flea.where(kind: "short")
     @longs = Flea.where(kind: "long")
   end
@@ -25,6 +25,7 @@ class PostsController < ApplicationController
         end
       one_post.save
     end
+    flash[:notice]="글이 작성 되었습니다."
       redirect_to '/'
   end
   def post_update
@@ -102,7 +103,7 @@ class PostsController < ApplicationController
     @check = true
     @search = params[:search]
     seller_user = User.where(kind: "seller")
-    @user_searches = seller_user.where("email LIKE ? OR nickname LIKE ?", "%#{@search}%", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:user_searches_page], :per_page => 12)
+    @user_searches = seller_user.where("email LIKE ? OR nickname LIKE ? OR category LIKE ?", "%#{@search}%", "%#{@search}%", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:user_searches_page], :per_page => 12)
     @post_searches = Post.where("content LIKE ?", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:post_searches_page], :per_page => 12)
     @flea_searches = Flea.where("sel_item LIKE ? OR title LIKE ? OR post LIKE ? OR location LIKE ?", "%#{@search}%", "%#{@search}%", "%#{@search}%", "%#{@search}%").order('updated_at DESC').paginate(:page => params[:flea_searches_page], :per_page => 12)
   end
