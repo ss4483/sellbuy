@@ -22,7 +22,7 @@
   <h5 class="center" id="flea_title"><%= @one_flea.title %></h5>
     <img class="materialboxed "  src="<%= @one_flea.image_url %>" style="margin:auto; max-height:500px; max-width:100%;">
     <br>
-  <div class="col s12"  style="margin-bottom:10px;">
+  <div class="col s12"  style="margin-bottom:15px;">
     <div class="col s3 center" >
           주관
     </div>
@@ -30,23 +30,28 @@
       <%= @one_flea.supervision %>
     </div>
   </div>
-  <div class="col s12"  style="margin-bottom:10px;">
+  <div class="col s12"  style="margin-bottom:15px;">
     <div class="col s3 center">
           기간
     </div>
     <div class="col s9">
-    <%= @one_flea.term_start.strftime("%m/%d %H:%M") %> - <%= @one_flea.term_end.to_s(:time) %>
+      <% if @one_flea.term_start.strftime("%m/%d") == @one_flea.term_end.strftime("%m/%d") %>
+        <%= @one_flea.term_start.strftime("%m월 %d일") %>
+      <% else %>
+        <%= @one_flea.term_start.strftime("%m월 %d일") %> - <%= @one_flea.term_end.strftime("%m월 %d일") %>
+      <% end %><br>
+    <%= @one_flea.term_start.to_s(:time) %> - <%= @one_flea.term_end.to_s(:time) %>
     </div>
   </div>
-  <div class="col s12" style="margin-bottom:10px;">
+  <div class="col s12" style="margin-bottom:15px;">
     <div class="col s3 center">
           셀러 모집 기간
     </div>
     <div class="col s9" >
-      <%= @one_flea.sel_term_start.strftime("%m/%d") %> - <%= @one_flea.sel_term_end.strftime("%m/%d") %>
+      <%= @one_flea.sel_term_start.strftime("%m월 %d일") %> - <%= @one_flea.sel_term_end.strftime("%m월 %d일") %>
     </div>
   </div>
-  <div class="col s12"  style="margin-bottom:10px;">
+  <div class="col s12"  style="margin-bottom:15px;">
     <div class="col s3 center">
           마켓 주제
     </div>
@@ -54,7 +59,7 @@
       <%= @one_flea.post.gsub(/\n/, '<br />').html_safe%>
     </div>
   </div>
-  <div class="col s12"  style="margin-bottom:10px;">
+  <div class="col s12"  style="margin-bottom:15px;">
     <div class="col s3 center">
         품목
     </div>
@@ -63,7 +68,7 @@
       <br>
     </div>
   </div>
-  <div class="col s12" style="margin-bottom:10px;">
+  <div class="col s12" style="margin-bottom:15px;">
     <div class="col s3 center">
       참가비 관련사항 <br>/ 지원항목 안내
     </div>
@@ -72,7 +77,7 @@
      <br>
     </div>
   </div>
-  <div class="col s12" style="margin-bottom:10px;">
+  <div class="col s12" style="margin-bottom:15px;">
     <div class="col s3 center">
       상세 주소
     </div>
@@ -81,14 +86,14 @@
       <%= @one_flea.address2 %>
     </div>
   </div>
-  <div class="col s12" style="margin-bottom:10px;">
+  <div class="col s12" style="margin-bottom:15px;">
     <div class="col s3 center" style="margin-top:116.5px;">
       지도
     </div>
     <div class="col s9" id="map" style="height:250px; "></div>
   </div>
 
-  <div class="col s12" style="margin-bottom:10px;">
+  <div class="col s12" style="margin-bottom:15px;">
     <div class="col s3 center">
       셀러 참가 방법
     </div>
