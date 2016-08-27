@@ -22,7 +22,7 @@
   <div class="col s12 m10 offset-m1 l8 offset-l2 " style="margin-top:10px; border-bottom: 3px solid silver; margin-bottom:10px;">
     <span class="right" style="font-size:12px;"> 작성자 : <%= q_nickname_page(@service.user.id) %></span>
     <br>
-    <div style="font-size:18px; margin-left:10px; margin-right:10px;"><%= @service.content %></div>
+    <div style="font-size:18px; margin-left:10px; margin-right:10px;"><%= @service.content.gsub(/\n/, '<br />').html_safe %></div>
     <br>
     <div class="right" style="margin-top:10px;">
 
@@ -96,7 +96,7 @@
                </div>
            <% end %>
         </div>
-        <div style="padding:10px; font-size:17px;"><%= r.content %></div>
+        <div style="padding:10px; font-size:17px;"><%= r.content.gsub(/\n/, '<br />').html_safe %></div>
         <span class="right"style="font-size:12px;"><%= r.updated_at.in_time_zone("Asia/Seoul").strftime("%m월%d일 %H:%M") %></span><br>
       </div>
     <% end %>

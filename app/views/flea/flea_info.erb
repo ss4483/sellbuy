@@ -51,7 +51,7 @@
           마켓 주제
     </div>
     <div class="col s9">
-      <%= @one_flea.post%>
+      <%= @one_flea.post.gsub(/\n/, '<br />').html_safe%>
     </div>
   </div>
   <div class="col s12"  style="margin-bottom:10px;">
@@ -68,7 +68,7 @@
       참가비 관련사항 <br>/ 지원항목 안내
     </div>
     <div class="col s9">
-     <%= @one_flea.condition %>
+       <%= @one_flea.condition.gsub(/\n/, '<br />').html_safe %>
      <br>
     </div>
   </div>
@@ -99,7 +99,7 @@
         <a class="enjoy-css " href="<%=@one_flea.enter_link%>" target="_blank">
         <i class="small material-icons">web</i><span style="vertical-align:super;">셀러 참가 신청하기</span></a>      <br>
       <% end %>
-      <span class="left"><%= @one_flea.enter_way %></span>
+      <span class="left"><%= @one_flea.enter_way.gsub(/\n/, '<br />').html_safe %></span>
     </div>
   </div>
 
@@ -132,7 +132,7 @@
 <% end %>
 
 </div>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=bfd6a0e439843d518fac93b55ea47a13&libraries=services"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=e68fb87fb93a0ed8d5ba757bb7f6f768&libraries=services"></script>
 
 
 <script>

@@ -66,7 +66,7 @@
           </div>
           <br>
           <span style="font-size:20px;">
-          <%= post.content %>
+          <%= post.content.gsub(/\n/, '<br />').html_safe %>
           </span>
         </span>
 
