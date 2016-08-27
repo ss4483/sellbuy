@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160816140752) do
     t.string   "supervision"
     t.string   "condition"
     t.string   "enter_link"
+    t.string   "enter_way"
     t.string   "sel_item"
     t.string   "image_url",      default: ""
     t.string   "pdf_url",        default: ""

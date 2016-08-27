@@ -13,7 +13,7 @@ class FleaController < ApplicationController
                           address: params[:address],address2: params[:address2],
                           post: params[:post],supervision: params[:supervision],
                           sel_item: params[:sel_item],
-                          condition: params[:condition],enter_link: params[:enter_link],
+                          condition: params[:condition],enter_link: params[:enter_link],enter_way: params[:enter_way],
                           location: params[:location])
 
       uploader = SellbuyUploader.new   # 플리마켓 포스터
@@ -48,6 +48,7 @@ class FleaController < ApplicationController
       @one_flea.sel_item = params[:sel_item]
       @one_flea.condition = params[:condition]
       @one_flea.enter_link = params[:enter_link]
+      @one_flea.enter_way = params[:enter_way]
       @one_flea.location = params[:location]
       if params[:pic].nil?
         @one_flea.image_url = @one_flea.image_url

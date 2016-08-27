@@ -65,7 +65,7 @@
   </div>
   <div class="col s12" style="margin-bottom:10px;">
     <div class="col s3 center">
-      참가비 환불 지원항목
+      참가비 관련사항 <br>/ 지원항목 안내
     </div>
     <div class="col s9">
      <%= @one_flea.condition %>
@@ -88,6 +88,20 @@
     <div class="col s9" id="map" style="height:250px; "></div>
   </div>
 
+  <div class="col s12" style="margin-bottom:10px;">
+    <div class="col s3 center">
+      셀러 참가 방법
+    </div>
+    <div class="col s9 center" id="flea_address">
+      <% if @one_flea.enter_link != "" && @one_flea.sel_term_end.to_f < Time.zone.now.to_datetime.to_f %>
+        <i class="small material-icons grey-text">web</i><span style="vertical-align:super; color:grey">셀러 참가 신청 완료</span>      <br>
+      <% elsif @one_flea.enter_link != ""%>
+        <a class="enjoy-css " href="<%=@one_flea.enter_link%>" target="_blank">
+        <i class="small material-icons">web</i><span style="vertical-align:super;">셀러 참가 신청하기</span></a>      <br>
+      <% end %>
+      <span class="left"><%= @one_flea.enter_way %></span>
+    </div>
+  </div>
 
 
   <div class="col s6" style="padding:15px;">
@@ -105,12 +119,7 @@
     <% end %>
   </div>
   <div class="col s6 center" style="padding:15px;">
-    <% if @one_flea.sel_term_end.to_f < Time.zone.now.to_datetime.to_f %>
-      <i class="small material-icons grey-text">web</i><span style="vertical-align:super; color:grey">셀러 참가 신청 완료</span>
-    <% else%>
-      <a class="enjoy-css " href="<%=@one_flea.enter_link%>" target="_blank">
-      <i class="small material-icons">web</i><span style="vertical-align:super;">셀러 참가 신청하기</span></a>
-    <% end %>
+
   </div>
 
 <% unless @one_flea.pdf_url == ""%>

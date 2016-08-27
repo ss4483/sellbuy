@@ -27,15 +27,17 @@ class UserPageController < ApplicationController
   def user_favorite
     if user_signed_in?
       one_user = User.find(params[:user_id])
-      check = true
-      current_user.favorites.each do |f|
-        if f == one_user
-          current_user.favorites.delete(one_user)
-          check = false
+      if one_user.kind == "seller"
+        check = true
+        current_user.favorites.each do |f|
+          if f == one_user
+            current_user.favorites.delete(one_user)
+            check = false
+          end
         end
-      end
-      if check
-        current_user.favorites << one_user
+        if check
+          current_user.favorites << one_user
+        end
       end
     end
     redirect_to "/user_page/#{params[:user_id]}"

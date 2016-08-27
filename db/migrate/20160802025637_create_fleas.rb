@@ -14,6 +14,7 @@ class CreateFleas < ActiveRecord::Migration
       t.string :supervision #주체, 주관
       t.string :condition #참가비& 환불& 지원항목
       t.string :enter_link #신청방법
+      t.string :enter_way #신청방법
       t.string :sel_item #품목
       t.string :image_url,    default: ""  #포스터(default는 이미지를 저장할 수도 안할수도 있으니 저장안했을 때는 기본값 넣겠다는 뜻)
       t.string :pdf_url,    default: ""

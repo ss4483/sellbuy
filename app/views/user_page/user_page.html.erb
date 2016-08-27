@@ -140,11 +140,6 @@
     <div class="col s3">
      <%= user_page_profile(@one_user.id) %>
       <br>
-      <% if user_signed_in? && @check_favorite %>
-        <a class="enjoy-css" href="/user_favorite/<%= @one_user.id %>" method="post"><i class="small material-icons">delete</i>즐겨찾기 제거</a>
-      <% elsif user_signed_in? %>
-        <a class="enjoy-css" href="/user_favorite/<%= @one_user.id %>" method="post"><i class="small material-icons">store</i>즐겨찾기</a>
-      <% end %>
     </div>
     <div class="col s9 row"><input type="hidden" value="<%=@one_user.id%>" class="seller_id">
       <div class="col s3 center" style="margin-bottom:10px;">

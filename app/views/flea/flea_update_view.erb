@@ -1,5 +1,5 @@
 <% if user_signed_in? && current_user.kind == "M" %>
-  <div class = "z-depth-3 col s12 m10 offset-m1 l8 offset-l2 white"style="">
+  <div class = "z-depth-3 col s12 m10 offset-m1 l8 offset-l2 white" style="margin-bottom:30px;">
   <p>마켓 등록</p>
         <form action="/flea_update/<%= @one_flea.id %>" method="POST" enctype="multipart/form-data">
           <input name ="utf8" type="hidden", value="✓">
@@ -69,7 +69,7 @@
 
           <div class="input-field col s12">
             <textarea id="market_condition" name="condition"  class="materialize-textarea" length="255"><%= @one_flea.condition %></textarea>
-            <label for="market_condition">참가비 환불 지원항목</label>
+            <label for="market_condition">참가비 관련사항 / 지원항목 안내</label>
           </div>
 
 
@@ -89,10 +89,13 @@
           </div>
 
 
-
+          <div class="input-field col s12">
+             <label for="market_enter_way" length="255">마켓 참가 방법</label>
+             <input id="market_enter_way" type="text" name="enter_way" value="<%= @one_flea.enter_way %>" >
+          </div>
 
           <div class="input-field col s12">
-             <label for="market_enter_link">마켓 링크</label>
+             <label for="market_enter_link" length="255">마켓 참가 링크</label>
              <input id="market_enter_link" type="text" name="enter_link" value="<%= @one_flea.enter_link %>" length="255">
           </div>
           <!-- 플리마켓 포스터 -->
