@@ -31,9 +31,15 @@
                       <span class="left" style="font-size:12px">[정기마켓]</span>
                     <% end %>
                     <br>
-                    <span class="" style="text-align:center; font-size:12px;"><%= m.title %></span>
-                    <span class="left" style="font-size:12px;">마켓 개최 기간 : <%= m.term_start.strftime("%m/%d") %>　 <%= m.term_start.to_s(:time) %> - <%= m.term_end.to_s(:time) %></span>
-                    <span class="left" style="font-size:12px;">셀러 모집 기간 : <%= m.sel_term_start.strftime("%m/%d") %> - <%= m.sel_term_end.strftime("%m/%d") %></span>
+                    <div class="" style="text-align:center; font-size:12px;"><%= short_title(m.title) %></div>
+                    <span class="left" style="font-size:12px;">마켓 개최 기간 :
+                      <% if m.term_start.strftime("%m/%d") == m.term_end.strftime("%m/%d") %>
+                        <%= m.term_start.strftime("%m월 %d일") %>
+                      <% else %>
+                        <%= m.term_start.strftime("%m월 %d일") %> - <%= m.term_end.strftime("%m월 %d일") %>
+                      <% end %></span><br>
+                        <span class="right" style="font-size:12px;line-height: 20px;"><%= m.term_start.to_s(:time) %> - <%= m.term_end.to_s(:time) %></span>
+                    <span class="left" style="font-size:12px;">셀러 모집 기간 : <%= m.sel_term_start.strftime("%m월 %d일") %> - <%= m.sel_term_end.strftime("%m월 %d일") %></span>
                   </div>
                 </div>' href="/flea_info/<%=m.id%>" style="height: 80px; width:220px; display: inline-block; padding:0px;">
 
@@ -41,8 +47,12 @@
                   <img class="valign center flea_img_s" src="<%= m.image_url %>" style="display: block; margin-left: auto; margin-right: auto; max-height:100%; width:auto; max-width:100%; height:auto; vertical-align: middle">
                 </div>
                 <div class="col s8" style="height: 80px; line-height: 22px; padding-top: 7px; ">
-                  <span><%= m.term_start.strftime("%m월 %d일") %></span><br>
-                  <span><%= m.term_end.to_s(:time) %> - <%= m.term_start.to_s(:time) %></span><br>
+                  <% if m.term_start.strftime("%m/%d") == m.term_end.strftime("%m/%d") %>
+                    <span><%= m.term_start.strftime("%m/%d") %></span><br>
+                  <% else %>
+                    <span><%= m.term_start.strftime("%m/%d") %> - <%= m.term_end.strftime("%m/%d") %></span><br>
+                  <% end %>
+                  <span class="right"><%= m.term_end.to_s(:time) %> - <%= m.term_start.to_s(:time) %></span><br>
                   <span class="right"><%= m.location %></span>
                 </div>
               </a>

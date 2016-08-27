@@ -1,9 +1,9 @@
 module FleaHelper
   def short_title(m)
-    if m[6].nil?
-      m[0..5]
+    if m[18].nil?
+      m[0..17]
     else
-      m[0..5]
+      m[0..17] + '...'
     end
   end
 
