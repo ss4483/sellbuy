@@ -40,20 +40,20 @@
             <p>마켓 개최 기간</p>
             <div class="col s6">
               <label for="term_start">마켓 시작 시간</label>
-              <input id="term_start" name="term_start"  class=flatpickr data-enabletime data-time_24hr  value="<%= @one_flea.term_start %>" required>
+              <input id="term_start" name="term_start"  class="flatpickr" data-enabletime data-time_24hr  value="<%= @one_flea.term_start.strftime("%Y-%m-%d %H:%M") %>" required>
             </div>
             <div class="col s6">
               <label for="term_end">마켓 마치는 시간</label>
-              <input id="term_end" name="term_end"  class=flatpickr data-enabletime data-time_24hr value="<%= @one_flea.term_end %>" required>
+              <input id="term_end" name="term_end"  class="flatpickr" data-enabletime data-time_24hr value="<%= @one_flea.term_end.strftime("%Y-%m-%d %H:%M") %>" required>
             </div>
             <p>셀러 모집 기간</p>
             <div class="col s6">
               <label for="sel_term_start">시작</label>
-              <input id="sel_term_start" name="sel_term_start"  class=flatpickr data-enabletime data-time_24hr value="<%= @one_flea.sel_term_start %>">
+              <input id="sel_term_start" name="sel_term_start"  class="flatpickr" data-enabletime data-time_24hr value="<%= @one_flea.sel_term_start.strftime("%Y-%m-%d %H:%M") %>">
             </div>
             <div class="col s6">
               <label for="sel_term_end">마감</label>
-              <input id="sel_term_end" name="sel_term_end"  class=flatpickr data-enabletime data-time_24hr value="<%= @one_flea.sel_term_end %>">
+              <input id="sel_term_end" name="sel_term_end"  class="flatpickr" data-enabletime data-time_24hr value="<%= @one_flea.sel_term_end.strftime("%Y-%m-%d %H:%M") %>">
             </div>
           </div>
 
