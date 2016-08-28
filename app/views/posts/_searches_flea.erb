@@ -3,7 +3,7 @@
     <div class="col s4 valign-wrapper" style="height:200px;" >
       <img class="flea_img_s valign center" src="<%= flea.image_url %>"  style="display: block;margin-left: auto;margin-right: auto; max-height:100%; width:auto; max-width:100%; height:auto; vertical-align: middle">
     </div>
-    <div class="col s8 black-text" style="font-size:12px;">
+    <div class="col s8 black-text" style="font-size:12px; line-height:20px;">
       <% if flea.sel_term_end.to_f > Time.zone.now.to_datetime.to_f && flea.term_end.to_f > Time.zone.now.to_datetime.to_f%>
         <span class="right red-text">셀러 모집 중</span>
       <% elsif  flea.term_end.to_f > Time.zone.now.to_datetime.to_f %>
@@ -15,11 +15,18 @@
       <% if flea.kind == "long" %>
         <span class="left" style="font-size:12px">[정기마켓]</span>
       <% end %>
-      <p class="center" style="margin-top:25px; font-size:15px">
+      <p class="center" style="margin-top:25px; font-size:15px;">
         <%= flea.title %></p>
-      <p style="font-size:13px"> 　　　　　지역 : <%= flea.location %></p>
-      <p style="font-size:13px"> 마켓 개최 기간 : <%= flea.term_start.strftime("%m/%d %H:%M") %> - <%= flea.term_end.to_s(:time) %></p>
-      <p style="font-size:13px"> 셀러 모집 기간 : <%= flea.sel_term_start.strftime("%m/%d") %> - <%= flea.sel_term_end.strftime("%m/%d") %></p>
+      <p style="font-size:13px; margin-bottom: 0.5em; margin-top:0.5em;"> 　　　　　지역 : <%= flea.location %></p>
+      <p style="font-size:13px; margin-bottom: 0.5em; margin-top:0.5em;"> 마켓 개최 기간 :
+            <% if flea.term_start.strftime("%m/%d") == flea.term_end.strftime("%m/%d") %>
+              <%= flea.term_start.strftime("%m월 %d일") %> 　<%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></p>
+            <% else %>
+              <%= flea.term_start.strftime("%m월 %d일") %> - <%= flea.term_end.strftime("%m월 %d일") %></p>
+                <p style="font-size:13px; margin-bottom: 0.7em; margin-top:0.7em;">　　　　 　　 　　　 　　　　　　　　<%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></p>
+            <% end %>
+
+      <p style="font-size:13px; margin-bottom: 0.7em; margin-top:0.7em;"> 셀러 모집 기간 : <%= flea.sel_term_start.strftime("%m월 %d일") %> - <%= flea.sel_term_end.strftime("%m월 %d일") %></p>
     </div>
   </div>
 </a>
