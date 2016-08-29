@@ -9,28 +9,28 @@
         <div class="col s3 center" style="margin-bottom:10px;">
           이메일
         </div>
-        <div class="col s9" style="margin-bottom:10px;font-weight:bold;">
+        <div class="col s9" style="margin-bottom:10px;">
           <span id="seller" ><%= @one_user.email %></span>
         </div>
 
         <div class="col s3 center" style="margin-bottom:10px;">
           이름
         </div>
-        <div class="col s9" style="margin-bottom:10px; font-weight:bold;">
+        <div class="col s9" style="margin-bottom:10px;">
           <span id="seller" ><%= @one_user.name %></span>
         </div>
 
         <div class="col s3 center" style="margin-bottom:10px;">
           닉네임
         </div>
-        <div class="col s9" style="margin-bottom:10px; font-weight:bold;">
+        <div class="col s9" style="margin-bottom:10px;">
           <span id="nickname"><%= @one_user.nickname%> </span>
         </div>
 
         <div class="col s3 center" style="margin-bottom:10px;">
           연락처
         </div>
-        <div class="col s9" style="margin-bottom:10px; font-weight:bold;">
+        <div class="col s9" style="margin-bottom:10px;">
           <span id="seller" ><%= @one_user.phone_num%></span>
         </div>
 
@@ -39,7 +39,7 @@
           <div class="col s3 center" style="margin-bottom:10px;">
             판매 제품
           </div>
-          <div class="col s9" style="margin-bottom:10px; font-weight:bold;">
+          <div class="col s9" style="margin-bottom:10px;">
             <span id="seller" ><%= @one_user.category%></span>
           </div>
         </div>
@@ -48,15 +48,15 @@
           <div class="col s3 center" style="margin-bottom:10px;">
             참가 경력
           </div>
-          <div class="col s9" style="margin-bottom:10px;font-weight:bold;">
+          <div class="col s9" style="margin-bottom:10px;">
             <span id="seller" ><%= @one_user.career%></span>
           </div>
         </div>
         <div class="col s7">
           <% if user_signed_in? && @check_favorite %>
-            <a class="enjoy-css " href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px; font-weight:bold;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기 취소</span></a>
+            <a class="enjoy-css " href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기 취소</span></a>
           <% elsif user_signed_in? %>
-            <a class="enjoy-css " href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px; font-weight:bold;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기</span></a>
+            <a class="enjoy-css " href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기</span></a>
           <% end %>
         </div>
 
