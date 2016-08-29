@@ -92,11 +92,12 @@
     <%= render partial: "/user_page/goods" %>
     <div id="ep_modals">
       <% if user_signed_in? %>
-      <!-- 수정 팝업창 -->
+      <!-- 글쓰기 파업창 -->
       <div id="write_1" class="modal modal-fixed-footer" style="max-height:650px; height:600px; width:580px;">
-        <form action="/epilogue/<%=@one_user.id%>" method="POST" enctype="multipart/form-data" style="height:initial;">
+          <form action="/epilogue/<%=@one_user.id%>" method="POST" enctype="multipart/form-data" style="height:initial;">
           <input name ="utf8" type="hidden", value="✓">
           <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+          <input type="hidden" name="kind", value = "epilogue">
           <div class="modal-content" style="padding:18px;">
             <img id="image_write_in"  class="image" src="<%=image_path("black.png")%>" alt="your image" style="max-height:600px; max-width:450px; display:block; margin-left:auto;margin-right:auto;"/>
 
