@@ -8,35 +8,35 @@
     <div class="col s3 center" style="margin-bottom:10px;">
       이메일
     </div>
-    <div class="col s9" style="margin-bottom:10px;">
+    <div class="col s9" style="margin-bottom:10px; font-weight:bold;">
       <span id="seller" ><%= user.email %></span>
     </div>
 
     <div class="col s3 center" style="margin-bottom:10px;">
       이름
     </div>
-    <div class="col s9" style="margin-bottom:10px;">
+    <div class="col s9" style="margin-bottom:10px; font-weight:bold;">
       <span id="seller" ><%= user.name %></span>
     </div>
 
     <div class="col s3 center" style="margin-bottom:10px;">
       닉네임
     </div>
-    <div class="col s9" style="margin-bottom:10px;">
+    <div class="col s9" style="margin-bottom:10px; font-weight:bold;">
       <span id="nickname"><%= user.nickname%> </span>
     </div>
 
     <div class="col s3 center" style="margin-bottom:10px;">
       연락처
     </div>
-    <div class="col s9" style="margin-bottom:10px;">
+    <div class="col s9" style="margin-bottom:10px; font-weight:bold;">
       <span id="seller" ><%= user.phone_num%></span>
     </div>
     <div class=" col s12">
       <div class="col s3 center" style="margin-bottom:10px;">
         판매 제품
       </div>
-      <div class="col s9" style="margin-bottom:10px;">
+      <div class="col s9" style="margin-bottom:10px; font-weight:bold;">
         <%= user.category%>
       </div>
     </div>
@@ -44,17 +44,12 @@
       <div class="col s3 center" style="margin-bottom:10px;">
         참가 경력
       </div>
-      <div class="col s9" style="margin-bottom:10px;">
+      <div class="col s9" style="margin-bottom:10px;font-weight:bold;">
         <%= user.career%>
       </div>
     </div>
-    <div class="col s7">
-      <% if user_signed_in? && @check_favorite %>
-        <a class="enjoy-css " href="/user_favorite/<%= user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기 취소</span></a>
-      <% elsif user_signed_in? %>
-        <a class="enjoy-css " href="/user_favorite/<%= user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기</span></a>
-      <% end %>
-        <a class="enjoy-css" style="font-size:15px;" href="/user_page/<%=user.id%>"> <i class="material-icons" style="font-size:1.2rem;">visibility</i>셀러 구경하기</a>
+    <div class="col s6 offset-s1">
+        <a class="enjoy-css" style="font-size:15px; font-weight:bold;" href="/user_page/<%=user.id%>"> <i class="material-icons" style="font-size:1.4rem;">visibility</i>셀러 구경하기</a>
     </div>
 
     <div class="col s5" style="text-align:right;">
