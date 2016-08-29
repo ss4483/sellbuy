@@ -3,14 +3,14 @@
   <br>
     <div style="position: relative;">
       <div class="z-depth-2"  style="display: block;margin-left: auto;margin-right: auto; width:650px; padding:20px; background-color:white; padding-top:10px;">
-        <div class="row" style="min-height:20px;position: relative; padding-left: 20px; margin-bottom:0px;">
+        <div class="row" style="min-height:20px;position: relative; margin-bottom:0px;">
           <% if  post.kind == 'epilogue' %>
-            <span class="left" style="font-size:18px">상품 review</span>
+            <span class="left" style="font-size:18px; padding-left: 20px; ">상품 review</span>
             <div class="center" style="wdith:100%;"><%= user_nickname_page(user_find(post.other_user).id) %>셀러 상품의 후기</div>
           <% elsif post.kind == 'goods' %>
-            <span class="left" style="font-size:18px">상품 info</span>
+            <span class="left" style="font-size:18px; padding-left: 20px; ">상품 info</span>
           <% elsif post.kind == 'markets'%>
-            <span class="left" style="font-size:18px">마켓 info</span>
+            <span class="left" style="font-size:18px; padding-left: 20px; ">마켓 info</span>
           <% end %>
           <span class="right" style="position: absolute; bottom: 0px; right:0px; font-size:12px;">
             <%= post.created_at.strftime("%m/%d %H:%M") %>
