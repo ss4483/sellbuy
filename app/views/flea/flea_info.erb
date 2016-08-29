@@ -48,7 +48,11 @@
           셀러 모집 기간
     </div>
     <div class="col s9" >
-      <%= @one_flea.sel_term_start.strftime("%m월 %d일") %> - <%= @one_flea.sel_term_end.strftime("%m월 %d일") %>
+      <% if @one_flea.sel_term_start.strftime("%m월 %d일") == @one_flea.sel_term_end.strftime("%m월 %d일") %>
+        <%= @one_flea.sel_term_start.strftime("%m월 %d일") %>
+      <% else %>
+        <%= @one_flea.sel_term_start.strftime("%m월 %d일") %> - <%= @one_flea.sel_term_end.strftime("%m월 %d일") %>
+      <% end %>
     </div>
   </div>
   <div class="col s12"  style="margin-bottom:15px;">
