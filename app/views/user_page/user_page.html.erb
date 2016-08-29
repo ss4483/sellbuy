@@ -4,11 +4,6 @@
       <div class="col s3">
        <%= user_page_profile(@one_user.id) %>
         <br><br><br>
-        <% if user_signed_in? && @check_favorite %>
-          <a class="enjoy-css right" href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기 취소</span></a>
-        <% elsif user_signed_in? %>
-          <a class="enjoy-css right" href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기</span></a>
-        <% end %>
       </div>
       <div class="col s9 row"><input type="hidden" value="<%=@one_user.id%>" class="seller_id"><br>
         <div class="col s3 center" style="margin-bottom:10px;">
@@ -39,7 +34,8 @@
           <span id="seller" ><%= @one_user.phone_num%></span>
         </div>
 
-        <div styl="col s12">
+
+        <div class="col s12">
           <div class="col s3 center" style="margin-bottom:10px;">
             판매 제품
           </div>
@@ -48,18 +44,23 @@
           </div>
         </div>
 
-        <div styl="col s12">
+        <div class="col s12">
           <div class="col s3 center" style="margin-bottom:10px;">
             참가 경력
           </div>
-          <div class="col s9" style="margin-bottom:10px;"><br>
+          <div class="col s9" style="margin-bottom:10px;">
             <span id="seller" ><%= @one_user.career%></span>
           </div>
         </div>
+        <div class="col s7">
+          <% if user_signed_in? && @check_favorite %>
+            <a class="enjoy-css right" href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기 취소</span></a>
+          <% elsif user_signed_in? %>
+            <a class="enjoy-css right" href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기</span></a>
+          <% end %>
+        </div>
 
-
-
-        <div class="col s5 offset-s7" style="text-align:right;">
+        <div class="col s5" style="text-align:right;">
           <%= facebook_url(@one_user.facebook_url) %>
           <%= instar_url(@one_user.instar_url) %>
           <%= twitter_url(@one_user.twitter_url) %>

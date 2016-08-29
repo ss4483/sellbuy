@@ -6,7 +6,7 @@
         <div class="row" style="min-height:20px;position: relative; margin-bottom:0px;">
           <% if  post.kind == 'epilogue' %>
             <span class="left" style="font-size:18px; padding-left: 20px; ">상품 review</span>
-            <div class="col s4 offset-s4" style=""><%= user_nickname_page(user_find(post.other_user).id) %>셀러 상품</div>
+            <div class="col s4 offset-s2"><%= user_nickname_page(user_find(post.other_user).id) %>의 상품</div>
           <% elsif post.kind == 'goods' %>
             <span class="left" style="font-size:18px; padding-left: 20px; ">상품 info</span>
           <% elsif post.kind == 'markets'%>
