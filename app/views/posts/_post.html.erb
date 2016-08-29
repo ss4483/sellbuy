@@ -7,7 +7,7 @@
           <span class="left">
             <% if  post.kind == 'epilogue' %>
               <span style="font-size:18px">상품 review</span>
-              <span class="center"><%= user_nickname_page(user_find(post.other_user).id) %>셀러 상품의 후기</spam>
+              <span style="text-align:cener;"><%= user_nickname_page(user_find(post.other_user).id) %>셀러 상품의 후기</spam>
             <% elsif post.kind == 'goods' %>
               <span style="font-size:18px">상품 info</span>
             <% elsif post.kind == 'markets'%>
