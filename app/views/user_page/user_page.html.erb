@@ -54,9 +54,9 @@
         </div>
         <div class="col s7">
           <% if user_signed_in? && @check_favorite %>
-            <a class="enjoy-css right" href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기 취소</span></a>
+            <a class="enjoy-css " href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기 취소</span></a>
           <% elsif user_signed_in? %>
-            <a class="enjoy-css right" href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기</span></a>
+            <a class="enjoy-css " href="/user_favorite/<%= @one_user.id %>" method="post" style="height:24px;"><i class="samll material-icons ">stars</i><span style="vertical-align:super;"> 즐겨찾기</span></a>
           <% end %>
         </div>
 
