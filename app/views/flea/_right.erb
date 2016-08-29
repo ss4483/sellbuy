@@ -38,7 +38,7 @@
                       <% else %>
                         <%= m.term_start.strftime("%m월 %d일") %> - <%= m.term_end.strftime("%m월 %d일") %>
                       <% end %></span><br>
-                        <span class="right" style="font-size:12px;line-height: 20px;"><%= m.term_start.to_s(:time) %> - <%= m.term_end.to_s(:time) %></span>
+                        <span class="right" style="font-size:12px;line-height: 20px;"><%= m.term_start.to_s(:time) %> - <%= m.term_end.to_s(:time) %></span><br>
                     <span class="left" style="font-size:12px;">셀러 모집 기간 :         <% if m.sel_term_start.strftime("%m월 %d일") == m.sel_term_end.strftime("%m월 %d일") %>
                               <%= m.sel_term_start.strftime("%m월 %d일") %>
                             <% else %>
