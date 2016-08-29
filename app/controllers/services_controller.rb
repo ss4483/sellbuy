@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
   def about_us
-    @check = true
+  
   end
 # services CRUD
   def services
