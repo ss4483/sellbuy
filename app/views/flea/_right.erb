@@ -1,72 +1,64 @@
-<ul id="flea" class="side-nav fixed scroll style-3" style="direction:rtl; text-align:left; background-color: rgba(255,255,255,0); position:fixed; left:5px; top:90px; height:calc(100% - (90px)); padding-top:10px;">
-    <% if user_signed_in? && current_user.kind =="M"%>
-      <a class="right" href="/flea_enroll_view">등록하기<i class="material-icons enjoy-css" style="display:inline-block; font-size:1.4rem;">mode_edit</i></a>
-    <% end %>
-    <li class="center"><a href="/past_flea"><i class="material-icons red-text" style="display:inline-block; margin-right:10px;">store</i>
-      <span style="vertical-align:super; font-size:15px;">지난 플리마켓</span></a>
-    </li>
+<div style="font-family:Open Sans, HelveticaNeue, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight:900;" >
+  <% if user_signed_in? && current_user.kind =="M"%>
+    <a class="right" href="/flea_enroll_view">등록하기<i class="material-icons enjoy-css" style="display:inline-block; font-size:1.4rem; height:100%;">mode_edit</i></a><br><br>
+  <% end %>
+  <a class="last_flea_a"href="/past_flea"><div class="last_flea" style="height:48px; margin-bottom:15px;"><i class="small material-icons red-text" style="display:inline-block;">store</i>
+    <span style="vertical-align:super; font-size:15px;">지난 플리마켓</span>
+  </div></a>
+  <div class="center" style="height:48px; margin-bottom:15px;">
+    <i class="small material-icons green-text" style="display:inline-block; width:24px; margin-right:10px;">store</i>
+    <span style="vertical-align:super; font-size:15px;">플리마켓</span>
+  </div>
+  <% fleas.each do |m| %>
+      <% if m.term_end.to_f > Time.zone.now.to_datetime.to_f %>
+        <div class="row left_div"  style="margin-bottom:0;">
+          <a class="tooltipped left"  data-delay="50"  data-position="right" data-html="true"
+            data-tooltip='
+            <div class="row valign-wrapper" style="width:450px; max-width:400px;">
+              <div class="col s4 valign center">
+                <img src="<%= m.image_url %>" style="max-width:100%; max-height:150px;" >
+              </div>
+              <div class="col s8 valign" style="line-height: 30px;" >
+                <% if m.sel_term_end.to_f > Time.zone.now.to_datetime.to_f %>
+                  <span class="badge red-text" style="font-size:12px">셀러 모집 중</span>
+                <% else %>
+                  <span class="badge green-text" style="font-size:12px">셀러 모집 완료</span>
+                <% end %>
 
-    <li class="center" style="height:48px; margin-bottom:15px;">
-      <span style="vertical-align:super; font-size:15px;">플리마켓</span>
-      <i class="small material-icons green-text" style="display:inline-block; width:24px; margin-right:10px;">store</i>
-    </li>
-    <% fleas.each do |m| %>
-        <% if m.term_end.to_f > Time.zone.now.to_datetime.to_f %>
-          <li>
-            <div class="row"  style="margin-bottom:0;">
-              <a class="tooltipped left"  data-delay="50"  data-position="right" data-html="true"
-                data-tooltip='
-                <div class="row valign-wrapper" style="width:450px; max-width:400px;">
-                  <div class="col s4 valign center">
-                    <img src="<%= m.image_url %>" style="max-width:100%; max-height:150px;" >
-                  </div>
-                  <div class="col s8 valign" style="line-height: 30px;" >
-                    <% if m.sel_term_end.to_f > Time.zone.now.to_datetime.to_f %>
-                      <span class="badge red-text" style="font-size:12px">셀러 모집 중</span>
-                    <% else %>
-                      <span class="badge green-text" style="font-size:12px">셀러 모집 완료</span>
-                    <% end %>
-
-                    <% if m.kind == "long" %>
-                      <span class="left" style="font-size:12px">[정기마켓]</span>
-                    <% end %>
-                    <br>
-                    <div class="" style="text-align:center; font-size:15px;"><%= short_title(m.title) %></div>
-                    <span class="left" style="font-size:12px;">마켓 개최 기간 :
-                      <% if m.term_start.strftime("%m/%d") == m.term_end.strftime("%m/%d") %>
-                        <%= m.term_start.strftime("%m월 %d일") %>
-                      <% else %>
-                        <%= m.term_start.strftime("%m월 %d일") %> - <%= m.term_end.strftime("%m월 %d일") %>
-                      <% end %></span><br>
-                        <span class="right" style="font-size:12px;line-height: 20px;"><%= m.term_start.to_s(:time) %> - <%= m.term_end.to_s(:time) %></span><br>
-                    <span class="left" style="font-size:12px;">셀러 모집 기간 :         <% if m.sel_term_start.strftime("%m월 %d일") == m.sel_term_end.strftime("%m월 %d일") %>
-                              <%= m.sel_term_start.strftime("%m월 %d일") %>
-                            <% else %>
-                              <%= m.sel_term_start.strftime("%m월 %d일") %> - <%= m.sel_term_end.strftime("%m월 %d일") %>
-                            <% end %></span>
-                  </div>
-                </div>' href="/flea_info/<%=m.id%>" style="height: 80px; width:220px; display: inline-block; padding:0px;">
-
-                <div class="col s4 valign-demo valign-wrapper" style="height: 80px; padding:5px;">
-                  <img class="valign center flea_img_s" src="<%= m.image_url %>" style="display: block; margin-left: auto; margin-right: auto; max-height:100%; width:auto; max-width:100%; height:auto; vertical-align: middle">
-                </div>
-                <div class="col s8" style="height: 80px; line-height: 22px; padding-top: 7px; ">
+                <% if m.kind == "long" %>
+                  <span class="left" style="font-size:12px">[정기마켓]</span>
+                <% end %>
+                <br>
+                <div class="" style="text-align:center; font-size:15px;"><%= short_title(m.title) %></div>
+                <span class="left" style="font-size:12px;">마켓 개최 기간 :
                   <% if m.term_start.strftime("%m/%d") == m.term_end.strftime("%m/%d") %>
-                    <span><%= m.term_start.strftime("%m/%d") %></span><br>
+                    <%= m.term_start.strftime("%m월 %d일") %>
                   <% else %>
-                    <span><%= m.term_end.strftime("%m/%d") %> - <%= m.term_start.strftime("%m/%d") %></span><br>
-                  <% end %>
-                  <span class="right"><%= m.term_end.to_s(:time) %> - <%= m.term_start.to_s(:time) %></span><br>
-                  <span class="right"><%= m.location %></span>
-                </div>
-              </a>
+                    <%= m.term_start.strftime("%m월 %d일") %> - <%= m.term_end.strftime("%m월 %d일") %>
+                  <% end %></span><br>
+                    <span class="right" style="font-size:12px;line-height: 20px;"><%= m.term_start.to_s(:time) %> - <%= m.term_end.to_s(:time) %></span><br>
+                <span class="left" style="font-size:12px;">셀러 모집 기간 :         <% if m.sel_term_start.strftime("%m월 %d일") == m.sel_term_end.strftime("%m월 %d일") %>
+                          <%= m.sel_term_start.strftime("%m월 %d일") %>
+                        <% else %>
+                          <%= m.sel_term_start.strftime("%m월 %d일") %> - <%= m.sel_term_end.strftime("%m월 %d일") %>
+                        <% end %></span>
+              </div>
+            </div>' href="/flea_info/<%=m.id%>" style="height: 80px; width:220px; display: inline-block; padding:0px;">
+
+            <div class="col s4 valign-demo valign-wrapper" style="height: 80px; padding:5px;">
+              <img class="valign center flea_img_s" src="<%= m.image_url %>" style="display: block; margin-left: auto; margin-right: auto; max-height:100%; width:auto; max-width:100%; height:auto; vertical-align: middle">
             </div>
-          </li>
-      <% end %>
+            <div class="col s8" style="height: 80px; line-height: 22px; padding-top: 7px; ">
+              <% if m.term_start.strftime("%m/%d") == m.term_end.strftime("%m/%d") %>
+                <span><%= m.term_start.strftime("%m/%d") %></span><br>
+              <% else %>
+                <span><%= m.term_start.strftime("%m/%d") %> - <%= m.term_end.strftime("%m/%d") %></span><br>
+              <% end %>
+              <span class="right"><%= m.term_end.to_s(:time) %> - <%= m.term_start.to_s(:time) %></span><br>
+              <span class="right"><%= m.location %></span>
+            </div>
+          </a>
+        </div>
     <% end %>
-</ul>
-
-
-<a href="#" data-activates="flea" class="button-collapse black-text" style="height:100%; width:100%">
-  <i class="medium material-icons" >menu</i>
-</a>
+  <% end %>
+</div>

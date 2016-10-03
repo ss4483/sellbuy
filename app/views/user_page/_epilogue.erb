@@ -1,9 +1,8 @@
-<a href="#" data-activates="flea" class="button-collapse black-text right">
-  <i class="medium material-icons">menu</i>
-</a>
-<ul id="flea" class="side-nav fixed scroll style-3" style="direction:rtl; text-align:right; background-color: rgba(255,255,255,0); position:fixed; left:5px; top:90px; height:calc(100% - (90px)); padding-top:10px;">
-  <li class="center" style="height:48px; margin-bottom:10px;">
-    <span style="vertical-align:super; font-size:15px;">후기</span></li>
+
+
+<div style="font-family:Open Sans, HelveticaNeue, Helvetica Neue, Helvetica, Arial, sans-serif; font-weight:900;" >
+  <div class="center" style="height:48px; margin-bottom:10px;">
+    <span style="vertical-align:super; font-size:15px;">후기</span></div>
   <% if user_signed_in? && @one_user != current_user %>
     <a class="modal-trigger enjoy-css" href="#write_1" style="font-size:15px;">후기 작성<i class="material-icons enjoy-css" style="display:inline-block; font-size:1.4rem;">mode_edit</i></a>
   <% else %>
@@ -14,7 +13,7 @@
   <div id="ep_pages" style="width:210px">
     <%= render partial: "/user_page/small_ep", collection: @ep_posts, as: :post %>
   </div>
-  <li class="center">
+  <div class="center">
     <%= will_paginate @ep_posts, :param_name => 'ep_page', class: "ep_pagination" %>
-  </li>
-</ul>
+  </div>
+</div>

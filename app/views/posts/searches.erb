@@ -1,5 +1,5 @@
 
-<div class="col s12 m10 offset-m1 l8 offset-l2">
+<div class="col l12">
   <ul class="tabs" style="background-color: Transparent;">
     <li class="tab col s4"><a class="active" href="#seller_search">셀러 검색</a></li>
     <li class="tab col s4"><a href="#post_search">글 검색</a></li>
@@ -7,7 +7,7 @@
   </ul>
 </div>
 <!--*************************************************************************************************-->
-<div id="seller_search" class="col s12 m10 offset-m1 l8 offset-l2"><br>
+<div id="seller_search" class="col l10 offset-l1"><br>
   <% if @user_searches.empty?%>
     <p class="center" style="font-size:20px;">'<%= @search %>'(으)로 검색한 결과가 없습니다.</p>
   <% else %>
@@ -18,7 +18,7 @@
   <% end %>
 </div>
 <!---------------------------------------------------------------------------------------------------------->
-<div id="post_search" class="col s12 m10 offset-m1 l8 offset-l2"><br>
+<div id="post_search" class="col l12"><br>
   <% if @post_searches.empty?%>
     <p class="center" style="font-size:20px;">'<%= @search %>'(으)로 검색 결과가 없습니다.</p>
   <% else %>
@@ -31,7 +31,7 @@
   <% end %>
 </div>
 <!---------------------------------------------------------------------------------------------------------->
-<div id="flea_search" class="col s12 m10 offset-m1 l8 offset-l2"><br>
+<div id="flea_search" class="col l10 offset-l1"><br>
   <% if @flea_searches.empty?%>
     <p  class="center" style="font-size:20px;">'<%= @search %>'(으)로 검색 결과가 없습니다.</p>
   <% else %>

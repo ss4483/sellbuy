@@ -1,4 +1,4 @@
-<div class="col s12 m10 offset-m1 l8 offset-l2">
+<div class="col l12">
 
   <ul class="tabs" style="background-color: Transparent;">
     <% if @one_user.kind == "seller"%>
@@ -12,7 +12,7 @@
 <!--*************************************************************************************************-->
 <!-- 등록한 상품 -->
 <% if @one_user.kind == "seller"%>
-  <div id="goods" class="col s12 m10 offset-m1 l8 offset-l2"><br><br>
+  <div id="goods" class="col l12"><br><br>
     <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
     <%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
     <div id="goods_pages" class="row"style="display:block;">
@@ -30,7 +30,7 @@
 
 <% if user_signed_in? && @one_user == current_user %>
   <!-- 나의 후기  -->
-  <div id="ep" class="col s12 m10 offset-m1 l8 offset-l2"><br>
+  <div id="ep" class="col l12"><br>
     <div id="my_ep_pages" class="row"style="display:block;">
       <% if @my_ep_posts.empty? %>
         <p class="center" style="font-size:15px;">등록한 후기가 없습니다.</p>

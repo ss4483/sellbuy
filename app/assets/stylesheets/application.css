@@ -17,9 +17,49 @@
  */
 
 /* application*/
+.left_ep:hover{
+  background: gray;
+  color: white !important;
+}
 
+.last_flea_a{
+  color: black;
+}
+.last_flea{
+  -webkit-transition:color 0.5s, background-color 0.5s;
+   transition:color 0.5s,background-color 0.5s;
+   cursor: pointer;
+   padding-top: 5px;
+}
+.last_flea:hover{
+  background-color: gray !important;
+}
+.last_flea_a:hover{
+  color: white;
+}
 
-
+.left_div a{
+    color: black;
+}
+.left_div a:hover{
+  color: white;
+}
+.left_div:hover{
+  background-color: gray;
+}
+nav ul a{
+      height: 50px !important;
+}
+nav ul a:hover {
+    background-color: white !important;
+    color: black !important;
+        height: 50px !important;
+}
+nav ul li.active {
+    color: black !important;
+  background-color: white !important;
+      height: 50px !important;
+}
 .user_img_round {
   border: 1px solid white;
   border-radius: 15px;
@@ -54,7 +94,7 @@
       position: absolute;
       top: 0;
       left: 0;
-        background: linear-gradient( to bottom,  #F6F6F5 , #F6F6F5 );
+        background: linear-gradient( to bottom,  white , white );
       width: 100%;
       height: 100%;
       opacity : 1;

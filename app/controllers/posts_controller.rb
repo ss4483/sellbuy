@@ -4,6 +4,7 @@ class PostsController < ApplicationController
     @posts = Post.where(index_check: true).order('updated_at DESC').paginate(:page => params[:posts_page], :per_page => 9)
     @shorts = Flea.where(kind: "short")
     @longs = Flea.where(kind: "long")
+    @main_fleas = Flea.all.order('updated_at DESC')[0..2]
   end
 
 # post CRUD

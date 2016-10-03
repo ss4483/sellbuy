@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col s12 m12 l2 offset-l1 ">
+  <div class="col l12 ">
     <a class="enjoy-css" href="/services">
       <i class="material-icons" style="font-size: 2.5rem; color:orange;">live_help</i>
       <span style="font-size:30px; margin-bottom:10px;">Q & A</span>
@@ -9,7 +9,7 @@
 </div>
 
 <div class="row">
-  <div class="col s12 m10 offset-m1 l8 offset-l2 center" style="border-bottom: 2px solid silver;">
+  <div class="col l10 offset-l1 center" style="border-bottom: 2px solid silver;">
     <span style="font-size:30px;"><%= @service.title %></span><br>
     <% if @service.public_check %>
       <span class="left" style="font-size:12px;">공개 질문</span>
@@ -19,7 +19,7 @@
     <span class="right"><%= @service.created_at.in_time_zone("Asia/Seoul").strftime("%m월%d일 %H:%M") %></span>
 
   </div>
-  <div class="col s12 m10 offset-m1 l8 offset-l2 " style="margin-top:10px; border-bottom: 3px solid silver; margin-bottom:10px;">
+  <div class="col l10 offset-l1  " style="margin-top:10px; border-bottom: 3px solid silver; margin-bottom:10px;">
     <span class="right" style="font-size:12px;"> 작성자 : <%= q_nickname_page(@service.user.id) %></span>
     <br>
     <div style="font-size:18px; margin-left:10px; margin-right:10px;"><%= @service.content.gsub(/\n/, '<br />').html_safe %></div>
@@ -51,7 +51,7 @@
   </div>
 
   <!-- 답글 -->
-  <div class="col s12 m10 offset-m1 l8 offset-l2 ">
+  <div class="col l10 offset-l1  ">
     <% @service.service_replies.all.each do |r| %>
       <div clss="col s12" style="padding-top:10px; padding-bottom:10px; border-bottom: 1px dotted silver;">
         <div>
@@ -101,7 +101,7 @@
       </div>
     <% end %>
   </div>
-  <div class="col s12 m10 offset-m1 l8 offset-l2 " style="position: relative;">
+  <div class="col l10 offset-l1 " style="position: relative;">
     <form action="/service_reply/<%=@service.id%>" method="POST">
       <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
       <input name ="utf8" type="hidden", value="✓">

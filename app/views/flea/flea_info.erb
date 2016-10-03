@@ -1,7 +1,7 @@
 
 
 <br>
-<div class="z-depth-2 col s12 m10 offset-m1 l8 offset-l2"  style=" position: relative;background-color:white; font-size:12px; margin-bottom:40px;">
+<div class="z-depth-2 col l11 offset-l1"  style=" position: relative;background-color:white; font-size:14px; margin-bottom:40px;">
   <% if user_signed_in? && current_user.kind == "M" %>
     <div class="right">
       <a class='enjoy-css' href="/flea_update_view/<%=@one_flea.id%>" style="width:100px; display:inline;">
@@ -11,12 +11,12 @@
     </div>
   <% end %><br>
   <% if @one_flea.sel_term_end.to_f > Time.zone.now.to_datetime.to_f && @one_flea.term_end.to_f > Time.zone.now.to_datetime.to_f%>
-    <span class="badge red-text" style="font-size:12px">셀러 모집 중</span>
+    <span class="badge red-text" style="font-size:14px">셀러 모집 중</span>
   <% elsif  @one_flea.term_end.to_f > Time.zone.now.to_datetime.to_f %>
-    <span class="badge green-text" style="font-size:12px">셀러 모집 완료</span>
+    <span class="badge green-text" style="font-size:14px">셀러 모집 완료</span>
   <% end %>
   <% if @one_flea.term_end.to_f < Time.zone.now.to_datetime.to_f %>
-    <span class="badge red-text" style="font-size:12px">완료 마켓</span>
+    <span class="badge red-text" style="font-size:14px">완료 마켓</span>
   <% end %>
 
   <h5 class="center" id="flea_title"><%= @one_flea.title %></h5>

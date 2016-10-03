@@ -1,3 +1,29 @@
+<div class="flexslider">
+  <ul class="slides" >
+    <% @main_fleas.each do |flea|%>
+    <li class="row" style="margin-bottom:0px">
+      <a href="/flea_info/<%=flea.id%>" style="color:black;">
+      <div class="col l6 valign-wrapper" style="height:500px; padding-left:20px;" >
+        <img class="flea_img_s valign center" src="<%= flea.image_url %>"  style="display: block;margin-left: auto;margin-right: auto; max-height:100%; width:auto; max-width:100%; height:auto; vertical-align: middle">
+      </div>
+      <div class="col l6">
+        <h5 class="center" style="margin-top:40px;"><%= flea_title(flea.title) %></h5><br>
+          <p style="font-size:18px; margin-bottom: 0.5em; margin-top:0.5em;"> 　　　　　지역 : <%= flea.location %></p>
+          <p style="font-size:18px; margin-bottom: 0.5em; margin-top:0.5em;"> 마켓 개최 기간 :
+                <% if flea.term_start.strftime("%m/%d") == flea.term_end.strftime("%m/%d") %>
+                  <span style="font-size:16px;"><%= flea.term_start.strftime("%m월 %d일") %> 　<%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></span></p>
+                <% else %>
+                  <span style="font-size:16px;"> <%= flea.term_start.strftime("%m월 %d일") %> - <%= flea.term_end.strftime("%m월 %d일") %></span></p>
+                    <p style="font-size:16px; margin-bottom: 0.7em; margin-top:0.7em;">　　　　 　　 　　　 　　　　　　　　<%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></p>
+                <% end %>
+          <p class="center" style="font-size:18px; margin-bottom: 0.5em; margin-top:0.5em;"> 마켓 주제</p>
+           <span style="font-size:16px; margin-left:20px;"><%= flea.post.gsub(/\n/, '<br />').html_safe%></span>
+      </div>
+    </a>
+    </li>
+    <% end %>
+  </ul>
+</div>
 
 <!-- post 쓰기-->
   <% if user_signed_in? && current_user.kind == "seller" %>
@@ -6,15 +32,20 @@
 <!-- 각각 post -->
 <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
 <%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
-<div class="col s12 m10 offset-m1 l8 offset-l2" >
+
 
 <div id="posts" class="row">
-  <%= render partial: '/posts/post', collection: @posts,as: 'post' %>
+  <%= render partial: '/user_page/small_post', collection: @posts,as: 'post' %>
 </div>
 
 
 <%= will_paginate @posts, :param_name => "posts_page", class: "posts_pagination" %>
-</div>
+
+
+
+
+
+
 <% if flash[:notice] %>
   <!-- Modal Structure -->
   <div id="write_modal" class="modal modal-fixed-footer" style="height:35%; width:35%;">

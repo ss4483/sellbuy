@@ -127,7 +127,7 @@ $(function(){
                   reply_id = $.parseJSON(json);
                   user_id = $('#current_user_id').val();
                   user_kind = $('#current_user_kind').val();
-                  user_nick = $('#current_user_nick').text();
+                  user_nick = $('#current_user_nick').val();
                   reply_content = $('#re_input_'+post_id).val();
 
                   var reply_content_span = $('<span />',{

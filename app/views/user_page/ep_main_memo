@@ -1,0 +1,10 @@
+
+<!-- <% elsif user_signed_in? && @one_user == current_user && post.index_check %>
+
+  <a class="enjoy-css" href="/epilogue_check/<%=post.id%>" style="width:100%; padding:0px; height:55px;">
+    <i class="small material-icons" style="width:100%; padding:0px; height:55px;">settings_backup_restore</i>
+  </a>
+<% elsif user_signed_in? && @one_user == current_user  %>
+  <a class="enjoy-css" href="/epilogue_check/<%=post.id%>"style="width:100%; padding:0px; height:55px;">
+    <i class="small material-icons" style="width:100%; padding:0px; height:55px;">done</i>
+  </a> -->

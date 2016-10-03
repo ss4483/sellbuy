@@ -1,10 +1,10 @@
 <div class="row">
-  <div class="col s12 m12 l2 offset-l1 ">
+  <div class="col l12 ">
     <img src="<%=image_path("like.png")%>" alt="market image" style="max-height:30px;" />
     <span style="font-size:25px; font-weight:bold;">좋아요</span>
   </div>
 </div>
-<div class="col s12 m10 offset-m1 l8 offset-l2" >
+<div>
   <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
   <%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
   <% if @like_posts.empty? %>

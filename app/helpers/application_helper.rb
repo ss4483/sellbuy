@@ -82,4 +82,12 @@ module ApplicationHelper
       p "/flea_info/#{Flea.where("image_url LIKE ?", "%#{url}%").take.id}"
     end
   end
+
+  def flea_title(m)
+    if m[20].nil?
+      m[0..19]
+    else
+      m[0..19] + '...'
+    end
+  end
 end
