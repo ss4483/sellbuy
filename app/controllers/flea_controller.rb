@@ -96,4 +96,8 @@ class FleaController < ApplicationController
     end
     redirect_to :back
   end
+
+  def navereb8fa99455f3d9c2616a9f1e794aa5ad
+    render :layout => false
+  end
 end

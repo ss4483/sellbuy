@@ -57,6 +57,8 @@ Rails.application.routes.draw do
 post'/services/same_nickname'
 
 get'/posts/last_re_id'
+
+get'/navereb8fa99455f3d9c2616a9f1e794aa5ad.html' => 'flea#navereb8fa99455f3d9c2616a9f1e794aa5ad'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
