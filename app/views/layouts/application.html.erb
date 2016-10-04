@@ -48,7 +48,12 @@
               <li><a href="/like_post">좋아요 글</a></li>
             <% end %>
 
-            <li><a href="collapsible.html">즐겨찾기</a></li>
+
+            <% if request.original_url.split('/')[-1] === "like_seller"%>
+              <li class="active"><a href="/like_seller" style="color:black;">즐겨찾기</a></li>
+            <% else %>
+              <li><a href="/like_seller">즐겨찾기</a></li>
+            <% end %>
 
             <% if request.original_url.split('/')[-2] + '/' + request.original_url.split('/')[-1] === "users/edit"%>
               <li class="active"><%= link_to '정보 수정',edit_user_registration_path, {:style=>'color:black;'}  %></li>

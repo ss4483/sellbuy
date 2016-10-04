@@ -1,0 +1,5 @@
+<% if user_signed_in? %>
+   <div id="flea_users" class="row">
+     <%= render partial: '/posts/searches_user', collection: current_user.favorites, as: :user %>
+   </div>
+ <% end %>

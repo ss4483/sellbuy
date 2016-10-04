@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   get '/epilogue_check/:epilogue_id' => 'user_page#epilogue_check'
   # 좋아요 글
   get '/like_post' => 'user_page#like_post'
+  # 즐겨찾는 셀러
+  get '/like_seller' => 'user_page#like_seller'
 
   get '/user_list' => 'user_page#user_list'
 # services

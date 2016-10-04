@@ -114,6 +114,12 @@ class UserPageController < ApplicationController
     end
   end
 
+  def like_seller
+    if user_signed_in?
+      @check = true
+    end
+  end
+
   def user_list
     @users = User.all.order('id DESC').paginate(:page => params[:user_list_page], :per_page => 10)
   end
