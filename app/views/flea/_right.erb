@@ -54,7 +54,7 @@
               <% else %>
                 <span><%= m.term_start.strftime("%m/%d") %> - <%= m.term_end.strftime("%m/%d") %></span><br>
               <% end %>
-              <span class="right"><%= m.term_end.to_s(:time) %> - <%= m.term_start.to_s(:time) %></span><br>
+              <span class="right"><%= m.term_start.to_s(:time) %> - <%= m.term_end.to_s(:time) %></span><br>
               <span class="right"><%= m.location %></span>
             </div>
           </a>
