@@ -9,7 +9,7 @@
     <i class="small material-icons green-text" style="display:inline-block; width:24px; margin-right:10px;">store</i>
     <span style="vertical-align:super; font-size:15px;">플리마켓</span>
   </div>
-  <% fleas.sorted_by(&:updated_at).each do |m| %>
+  <% fleas.sort_by{|e| e[:time_ago]}.reverse.each do |m| %>
       <% if m.term_end.to_f > Time.zone.now.to_datetime.to_f %>
         <div class="row left_div"  style="margin-bottom:0;">
           <a class="tooltipped left"  data-delay="50"  data-position="right" data-html="true"
