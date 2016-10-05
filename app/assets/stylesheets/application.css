@@ -68,10 +68,7 @@ nav ul li.active {
   -o-border-radius: 15px;
 }
 @font-face {font-family:NG;
-            src: url("../fonts/NanumGothic_Coding.ttf")
-            format("opentype");}
-@font-face {font-family:NGB;
-            src: url("../fonts/NanumGothic_Coding_Bold.ttf")
+            src: url("../fonts/NanumBarunGothicUltraLight.ttf")
             format("opentype");}
   .progress {
     background-color: rgba(0, 0, 0, 0) !important;

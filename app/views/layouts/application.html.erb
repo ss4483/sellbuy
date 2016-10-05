@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>와라! 플리마켓</title>
-  <meta name="description" content="순전히 플리마켓을 좋아하는 그 마음이 발전되어서 이제는 '와라 플리마켓' 이 되었습니다.">
+  <meta name="description" content="순전히 플리마켓을 좋아하는 사람들">
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -14,13 +14,13 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
-<body class="scroll style-3" style="font-family:NGB; font-size:12px;">
+<body class="scroll style-3" style="font-family:NG; font-size:14px; font-weight:800">
   <header>
-    <div class="container" style="width:100%; text-align:center; heigth:190px;" >
+    <div class="container" style="width:100%; text-align:center; heigth:180px;" >
       <a href="/">
-        <img  src="<%=image_path("logo.png")%>" alt="logo" height="100px" style="margin-top:40px;"/>
+        <img  src="<%=image_path("logo4.png")%>" alt="logo" height="140px" style="margin-top:20px;"/>
       </a><br>
       <form id="search_form" action="/searches" method="get" style="width:20%; height:40px; text-align:right; margin-left:80%;">
         <div class="input-field" style="height:50px; padding-bottom:10px; padding-right:45px; margin-top:5px; margin-bottom:0px;">
@@ -37,31 +37,31 @@
         <% if user_signed_in? %>
           <ul class="  hide-on-med-and-down" style="display: inline-block;">
             <% if request.original_url.split('/')[-2] + '/' + request.original_url.split('/')[-1] === "user_page/"+ current_user.id.to_s %>
-              <li class="active"><a href="/user_page/<%= current_user.id %>" style="color:black;">내 페이지</a></li>
+              <li class="active"><a href="/user_page/<%= current_user.id %>" style="color:black;">My Page</a></li>
             <% else %>
-              <li><a href="/user_page/<%= current_user.id %>">내 페이지</a></li>
+              <li><a href="/user_page/<%= current_user.id %>">My Page</a></li>
             <% end %>
 
             <% if request.original_url.split('/')[-1] === "like_post"%>
-              <li class="active"><a href="/like_post" style="color:black;">좋아요 글</a></li>
+              <li class="active"><a href="/like_post" style="color:black;">Likes</a></li>
             <% else %>
-              <li><a href="/like_post">좋아요 글</a></li>
+              <li><a href="/like_post">Likes</a></li>
             <% end %>
 
 
             <% if request.original_url.split('/')[-1] === "like_seller"%>
-              <li class="active"><a href="/like_seller" style="color:black;">즐겨찾기</a></li>
+              <li class="active"><a href="/like_seller" style="color:black;">Favorites</a></li>
             <% else %>
-              <li><a href="/like_seller">즐겨찾기</a></li>
+              <li><a href="/like_seller">Favorites</a></li>
             <% end %>
 
             <% if request.original_url.split('/')[-2] + '/' + request.original_url.split('/')[-1] === "users/edit"%>
-              <li class="active"><%= link_to '정보 수정',edit_user_registration_path, {:style=>'color:black;'}  %></li>
+              <li class="active"><%= link_to 'Info',edit_user_registration_path, {:style=>'color:black;'}  %></li>
             <% else %>
-              <li><%= link_to '정보 수정',edit_user_registration_path%></li>
+              <li><%= link_to 'Info',edit_user_registration_path%></li>
             <% end %>
 
-            <li><a href="/users/sign_out">로그아웃</a></li>
+            <li><a href="/users/sign_out">LogOut</a></li>
 
             <% if request.original_url.split('/')[-1] === "services"%>
               <li class="active"><a href="/services" style="color:black;">Q & A</a></li>
@@ -80,14 +80,14 @@
           <input type="hidden" id="current_user_kind" value="<%=current_user.kind%>">
         <% else %>
         <ul class="  hide-on-med-and-down" style="display: inline-block;">
-          <li><a href="#" style="pointer-events: none; cursor: default; color: gray;">내 페이지</a></li>
-          <li><a href="#" style="pointer-events: none; cursor: default; color: gray;">좋아요 글</a></li>
-          <li><a href="#" style="pointer-events: none; cursor: default; color: gray;">즐겨찾기</a></li>
-          <li><a href="#" style="pointer-events: none; cursor: default; color: gray;">정보수정</a></li>
+          <li><a href="#" style="pointer-events: none; cursor: default; color: gray;">My Page</a></li>
+          <li><a href="#" style="pointer-events: none; cursor: default; color: gray;">Likes</a></li>
+          <li><a href="#" style="pointer-events: none; cursor: default; color: gray;">Favorites</a></li>
+          <li><a href="#" style="pointer-events: none; cursor: default; color: gray;">Info</a></li>
           <% if request.original_url.split('/')[-2] + '/' + request.original_url.split('/')[-1] === "users/sign_in"%>
-            <li class="active"><a href="/users/sign_in" style="color:black;">로그인</a></li>
+            <li class="active"><a href="/users/sign_in" style="color:black;">LogIn</a></li>
           <% else %>
-            <li><a href="/users/sign_in">로그인</a></li>
+            <li><a href="/users/sign_in">LogIn</a></li>
           <% end %>
           <li><a href="#" style="pointer-events: none; cursor: default; color: gray;">Q & A</a></li>
           <% if request.original_url.split('/')[-1] === "about_us"%>

@@ -116,7 +116,7 @@
         <input id="profile" class="image_in" type="file" name="user[profile]">
       </label>
       <!--성별-->
-      <div class="row">
+      <div class="row" style="margin-top:15px;">
         <div class="col s3">
           <span class="user_label">성   별</span>
         </div>
@@ -150,42 +150,6 @@
           </div>
         <% end %>
         <div class="col s1">
-        </div>
-      </div>
-  <!--지역-->
-      <div class="row">
-        <div class="col s3">
-          <span class="user_label">지  역</span>
-        </div>
-        <% if current_user.location == "busan" %>
-          <div class="col s4">
-            <input class="with-gap" name="user[location]" type="radio" id="location1" value="busan" checked/>
-            <label class="user_label" for="location1">부 산</label>
-          </div>
-          <div class="col s4">
-            <input class="with-gap" name="user[location]" type="radio" id="location2" value="deagu">
-            <label class="user_label" for="location2">대 구</label>
-          </div>
-        <% elsif current_user.location == "deagu" %>
-          <div class="col s4">
-            <input class="with-gap" name="user[location]" type="radio" id="location1" value="busan">
-            <label class="user_label" for="location1">부 산</label>
-          </div>
-          <div class="col s4">
-            <input class="with-gap" name="user[location]" type="radio" id="location2" value="deagu" checked/>
-            <label class="user_label" for="location2">대 구</label>
-          </div>
-        <% else %>
-          <div class="col s4">
-            <input class="with-gap" name="user[location]" type="radio" id="location1" value="busan">
-            <label class="user_label" for="location1">부 산</label>
-          </div>
-          <div class="col s4">
-            <input class="with-gap" name="user[location]" type="radio" id="location2" value="deagu" />
-            <label class="user_label" for="location2">대 구</label>
-          </div>
-        <% end %>
-        <div class="col s2">
         </div>
       </div>
      <!--참가 경력 사항-->

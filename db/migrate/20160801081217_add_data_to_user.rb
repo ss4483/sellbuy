@@ -5,7 +5,6 @@ class AddDataToUser < ActiveRecord::Migration
     add_column :users, :nickname, :string #닉네임
     add_column :users, :profile, :string #프로필 사진 주소
     add_column :users, :phone_num, :string #폰번호
-
     add_column :users, :gender, :string #성별
     add_column :users, :location, :string #지역
     add_column :users, :career, :string #참가경력

@@ -17,13 +17,13 @@
       <% end %>
       <p class="center" style="margin-top:25px; font-size:15px;">
         <%= flea.title %></p>
-      <p style="font-size:13px; margin-bottom: 0.5em; margin-top:0.5em;"> 　　　　　지역 : <%= flea.location %></p>
+      <p style="font-size:13px; margin-bottom: 0.5em; margin-top:0.5em;"><span style="color:white;"> 　　　　　</span>지역 : <%= flea.location %></p>
       <p style="font-size:13px; margin-bottom: 0.5em; margin-top:0.5em;"> 마켓 개최 기간 :
             <% if flea.term_start.strftime("%m/%d") == flea.term_end.strftime("%m/%d") %>
               <%= flea.term_start.strftime("%m월 %d일") %> 　<%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></p>
             <% else %>
               <%= flea.term_start.strftime("%m월 %d일") %> - <%= flea.term_end.strftime("%m월 %d일") %></p>
-                <p style="font-size:13px; margin-bottom: 0.7em; margin-top:0.7em;">　　　　 　　 　　　 　　　　　　　　<%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></p>
+                <p style="font-size:13px; margin-bottom: 0.7em; margin-top:0.7em;"><span style="color:white;">　　　　 　　 　　　 　　　　　　　　</span><%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></p>
             <% end %>
 
       <p style="font-size:13px; margin-bottom: 0.7em; margin-top:0.7em;"> 셀러 모집 기간 :

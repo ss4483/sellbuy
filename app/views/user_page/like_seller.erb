@@ -1,3 +1,9 @@
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h5 class="center" style="font-weight:bold">Favorites</h5>
+        <hr>
+    </div>
+</div>
 <% if user_signed_in? %>
    <div id="flea_users" class="row">
      <%= render partial: '/posts/searches_user', collection: current_user.favorites, as: :user %>

@@ -7,14 +7,14 @@
         <img class="flea_img_s valign center" src="<%= flea.image_url %>"  style="display: block;margin-left: auto;margin-right: auto; max-height:100%; width:auto; max-width:100%; height:auto; vertical-align: middle">
       </div>
       <div class="col l6">
-        <h5 class="center" style="margin-top:40px;"><%= flea_title(flea.title) %></h5><br>
-          <p style="font-size:18px; margin-bottom: 0.5em; margin-top:0.5em;"> 　　　　　지역 : <%= flea.location %></p>
+        <p class="center" style="margin-top:40px; font-size:30px;"><%= flea_title(flea.title) %></p><br>
+          <p style="font-size:18px; margin-bottom: 0.5em; margin-top:0.5em;"><span style="color:white;"> 　　　　　</span>지역 : <%= flea.location %></p>
           <p style="font-size:18px; margin-bottom: 0.5em; margin-top:0.5em;"> 마켓 개최 기간 :
                 <% if flea.term_start.strftime("%m/%d") == flea.term_end.strftime("%m/%d") %>
-                  <span style="font-size:16px;"><%= flea.term_start.strftime("%m월 %d일") %> 　<%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></span></p>
+                  <span style="font-size:16px;"><%= flea.term_start.strftime("%m월 %d일") %><span style="color:white;"> 　</span><%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></span></p>
                 <% else %>
                   <span style="font-size:16px;"> <%= flea.term_start.strftime("%m월 %d일") %> - <%= flea.term_end.strftime("%m월 %d일") %></span></p>
-                    <p style="font-size:16px; margin-bottom: 0.7em; margin-top:0.7em;">　　　　 　　 　　　 　　　　　　　　<%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></p>
+                    <p style="font-size:16px; margin-bottom: 0.7em; margin-top:0.7em;"><span style="color:white;">　　　　 　　 　　　 　　　　　　　　</span><%= flea.term_start.to_s(:time) %> - <%= flea.term_end.to_s(:time) %></p>
                 <% end %>
           <p class="center" style="font-size:18px; margin-bottom: 0.5em; margin-top:0.5em;"> 마켓 주제</p>
            <span style="font-size:16px; margin-left:20px;"><%= flea.post.gsub(/\n/, '<br />').html_safe%></span>
@@ -23,8 +23,13 @@
     </li>
     <% end %>
   </ul>
+</div><br>
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <h5 class="center">SELLER's News</h5>
+        <hr>
+    </div>
 </div>
-
 <!-- post 쓰기-->
   <% if user_signed_in? && current_user.kind == "seller" %>
     <%= render partial: "posts/write_post" %>

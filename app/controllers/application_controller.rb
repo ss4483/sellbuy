@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
       def configure_permitted_parameters
           devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:email, :password) }
-          devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:category, :career, :nickname, :profile, :kind, :name, :phone_num, :facebook_url, :instar_url, :twitter_url, :blog_url, :date_of_birth, :gender, :location, :email, :password) }
-          devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:category, :career, :nickname, :profile, :kind, :name, :phone_num, :facebook_url, :instar_url, :twitter_url, :blog_url, :date_of_birth, :gender, :location, :password, :current_password) }
+          devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:category, :career, :talk_name, :nickname, :profile, :kind, :name, :phone_num, :facebook_url, :instar_url, :twitter_url, :blog_url, :date_of_birth, :gender, :location, :email, :password) }
+          devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:category, :career, :talk_name, :nickname, :profile, :kind, :name, :phone_num, :facebook_url, :instar_url, :twitter_url, :blog_url, :date_of_birth, :gender, :location, :password, :current_password) }
       end
 end
