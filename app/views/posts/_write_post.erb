@@ -1,108 +1,115 @@
-<div class="row">
-  <div class="col s12 m12 l2 offset-l1 ">
-    <div id="polar" style="display:inline-block;" >
-      <img src="<%=image_path("polaroid.png")%>" alt="market image" style="max-height:40px;"/>
-      <span style="font-size:15px;">글쓰기</span>
+
+<!-- post 쓰기-->
+  <div class="col l3" style="height:240px; margin-bottom:30px;">
+    <div class=" z-depth-2 white" style="height:240px; padding:10px; margin:10; position: relative;">
+      <a class="enjoy-css modal-trigger_ep" href="#post_write" style="display: inline;">
+        <img src="<%=image_path("plus.png")%>" style="max-width:100%; max-height:60px;  display:block; margin-left:auto;margin-right:auto; margin-top:70px;"><br>
+      </a>
     </div>
   </div>
-</div>
-<!-- post 쓰기-->
-<div id="polar-write" class="z-depth-2" style="display: block;margin-left: auto;margin-right: auto;  width:650px;padding:15px; background-color:white; display:none; ">
-  <div class="row">
-    <div class="col s12">
-      <ul class="tabs">
-        <li class="tab col s6"><a class="active" href="#goods"><i class="material-icons">shopping_basket</i> 상품 등록</a></li>
-        <li class="tab col s6 "><a href="#store"><i class="material-icons">store</i> 마켓 참여</a></li>
-      </ul>
-    </div>
-     <!-- 상품 등록 -->
-    <div id="goods" class="col s12">
-     <form action="/post_write" method="POST" enctype="multipart/form-data">
-       <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
-       <input name ="utf8" type="hidden", value="✓">
-       <input name="kind" type="hidden" value="goods">
-       <input type="hidden" name="image_url" value="">
-       <br>
-       <img id="image_write_in" class="image" src="<%=image_path("black.png")%>" alt="your image" style="max-height:450px; max-width:95%; display:block; margin-left:auto;margin-right:auto;"/>
-       <br>
-       <!-- 텍스트 입력 -->
-       <div class="field row">
-         <div class="col s12 m12 l11 offset-l1">
-           <label class="filebox"for="goods_content">
-             <%= user_profile(current_user.id) %>
-             <span style="font-size:18px; color:black;"><%= current_user.nickname %>   </span>
-                 <label for="write_in">사진 업로드</label>
-             <input id="write_in" class="image_in" type="file" name="pic" required>
-           </label><br>
-         </div>
-         <div class="col s9 m10 l9 offset-l1">
-           <textarea id="goods_content" class="materialize-textarea" name="content" placeholder="내용을 입력하세요" required></textarea>
-         </div>
-         <div class="col s3 m2 l2">
-           <button class="enjoy-css"><i class="material-icons right small">textsms</i></button>
-         </div>
-       </div>
-     </form>
-    </div>
-     <!-- 마켓 참여 -->
-    <div id="store" class="col s12">
-      <form action="/post_write" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
-        <input name ="utf8" type="hidden", value="✓">
-        <input name="kind" type="hidden" value="markets"><br>
-        <img id="marketImg" src="<%=image_path("black.png")%>" alt="market image" style="max-height:450px; max-width:100%;  display:block; margin-left:auto;margin-right:auto;" />
-        <input id="marketIn" type="hidden" name="image_url" value="">
-        <br>
-        <!-- 참여마켓 선택 -->
-         <div class="row">
-           <div class="col s6">
-           <!-- Dropdown Trigger -->
-             <a class='dropdown-button btn' href='#' data-activates='shorts' style="width:90%;">기간제 마켓 선택</a>
-          <!-- Dropdown Structure -->
-             <ul id='shorts' class='dropdown-content' >
-               <% @shorts.each do |m| %>
-                 <% if m.term_end.to_f > Time.zone.now.to_datetime.to_f %>
-                   <li class="flea" style="width:100%;" style="margin: 5px auto;" value="<%=m.id%>"><span><%= m.title %></span></li>
-                   <li class="divider"></li>
-                   <input id="market_img_<%=m.id%>" type="hidden" value="<%=m.image_url%>">
-                   <input id="market_end_<%=m.id%>" type="hidden" value="<%=m.term_end%>">
-                 <% end %>
-               <% end %>
-             </ul>
-           </div>
-           <div class="col s6">
-             <a class='dropdown-button btn' href='#' data-activates='longs'style="width:90%;">정기 마켓 선택</a>
-            <!-- Dropdown Structure -->
-             <ul id='longs' class='dropdown-content' >
-               <% @longs.each do |m| %>
-                 <% if m.term_end.to_f > Time.zone.now.to_datetime.to_f %>
-                   <li class="flea" style="width:100%;" style="margin: 5px auto;" value="<%=m.id%>"><span><%= m.title %></span></li>
-                   <li class="divider"></li>
-                   <input id="market_img_<%=m.id%>" type="hidden" value="<%=m.image_url%>">
-                   <input id="market_end_<%=m.id%>" type="hidden" value="<%=m.term_end%>">
-                 <% end %>
-               <% end %>
-             </ul>
-           </div>
-         </div>
-      <!-- 텍스트 입력 -->
-        <div class="field row" style="margin-bottom:0px;">
-          <div class="col s12 m12 l11 offset-l1">
-            <label class="filebox"for="attend_text">
-              <%= user_profile(current_user.id) %>
-              <span style="font-size:18px; color:black;"><%= current_user.nickname %></span>
-              <input type="hidden" id="banner" name="banner">
-              <input type="hidden" id="term_end" name="term_end">
-            </label>
+  <!---------------------------------------------------------------------------------------------------------->
+
+  <!-- 포스트 자세히 보기 -->
+  <div id="post_write" class="modal"  style="background-color:white;max-height:700px; height:680px; width:630px;">
+    <div style="padding:20px;">
+      <div class="row" style="min-height:30px;position: relative; font-size:20px; padding-left: 20px; margin-bottom:0px;">
+        <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col s6"><a class="active" href="#goods"><i class="material-icons">shopping_basket</i> 상품 등록</a></li>
+              <li class="tab col s6 "><a href="#store"><i class="material-icons">store</i> 마켓 참여</a></li>
+            </ul>
           </div>
-          <div class="col s9 m10 l9 offset-l1">
-            <textarea id="attend_text" class="attend materialize-textarea" name="content" placeholder="내용을 입력하세요" required></textarea>
+           <!-- 상품 등록 -->
+          <div id="goods" class="col s12">
+           <form action="/post_write" method="POST" enctype="multipart/form-data">
+             <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+             <input name ="utf8" type="hidden", value="✓">
+             <input name="kind" type="hidden" value="goods">
+             <input type="hidden" name="image_url" value="">
+             <br>
+             <img id="image_write_in" class="image" src="<%=image_path("black.png")%>" alt="your image" style="max-height:450px; max-width:95%; display:block; margin-left:auto;margin-right:auto;"/>
+             <br>
+             <!-- 텍스트 입력 -->
+             <div class="field row">
+               <div class="col s12 m12 l11 offset-l1">
+                 <label class="filebox"for="goods_content">
+                   <%= user_profile(current_user.id) %>
+                   <span style="font-size:18px; color:black;"><%= current_user.nickname %>   </span>
+                       <label for="write_in">사진 업로드</label>
+                   <input id="write_in" class="image_in" type="file" name="pic" required>
+                 </label><br>
+               </div>
+               <div class="col s9 m10 l9 offset-l1">
+                 <textarea id="goods_content" class="materialize-textarea" name="content" placeholder="내용을 입력하세요" required></textarea>
+               </div>
+               <div class="col s3 m2 l2">
+                 <button class="enjoy-css"><i class="material-icons right small">textsms</i></button>
+               </div>
+             </div>
+           </form>
           </div>
-          <div class="col s3 m2 l2">
-            <button class="enjoy-css" ><i class="material-icons right small" style="">textsms</i></button>
+           <!-- 마켓 참여 -->
+          <div id="store" class="col s12">
+            <form action="/post_write" method="POST" enctype="multipart/form-data">
+              <input type="hidden" name="authenticity_token", value = "<%=form_authenticity_token %>">
+              <input name ="utf8" type="hidden", value="✓">
+              <input name="kind" type="hidden" value="markets"><br>
+              <img id="marketImg" src="<%=image_path("black.png")%>" alt="market image" style="max-height:450px; max-width:100%;  display:block; margin-left:auto;margin-right:auto;" />
+              <input id="marketIn" type="hidden" name="image_url" value="">
+              <br>
+              <!-- 참여마켓 선택 -->
+               <div class="row">
+                 <div class="col s6">
+                 <!-- Dropdown Trigger -->
+                   <a class='dropdown-button btn' href='#' data-activates='shorts' style="width:90%;">기간제 마켓 선택</a>
+                <!-- Dropdown Structure -->
+                   <ul id='shorts' class='dropdown-content' >
+                     <% @shorts.each do |m| %>
+                       <% if m.term_end.to_f > Time.zone.now.to_datetime.to_f %>
+                         <li class="flea" style="width:100%;" style="margin: 5px auto;" value="<%=m.id%>"><span><%= m.title %></span></li>
+                         <li class="divider"></li>
+                         <input id="market_img_<%=m.id%>" type="hidden" value="<%=m.image_url%>">
+                         <input id="market_end_<%=m.id%>" type="hidden" value="<%=m.term_end%>">
+                       <% end %>
+                     <% end %>
+                   </ul>
+                 </div>
+                 <div class="col s6">
+                   <a class='dropdown-button btn' href='#' data-activates='longs'style="width:90%;">정기 마켓 선택</a>
+                  <!-- Dropdown Structure -->
+                   <ul id='longs' class='dropdown-content' >
+                     <% @longs.each do |m| %>
+                       <% if m.term_end.to_f > Time.zone.now.to_datetime.to_f %>
+                         <li class="flea" style="width:100%;" style="margin: 5px auto;" value="<%=m.id%>"><span><%= m.title %></span></li>
+                         <li class="divider"></li>
+                         <input id="market_img_<%=m.id%>" type="hidden" value="<%=m.image_url%>">
+                         <input id="market_end_<%=m.id%>" type="hidden" value="<%=m.term_end%>">
+                       <% end %>
+                     <% end %>
+                   </ul>
+                 </div>
+               </div>
+            <!-- 텍스트 입력 -->
+              <div class="field row" style="margin-bottom:0px;">
+                <div class="col s12 m12 l11 offset-l1">
+                  <label class="filebox"for="attend_text">
+                    <%= user_profile(current_user.id) %>
+                    <span style="font-size:18px; color:black;"><%= current_user.nickname %></span>
+                    <input type="hidden" id="banner" name="banner">
+                    <input type="hidden" id="term_end" name="term_end">
+                  </label>
+                </div>
+                <div class="col s9 m10 l9 offset-l1">
+                  <textarea id="attend_text" class="attend materialize-textarea" name="content" placeholder="내용을 입력하세요" required></textarea>
+                </div>
+                <div class="col s3 m2 l2">
+                  <button class="enjoy-css" ><i class="material-icons right small" style="">textsms</i></button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
-  </div><br>

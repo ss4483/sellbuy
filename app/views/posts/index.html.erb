@@ -7,7 +7,7 @@
         <img class="flea_img_s valign center" src="<%= flea.image_url %>"  style="display: block;margin-left: auto;margin-right: auto; max-height:100%; width:auto; max-width:100%; height:auto; vertical-align: middle">
       </div>
       <div class="col l6">
-        <p class="center" style="margin-top:40px; font-size:30px;"><%= flea_title(flea.title) %></p><br>
+        <p class="center" style="margin-top:40px; font-size:30px;"><%= flea_title(flea.title) %></p>
           <p style="font-size:18px; margin-bottom: 0.5em; margin-top:0.5em;"><span style="color:white;"> 　　　　　</span>지역 : <%= flea.location %></p>
           <p style="font-size:18px; margin-bottom: 0.5em; margin-top:0.5em;"> 마켓 개최 기간 :
                 <% if flea.term_start.strftime("%m/%d") == flea.term_end.strftime("%m/%d") %>
@@ -30,16 +30,17 @@
         <hr>
     </div>
 </div>
-<!-- post 쓰기-->
-  <% if user_signed_in? && current_user.kind == "seller" %>
-    <%= render partial: "posts/write_post" %>
-  <% end %>
+
 <!-- 각각 post -->
 <%= content_tag(:div, "", id: 'like-id', data:{path_to_asset: asset_path("like.png")}) %>
 <%= content_tag(:div, "", id: 'unlike-id', data:{path_to_asset: asset_path("unlike.png")}) %>
 
 
 <div id="posts" class="row">
+  <!-- post 쓰기-->
+    <% if user_signed_in? && current_user.kind == "seller" %>
+      <%= render partial: "posts/write_post" %>
+    <% end %>
   <%= render partial: '/user_page/small_post', collection: @posts,as: 'post' %>
 </div>
 

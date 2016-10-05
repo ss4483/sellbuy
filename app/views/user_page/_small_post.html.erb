@@ -15,7 +15,7 @@
             <% end %>
           </span>
         <% end %>
-        <span class="right"><img  src="<%=image_path("like.png")%>" alt="logo" height="15px"/><span class="like_counts_<%=post.id%>"><%= post.post_likes.all.count %></span></span><br>
+        <span class="right"><img  src="<%=image_path("like.png")%>" alt="logo" height="15px"/><span class="like_counts_<%=post.id%>"> <%= post.post_likes.all.count %></span></span><br>
         <span><%= content(post.content) %></span>
     </a>
     <div class="right" style="position: absolute; right:0px; bottom:0px;">

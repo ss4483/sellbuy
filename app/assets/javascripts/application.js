@@ -30,15 +30,7 @@ $(function(){
   $('.modal-trigger_ep').leanModal({
   });
   flatpickr('.flatpickr')
-  // polar 글쓰기
-  $("#polar").css( 'cursor', 'pointer' );
-  $("#polar").click(function(){
-    if($("#polar-write").css("display") == "none"){
-        $("#polar-write").show("slow");
-    } else {
-        $("#polar-write").hide("slow");
-    }
-  })
+
 
 
   // input type="file 미리보기"
